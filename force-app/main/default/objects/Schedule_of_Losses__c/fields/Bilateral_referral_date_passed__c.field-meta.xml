@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bilateral_referral_date_passed__c</fullName>
+    <externalId>false</externalId>
+    <formula>If(
+AND(Case__r.Protocol__r.Bilateral_referral_days__c=0,Bilateral_referral_date__c  &lt;= Today()),true,
+If(
+OR(Bilateral_referral_date__c  &gt;= Today(),ISNULL(Bilateral_referral_date__c ) ),
+false,true))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Bilateral referral date passed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

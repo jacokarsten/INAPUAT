@@ -1,0 +1,16 @@
+<apex:page controller="RunscheduledJobs">
+     
+  <apex:form >    
+  Run:Referal Job to check and change status' based Uni/Bilateral or Arbitration dates <br/>
+  <apex:commandButton value="Run" action="{!RunReferals}"/> 
+  
+  <br/><br/>
+  Run: Notification<br/>
+  <apex:commandButton value="Run" action="{!RunNotifications}"/> 
+  <br/><br/>
+  Run: Reset SOL and Arbitration<br/>
+  <apex:commandButton value="Run" action="{!runResetArb}"/> 
+  
+  </apex:form>
+  
+</apex:page>

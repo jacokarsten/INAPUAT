@@ -1,0 +1,11 @@
+Please note that for case {!Case_Notification__c.Case__c} the Final Offers period has started, which means both parties are allowed a final offer in an effort to avoid arbitration.
+<br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please email admin@nuvalaw.com

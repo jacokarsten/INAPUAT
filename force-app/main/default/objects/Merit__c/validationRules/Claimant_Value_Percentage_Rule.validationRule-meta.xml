@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Claimant_Value_Percentage_Rule</fullName>
+    <active>true</active>
+    <description>Only 0-100 allowed</description>
+    <errorConditionFormula>OR(
+Claimant_Position__c  &gt; 1.0, 
+Claimant_Position__c  &lt; 0.0
+)</errorConditionFormula>
+    <errorDisplayField>Claimant_Position__c</errorDisplayField>
+    <errorMessage>Please enter a percentage value between 0-100</errorMessage>
+</ValidationRule>

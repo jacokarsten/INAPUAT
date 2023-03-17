@@ -1,0 +1,13 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="sObjectInfo" type="Case_User_Invitation__c"/>
+    <aura:attribute name="fieldsArray" type="List" default="['Case_Number__c','Case_Type__c']"/>
+    
+    <lightning:recordForm
+                          recordId="{!v.recordId}"
+                          objectApiName="Case_User_Invitation__c"
+                          columns="1"
+                          mode="readonly" 
+                          fields="{!v.fieldsArray}"/>
+    
+</aura:component>

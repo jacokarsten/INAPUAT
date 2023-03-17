@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Claimant_Final_Offer_Confirmed__c</fullName>
+    <externalId>false</externalId>
+    <formula>Loss_Category__r.Case__r.Confirm_Final_Offer_Claimant__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Claimant Final Offer Confirmed</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

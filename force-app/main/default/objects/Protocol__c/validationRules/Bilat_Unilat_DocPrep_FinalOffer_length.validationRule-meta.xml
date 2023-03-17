@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bilat_Unilat_DocPrep_FinalOffer_length</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(Bilateral_Prior_Notification_days__c &gt; Bilateral_referral_days__c, Doc_Prep_prior_Notification_days__c&gt; Doc_Prep_Duration__c, Final_Offer_prior_Notification_days__c&gt;  Final_Offers_Duration__c, Unilateral_Prior_Notification_days__c&gt;Unilateral_referral_days__c)</errorConditionFormula>
+    <errorMessage>Bilateral, Unilateral, Doc Prep and Final Offers prior notification length must be less than or equal to the corresponding length of that period.</errorMessage>
+</ValidationRule>

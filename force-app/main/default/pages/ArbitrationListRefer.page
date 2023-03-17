@@ -1,0 +1,5 @@
+<apex:page StandardController="Case" standardStylesheets="true" showHeader="false" lightningStylesheets="true" >
+  
+  <c:ArbitrationDocRefer />
+  
+</apex:page>

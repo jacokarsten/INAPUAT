@@ -1,0 +1,42 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="TeamViewApexController">
+    
+    <!-- attributes -->
+    <aura:attribute name="teams" type="Object" default="[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]" />
+    <aura:attribute name="sortedBy" type="String" default="Name"/>
+    <aura:attribute name="sortedDirection" type="String" default="asc"/>
+    
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+    
+    
+    
+    
+    <!-- the container element determine the height of the datatable -->
+    <div style="height: 400px" class="custom-background">
+        
+        <lightning:datatable aura:id="teamListId"
+                             data="{! v.teams }"
+                             columns="{! v.mycolumns }"
+                             keyField="Id"
+                             onsort="{!c.updateColumnSorting}"
+                             sortedBy="{!v.sortedBy}"  
+                             sortedDirection="{!v.sortedDirection}"
+                             showRowNumberColumn="true"
+                             hideCheckboxColumn="true"                             
+                             errors="{! v.errors }"
+                             draftValues="{! v.draftValues }"
+                             />
+        
+    </div>
+    
+    
+    
+    
+    
+    
+</aura:component>

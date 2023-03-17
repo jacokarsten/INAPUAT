@@ -1,0 +1,13 @@
+<apex:page StandardController="Case" standardStylesheets="false"  showHeader="false" lightningStylesheets="true" applyHtmlTag="false" >
+  
+  
+ 
+  <apex:slds />
+   
+  <div class="slds-scope">
+  <c:Lossitem />
+  </div>
+  
+  
+  
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to notify Market Maker that the Arbitrator has not responded with an Arbitral Award</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>No Arbitral Award Response From Arbitrator</name>
+    <style>none</style>
+    <subject>INAP Case {!Case_Notification__c.Case__c}: Arbitrator has failed to provide an award</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

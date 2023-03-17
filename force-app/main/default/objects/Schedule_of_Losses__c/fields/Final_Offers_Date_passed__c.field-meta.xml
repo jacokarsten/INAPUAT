@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Final_Offers_Date_passed__c</fullName>
+    <externalId>false</externalId>
+    <formula>If(AND(Case__r.Protocol__r.Final_Offers_Duration__c = 0,Final_Offers_End_Date__c&lt;=today()),true,
+If(OR(Final_Offers_End_Date__c &gt;= Today(),ISNULL(Final_Offers_End_Date__c)),false,true))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Final Offers Date passed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

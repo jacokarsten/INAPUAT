@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reg_Referred_1_Cannot_Refer_EE</fullName>
+    <active>true</active>
+    <description>Cannot refer case - end to end protocol</description>
+    <errorConditionFormula>AND(  Claimant_Vehicle_Registration_Count__c  = NULL,  
+ Defendant_Vehicle_Registration__c = NULL,  Protocol__r.Case_Protocol__c = &apos;Case EndtoEnd&apos;)</errorConditionFormula>
+    <errorMessage>You cannot refer this case.  Please check that you have entered the Claimant and Defendant Vehicle registration numbers, and that the Claimant Position has been updated on the Merit</errorMessage>
+</ValidationRule>

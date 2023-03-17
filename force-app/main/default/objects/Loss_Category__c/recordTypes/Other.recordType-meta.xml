@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Head_of_Loss_Header</compactLayoutAssignment>
+    <label>Other</label>
+    <picklistValues>
+        <picklist>Head_of_Loss_Type__c</picklist>
+        <values>
+            <fullName>Bereavement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disadvantage on Labour Market</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Future Financial Losses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal Costs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loss of Congenial Employment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pain%2C Suffering %26 Loss of Amenities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Past Financial Losses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Total Loss Amount</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

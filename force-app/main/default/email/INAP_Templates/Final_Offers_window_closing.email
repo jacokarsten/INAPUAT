@@ -1,0 +1,11 @@
+Please note that for case {!Case_Notification__c.Case__c} Final Offers will end in X days, after which all arbitral items will then be arbitrated.
+<br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please email admin@nuvalaw.com

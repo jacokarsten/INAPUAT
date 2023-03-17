@@ -1,0 +1,13 @@
+Your team has been assigned to a new case by one of your firm supervisors. Please review this case and accept or decline it on behalf of your firm. 
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+</br>
+</br>
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com

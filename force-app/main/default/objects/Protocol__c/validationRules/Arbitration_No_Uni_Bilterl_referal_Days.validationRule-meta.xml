@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arbitration_No_Uni_Bilterl_referal_Days</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Mininmum_Schedule__c) = &apos;Merit and Damages Required&apos;,
+OR( Bilateral_referral_days__c &gt;0, Unilateral_referral_days__c &gt;0, No_referral_days__c &gt;0))</errorConditionFormula>
+    <errorMessage>You can&apos;t have period lengths for Arbitration Protocol (No referral, Bilateral, Unilateral)</errorMessage>
+</ValidationRule>

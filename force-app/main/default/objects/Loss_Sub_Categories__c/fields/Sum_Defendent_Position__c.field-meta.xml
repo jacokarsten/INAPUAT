@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sum_Defendent_Position__c</fullName>
+    <externalId>false</externalId>
+    <label>Sum Defendent Position</label>
+    <summarizedField>Defendant_Firm_Loss_Item_Position__c.Defendant_Position__c</summarizedField>
+    <summaryForeignKey>Defendant_Firm_Loss_Item_Position__c.Loss_Sub_Category__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

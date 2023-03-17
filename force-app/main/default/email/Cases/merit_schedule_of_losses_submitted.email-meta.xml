@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notifies defendant CH merit/schedule of losses submitted.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>merit schedule of losses submitted.</name>
+    <style>none</style>
+    <subject>Merit/schedule of losses submitted for  {!Case.CaseNumber}</subject>
+    <textOnly>Please click here to view new Case:  View
+
+Regards
+
+Nuvalaw</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

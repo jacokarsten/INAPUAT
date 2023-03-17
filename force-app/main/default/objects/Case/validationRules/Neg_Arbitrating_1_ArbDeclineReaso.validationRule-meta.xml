@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Neg_Arbitrating_1_ArbDeclineReaso</fullName>
+    <active>true</active>
+    <description>Requests a reason for declining arbitration from the Arbitrator Firm</description>
+    <errorConditionFormula>TEXT(Arbitrator_Accept_Decline__c) = &quot; Decline&quot;
+&amp;&amp;  Reason_for_Declining_Arbitration__c = &quot;&quot;</errorConditionFormula>
+    <errorDisplayField>Reason_for_Declining_Arbitration__c</errorDisplayField>
+    <errorMessage>Please provide a reason for declining</errorMessage>
+</ValidationRule>

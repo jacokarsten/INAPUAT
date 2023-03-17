@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block__c</fullName>
+    <externalId>false</externalId>
+    <label>Block</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Injuries to the head</fullName>
+                <default>false</default>
+                <label>Injuries to the head</label>
+            </value>
+            <value>
+                <fullName>Injuries to the neck</fullName>
+                <default>false</default>
+                <label>Injuries to the neck</label>
+            </value>
+            <value>
+                <fullName>Injuries to the thorax</fullName>
+                <default>false</default>
+                <label>Injuries to the thorax</label>
+            </value>
+            <value>
+                <fullName>Injuries to the abdomen, lower back, lumbar spine and pelvis</fullName>
+                <default>false</default>
+                <label>Injuries to the abdomen, lower back, lumbar spine and pelvis</label>
+            </value>
+            <value>
+                <fullName>Injuries to the shoulder and upper arm</fullName>
+                <default>false</default>
+                <label>Injuries to the shoulder and upper arm</label>
+            </value>
+            <value>
+                <fullName>Injuries to the elbow and forearm</fullName>
+                <default>false</default>
+                <label>Injuries to the elbow and forearm</label>
+            </value>
+            <value>
+                <fullName>Injuries to the wrist and hand</fullName>
+                <default>false</default>
+                <label>Injuries to the wrist and hand</label>
+            </value>
+            <value>
+                <fullName>Injuries to the hip and thigh</fullName>
+                <default>false</default>
+                <label>Injuries to the hip and thigh</label>
+            </value>
+            <value>
+                <fullName>Injuries to the knee and lower leg</fullName>
+                <default>false</default>
+                <label>Injuries to the knee and lower leg</label>
+            </value>
+            <value>
+                <fullName>Injuries to the ankle and foot</fullName>
+                <default>false</default>
+                <label>Injuries to the ankle and foot</label>
+            </value>
+            <value>
+                <fullName>Injuries involving multiple body regions</fullName>
+                <default>false</default>
+                <label>Injuries involving multiple body regions</label>
+            </value>
+            <value>
+                <fullName>Injuries to unspecified part of trunk, limb or body region</fullName>
+                <default>false</default>
+                <label>Injuries to unspecified part of trunk, limb or body region</label>
+            </value>
+            <value>
+                <fullName>Effects of foreign body entering through natural orifice</fullName>
+                <default>false</default>
+                <label>Effects of foreign body entering through natural orifice</label>
+            </value>
+            <value>
+                <fullName>Burns and corrosions of external body surface, specified by site</fullName>
+                <default>false</default>
+                <label>Burns and corrosions of external body surface, specified by site</label>
+            </value>
+            <value>
+                <fullName>Burns and corrosions confined to eye and internal organs</fullName>
+                <default>false</default>
+                <label>Burns and corrosions confined to eye and internal organs</label>
+            </value>
+            <value>
+                <fullName>Burns and corrosions of multiple and unspecified body regions</fullName>
+                <default>false</default>
+                <label>Burns and corrosions of multiple and unspecified body regions</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

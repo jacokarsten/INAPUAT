@@ -1,0 +1,21 @@
+<apex:page lightningStylesheets="true" standardController="Case">
+  
+  <apex:form >
+  
+   <apex:commandButton styleClass="btn btn-default"   value="SUBMIT SCHEDULE OF LOSSES" 
+   onclick="/flow/ReferedStatusUpdate?varCaseID={!Case.Id}&retURL={!Case.Id}"  />
+
+  </apex:form>
+  
+  <script>
+  
+  function SUBMIT SCHEDULE OF LOSSES(){   
+    
+          top.location ="/lightning/r/Case/"+'{!Case}'+"/view";
+        
+  }      
+  function Finish(Caseid){
+          top.location ="/lightning/r/Case/"+Caseid+"/view";    
+  }
+  </script>
+</apex:page>

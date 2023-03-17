@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Provisional_Actual_Value__c</fullName>
+    <description>Provisional / actual value of damages</description>
+    <externalId>false</externalId>
+    <label>Provisional / Actual Value</label>
+    <summarizedField>Loss_Sub_Categories__c.Prov_Act_Value__c</summarizedField>
+    <summaryForeignKey>Loss_Sub_Categories__c.Loss_Category__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

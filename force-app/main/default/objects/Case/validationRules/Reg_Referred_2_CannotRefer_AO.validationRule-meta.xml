@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reg_Referred_2_CannotRefer_AO</fullName>
+    <active>true</active>
+    <description>Total damages on case must be &gt; 0
+Arbitration Only Protocol</description>
+    <errorConditionFormula>AND(   Total_Obligation__c  &lt;= 0,
+TEXT( Protocol__r.Mininmum_Schedule__c) = &apos;Loss Item &gt; 0&apos;,TEXT(Status)= &apos;Referred&apos;)</errorConditionFormula>
+    <errorMessage>You cannot refer this case.  Please update the Loss Item with a Claimant position value</errorMessage>
+</ValidationRule>

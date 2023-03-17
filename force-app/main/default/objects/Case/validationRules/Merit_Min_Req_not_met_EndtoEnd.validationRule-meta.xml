@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Merit_Min_Req_not_met_EndtoEnd</fullName>
+    <active>false</active>
+    <description>You cannot submit the Schedule of Losses - End to End Protocol</description>
+    <errorConditionFormula>AND(Merit_Minimum_Requirements__c = FALSE, Submit_Schedule_of_Losses__c =TRUE) &amp;&amp; Protocol__r.Name = &apos;End to End - PI Motor Vehicle&apos;</errorConditionFormula>
+    <errorMessage>You cannot submit the Schedule of Losses.  The Merit Minimum requirements have not been met.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,63 @@
+<aura:component implements="lightning:availableForFlowScreens,force:hasRecordId,force:lightningQuickAction" access="global" controller="FileListViewController">
+    
+    <aura:attribute name="fileNames" type="String[]" />
+    <aura:attribute name="caseId" type="String" />
+    <aura:attribute name="objInfoForPicklistValues" type="ContentVersion" default="{sobjectType : 'ContentVersion'}" description="object information to fetch picklist values"/>
+    <aura:attribute name="inapDocTypePicklist" type="string[]" description="store picklist options values"/> 
+    <aura:attribute name="sharingPermissionsPicklist" type="string[]" description="store picklist options values"/> 
+    <aura:attribute name="showSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="gridColumns" type="List"/>
+    <aura:attribute name="saveDraftValues" type="Object"/>
+    <aura:attribute name="showErrorClass" type="boolean" default="false"/>
+    <aura:attribute name="sNo" type="string" />
+    <aura:attribute name="singleRec" type="sobject" default="{'sobjectType' : 'ContentVersion',
+                                                             'ContentDocumentId' : '',
+                                                             'Title' : '',
+                                                             'INAP_Doc_Type__c' : '',
+                                                             'Sharing_Permissions__c' :'',
+                                                             'ContentModifiedDate' : '',
+                                                             }"/>
+    <aura:attribute name="nameEditMode" type="boolean" default="false" />
+    <aura:attribute name="inapDocTypeEditMode" type="boolean" default="false" />
+    <aura:attribute name="sharingPermissionsEditMode" type="boolean" default="false" />
+    
+    <!-- handlers-->
+    
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler event="lightning:openFiles" action="{! c.handleOpenFiles }" />
+    
+    <!--Table Row Start-->  
+    <tr>
+        <td><div class="slds-truncate">{!v.sNo}</div></td>
+        <td ondblclick="{!c.inlineEditName}" class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <span class="slds-grid slds-grid_align-spread">
+                <!-- show input and output section based on boolean flag --> 
+                <aura:if isTrue="{!v.nameEditMode == false}">
+                    <button class="slds-button slds-button" name="Content Document Id" id="{!v.singleRec.ContentDocumentId}" onclick="{!c.openSingleFile}">{!v.singleRec.Title}</button>
+                </aura:if> 
+            </span>
+        </td>
+        <td ondblclick="{!c.inlineEditDocType}" class="slds-cell-edit">
+            <span class="slds-grid slds-grid_align-spread">
+                <!-- show input and output section based on boolean flag --> 
+                <aura:if isTrue="{!v.inapDocTypeEditMode == false}">
+                    <span class="slds-truncate" title="Document Type">{!v.singleRec.INAP_Doc_Type__c}</span>
+                 </aura:if> 
+            </span>
+        </td> 
+        
+        <td ondblclick="{!c.inlineEditSharingPermissions}" class="slds-cell-edit">
+            <span class="slds-grid slds-grid_align-spread">
+                <!-- show input and output section based on boolean flag --> 
+                <aura:if isTrue="{!v.sharingPermissionsEditMode == false}">
+                    <span class="slds-truncate" title="Sharing Permissions">{!v.singleRec.Sharing_Permissions__c}</span>
+                </aura:if> 
+            </span>
+        </td> 
+        <td>
+        <span class="slds-truncate" title="Timestamp">{!v.singleRec.ContentModifiedDate}</span>
+        </td>
+    </tr>
+    
+</aura:component>

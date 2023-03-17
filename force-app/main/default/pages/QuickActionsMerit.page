@@ -1,0 +1,20 @@
+<apex:page lightningStylesheets="true" standardController="Merit__c">
+  
+  <apex:form >
+  
+   <apex:commandButton styleClass="btn btn-default"   value="Back to Case" onclick="BacktoCase();"  />
+
+  </apex:form>
+  
+  <script>
+  
+  function BacktoCase(){   
+    
+          top.location ="/lightning/r/Case/"+'{!Merit__c.Related_Case__c}'+"/view";
+        
+  }      
+  function Finish(Caseid){
+          top.location ="/lightning/r/Case/"+Caseid+"/view";    
+  }
+  </script>
+</apex:page>

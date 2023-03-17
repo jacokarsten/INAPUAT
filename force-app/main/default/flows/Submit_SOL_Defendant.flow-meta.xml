@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <interviewLabel>Submit SOL - Defendant {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Submit SOL - Defendant v2</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Submit_SOL_Defendant</name>
+        <label>Submit SOL - Defendant</label>
+        <locationX>353</locationX>
+        <locationY>13</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varSOLd</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Stage__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Negotiation</stringValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Submit_Schedule_of_Losses_Defendant__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <startElementReference>Submit_SOL_Defendant</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>varSOLd</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

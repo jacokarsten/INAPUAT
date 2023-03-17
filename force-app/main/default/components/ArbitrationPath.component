@@ -1,0 +1,89 @@
+<apex:component controller="ArbitrationItemViewLightningVF_2">
+
+<apex:outputPanel id="ArbPath">
+<div class="slds-region_medium" style="width: 1000px;">
+  <article class="slds-card">
+  <div class="slds-path">
+    <div class="slds-grid slds-path__track">
+      <div class="slds-grid slds-path__scroller-container">
+        <div class="slds-path__scroller" role="application">
+          <div class="slds-path__scroller_inner">
+          
+            <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+          
+               <li class="slds-path__item {!if(SubmitItems=true,'slds-is-complete','slds-is-current slds-is-active')}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-6" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title"> Referral to Arbitration</span>
+                </a>
+              </li>
+              <li class="slds-path__item {!if(And(SubmitItems=true,ConfirmItems=true),'slds-is-complete',if(And(SubmitItems=true,ConfirmItems=false),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-7" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Confirm Items for Arbitration</span>
+                </a>
+              </li>
+              <li class="slds-path__item {!if(And(ConfirmItems=true,SubmitItems=true,ConfirmDocument=true),'slds-is-complete',if(And(SubmitItems=true,ConfirmDocument=false,ConfirmItems=true),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-8" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text" >Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Document Preparation</span>
+                </a>
+              </li>
+              <li class="slds-path__item {!if(AND(SubmitItems=true,ConfirmItems=true,ConfirmFinal=true,ConfirmDocument=true),'slds-is-complete',if(AND(SubmitItems=true,ConfirmItems=true,ConfirmFinal=false,ConfirmDocument=true),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="true" class="slds-path__link" href="javascript:void(0);" id="path-9" role="option" tabindex="0">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Final Offers</span>
+                </a>
+              </li>
+              <li class="slds-path__item  {!if(AND(SubmitItems=true,SubmitAward=true,ConfirmItems=true,ConfirmFinal=true,ConfirmDocument=true),'slds-is-complete',if(AND(SubmitItems=true,SubmitAward=false,ConfirmItems=true,ConfirmFinal=true,ConfirmDocument=true),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-10" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Arbitration</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</article>
+
+</div>
+
+<script>
+
+//slds-is-complete
+//slds-is-incomplete
+//slds-is-current
+</script>
+</apex:outputPanel>
+
+</apex:component>

@@ -1,0 +1,12 @@
+{!Case.ClaimantFirm__c} has referred a case for review. Please assign the case to the appropriate team within your firm.
+</br>
+</br>
+View Case: <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+</br>
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com

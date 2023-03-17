@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arbitration_Notification_Start_date__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(AND(ISBLANK(Arbitration_Start_Date__c),NOT(ISBLANK(Arbitrator_Accept_Date__c))),
+Arbitrator_Accept_Date__c,
+if(Arbitrator_Accept_Date__c &gt;= Arbitration_Start_Date__c,Arbitrator_Accept_Date__c,
+Arbitration_Start_Date__c))</formula>
+    <label>Arbitration Notification Start date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

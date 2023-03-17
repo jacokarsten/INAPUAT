@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Referred_End_Date_del__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Status, &quot;Pending Acceptance&quot;),NOW(),NULL)</formula>
+    <label>Status Referred End Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

@@ -1,0 +1,48 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="recID" type="String" />
+    
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Case">
+    <div class="slds-page-header slds-page-header_record-home">
+        
+            
+                
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-page-header__row">
+                            <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container">
+                                        <lightning:icon iconName="standard:case" alternativeText="Case" />
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                                <span>Case</span>
+                                                <span class="slds-page-header__title slds-truncate" title="Subject"> <lightning:outputField fieldName="Subject" variant="label-hidden" /> </span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <span>Case Number</span>
+                            <lightning:outputField fieldName="CaseNumber"  variant="label-hidden" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <span>Status</span>
+                            <lightning:outputField fieldName="Status"  variant="label-hidden" />
+                        </div>
+                    </div>
+                
+            </div>
+       
+    </lightning:recordViewForm>
+    
+</aura:component>

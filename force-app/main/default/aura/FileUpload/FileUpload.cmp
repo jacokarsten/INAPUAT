@@ -1,0 +1,47 @@
+<aura:component implements="lightning:availableForFlowScreens,force:hasRecordId,force:lightningQuickAction" access="global">
+    
+    
+    <aura:attribute name="caseID" type="String" />
+    <aura:attribute name="contentIds" type="String[]" />
+    <aura:attribute name="fileNames" type="String[]"  default="No File Selected.."/>
+    <aura:attribute name="files" type="String[]"  default="No File Selected.."/>
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+    
+    
+    
+    
+    <!-- Lightning Input with file type and on file change call the 'handleFilesChange' controller --> 
+    
+    <lightning:fileUpload label="Upload Multiple"
+                          name="fileUploader"
+                          multiple="true" 
+                          recordId="{!v.caseID}"
+                          aura:id="multipleUpload"
+                          onuploadfinished="{!c.handleUploadFinished}" />
+    
+    <div style="padding-top:25px; min-height:300px; height:auto; width:100%">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col" style="background-color:#eaf4ff">
+                        <div class="slds-truncate" title="Uploaded Files">Uploaded Documents</div>
+                    </th>
+                </tr>
+            </thead>
+            <aura:iteration items="{!v.fileNames}" var="file" >
+                <tbody>
+                    <tr class="slds-hint-parent">
+                        <th data-label="Document Name" scope="row">
+                            <div class="slds-truncate" title="file">
+                                <p>{!file.name}</p>
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+            </aura:iteration>
+        </table>
+    </div>
+    
+    
+    
+</aura:component>

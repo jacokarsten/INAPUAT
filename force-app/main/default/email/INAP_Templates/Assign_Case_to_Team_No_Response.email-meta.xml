@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to notify Market Maker that the Defendant Firm has not assigned a case team</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Assign Case to Team - No Response</name>
+    <style>none</style>
+    <subject>INAP Case {!Case.CaseNumber}: No response from {!Case.Defendant_Firm__c} Supervisors</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

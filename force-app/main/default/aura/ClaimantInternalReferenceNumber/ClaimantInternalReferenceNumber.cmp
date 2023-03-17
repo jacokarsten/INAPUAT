@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+    <lightning:recordEditForm aura:id="recordViewForm"
+                                     objectApiName="Case">
+        <lightning:inputField fieldName="Claimant_Internal_Reference_Number__c" />
+        </lightning:recordEditForm>
+    </div>
+
+    <!-- Record Display -->
+    <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+        <lightning:recordViewForm objectApiName="Case">
+        <div class="slds-box">
+            <lightning:outputField fieldName="Claimant_Internal_Reference_Number__c" />
+            </div>
+        </lightning:recordViewForm>
+    </div>
+    
+</aura:component>

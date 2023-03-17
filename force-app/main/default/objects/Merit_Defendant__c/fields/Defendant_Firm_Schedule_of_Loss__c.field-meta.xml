@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defendant_Firm_Schedule_of_Loss__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Defendant Firm - Schedule of Loss</label>
+    <referenceTo>Defendant_Firm_Schedule_of_Loss__c</referenceTo>
+    <relationshipLabel>Merit - Defendants</relationshipLabel>
+    <relationshipName>Merit_Defendants_del</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

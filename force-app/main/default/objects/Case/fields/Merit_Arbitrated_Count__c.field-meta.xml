@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Merit_Arbitrated_Count__c</fullName>
+    <externalId>false</externalId>
+    <label>Neg-Neg-Merit Arbitrated Count</label>
+    <summaryFilterItems>
+        <field>Merit__c.Status__c</field>
+        <operation>equals</operation>
+        <value>Arbitrated</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Merit__c.Related_Case__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

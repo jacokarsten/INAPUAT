@@ -1,0 +1,150 @@
+<aura:component implements="force:hasRecordId,force:lightningQuickAction,lightning:availableForFlowScreens" access="global" controller="IncidentMatchingController" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="communityURL" type="String" />
+    <aura:attribute name="postalCode" type="String" />
+    <aura:attribute name="incidentDate" type="Date" />
+    <aura:attribute name="incidentID" type="String" />
+    <aura:attribute name="Created_Case_Id" type="String" />
+    <aura:attribute name="firmId" type="String" />
+    <aura:attribute name="gridData" type="IncidentMatchingController[]" />
+    <aura:attribute name="canNext" type="Boolean" />
+    <aura:attribute name="noData" type="Boolean" default="false" />
+    
+    
+    <table aria-multiselectable="true" class="slds-table slds-table_bordered  slds-table_cell-buffer slds-no-row-hover" role="grid" style="border: solid 2px #d4d4d4" >
+        <thead style="border: solid 2px #d4d4d4">
+            <tr class="slds-line-height_reset" style="height:35px"   colspan="12" >
+                <th aria-label="Incident" aria-sort="none" class="slds-is-resizable" scope="col"   style="background-color:#003a74; color:#ffffff; padding-left:20px">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                        <span class="slds-truncate" title="Incident">Incident</span>
+                    </div>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Incident column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-121" max="1000" min="20" tabindex="-1" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-label="Employees" aria-sort="none" class="slds-is-resizable" scope="col"   style="background-color:#003a74; color:#ffffff; padding-left:8px">
+                    
+                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                        <span class="slds-truncate" title="Employees">Incident Date</span>
+                    </div>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Employees column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-122" max="1000" min="20" tabindex="-1" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-label="Phone Number" aria-sort="none" class="slds-is-resizable" scope="col"    style="background-color:#003a74; color:#ffffff; padding-left:8px">
+                    
+                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                        <span class="slds-truncate" title="postalCode">Postal Code</span>
+                    </div>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Phone Number column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-123" max="1000" min="20" tabindex="-1" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th class="" scope="col"    style="background-color:#003a74; color:#ffffff; padding-left:10px">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                        <span class="slds-truncate" title="Action">Action</span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <aura:iteration items="{!v.gridData}" var="incident" >
+            <tbody>
+                <tr aria-level="1" aria-posinset="1" aria-selected="false" aria-setsize="4" class="slds-hint-parent" tabindex="0"  style="background-color:#eaf4ff">
+                    <td data-label="Name" role="gridcell"  >
+                        <button class="slds-button slds-button" name="Incident" id="{!incident.incidentId}" onclick="{!c.goToRecord}">{!incident.Name}</button>
+                    </td>
+                    <td data-label="IncidentDate" role="gridcell" >
+                        <lightning:formattedDateTime value="{!incident.IncidentDate}" year="numeric" month="numeric" day="numeric"  hour="2-digit" minute="2-digit" />
+                    </td>
+                    <td data-label="Address" role="gridcell"  >
+                        <div class="slds-truncate" title="Address">{!incident.AddressLine1}&#44;&nbsp;{!incident.City}&#44;&nbsp;{!incident.County}&#44;&nbsp;{!incident.PostalCode}</div>
+                    </td>
+                    <td data-label="IncidentAction" role="gridcell" >
+                        <button class="slds-button slds-button--brand" id="{!incident.incidentId}" tabindex="-1" title="IncidentAction" onclick="{! c.handleClick }">New Case</button>
+                    </td>
+                </tr>
+                <tr style="background-color:#eff4fa">
+                    <td data-label="Description" scope="row" colspan="12">
+                        <div class="slds-truncate" title="Description">
+                            <h5><b>Incident Description: </b></h5>{!incident.Description}</div>
+                    </td>                
+                </tr>
+                <tr>
+                    <td colspan="11" style="margin:0px; padding:0px">
+                        <table class="slds-table  slds-table_cell-buffer slds-table_bordered slds-no-row-hover">
+                            <thead>
+                                <tr class="slds-line-height_reset"  style="height:35px" >
+                                    <th aria-label="CaseNumber" aria-sort="none" class="slds-has-button-menu" scope="col"  colspan="2">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate" title="CaseNumber">Case Number</span>
+                                        </div>     
+                                    </th>
+                                    <th aria-label="Employees" aria-sort="none" class="slds-has-button-menu " scope="col"  colspan="2">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate" title="Claimant">Claimant Name</span>
+                                        </div>
+                                    </th>
+                                    <th aria-label="Phone Number" aria-sort="none" class="slds-has-button-menu" scope="col"  colspan="2">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate" title="Defendant">Defendant Name</span>
+                                        </div>
+                                    </th>
+                                    <th aria-label="Phone Number" aria-sort="none" class="slds-has-button-menu " scope="col"  colspan="2">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate" title="Defendant">Defendant Firm</span>
+                                        </div>
+                                    </th>
+                                    <th aria-label="Case Type" aria-sort="none" class="slds-has-button-menu " scope="col"  colspan="2">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate" title="Case Type">Case Type</span>
+                                        </div>
+                                    </th>
+                                    <th aria-label="Phone Number" aria-sort="none" class="slds-has-button-menu " scope="col"   colspan="2">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span class="slds-truncate" title="status">Status</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <aura:iteration items="{!incident._children}" var="child"  indexVar="index">
+                                <tbody>
+                                    <tr aria-level="1" aria-posinset="1" aria-selected="false" aria-setsize="4" class="slds-hint-parent" tabindex="0">
+                                        <td data-label="Name" role="gridcell"  colspan="2">
+                                            <button class="slds-button slds-button" name="Case" id="{!child.caseId}" onclick="{!c.goToRecord}">{!child.Name}</button>
+                                        </td>
+                                        <td data-label="ClaimantName" role="gridcell"  colspan="2">
+                                            <div class="slds-truncate" title="ClaimantName">{!child.ClaimantFirstName}&nbsp;{!child.ClaimantLastName}</div>
+                                        </td>
+                                        <td data-label="DefendantName" role="gridcell"  colspan="2">
+                                            <div class="slds-truncate" title="Defendant">{!child.DefendantName}</div>
+                                        </td>
+                                        <td data-label="DefendantFirm" role="gridcell"  colspan="2">
+                                            <div class="slds-truncate" title="DefendantFirm">{!child.DefendantFirm}</div>
+                                        </td>
+                                        <td data-label="CaseType" role="gridcell"  colspan="2">
+                                            <div class="slds-truncate" title="CaseType">{!child.CaseType}</div>
+                                        </td>
+                                        <td data-label="Status" role="gridcell"  colspan="2">
+                                            <div class="slds-truncate" title="Status">{!child.Status}</div>
+                                        </td>
+                                    </tr>
+                                </tbody>   
+                            </aura:iteration> 
+                        </table>
+                    </td>  
+                </tr>
+            </tbody>      
+        </aura:iteration>
+    </table>
+    
+</aura:component>

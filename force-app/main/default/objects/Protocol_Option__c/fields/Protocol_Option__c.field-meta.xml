@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Protocol_Option__c</fullName>
+    <externalId>false</externalId>
+    <label>Protocol Option</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Protocol_Item_Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Incident - PI-MV-EE</fullName>
+                <default>false</default>
+                <label>Incident - PI-MV-EE</label>
+            </value>
+            <value>
+                <fullName>Incident - PI-MV-AO</fullName>
+                <default>false</default>
+                <label>Incident - PI-MV-AO</label>
+            </value>
+            <value>
+                <fullName>Incident - PI-EL-EE</fullName>
+                <default>false</default>
+                <label>Incident - PI-EL-EE</label>
+            </value>
+            <value>
+                <fullName>Incident - PI-PL-EE</fullName>
+                <default>false</default>
+                <label>Incident - PI-PL-EE</label>
+            </value>
+            <value>
+                <fullName>Claimant - PI-MV-EE</fullName>
+                <default>false</default>
+                <label>Claimant - PI-MV-EE</label>
+            </value>
+            <value>
+                <fullName>Claimant - PI-MV-AO</fullName>
+                <default>false</default>
+                <label>Claimant - PI-MV-AO</label>
+            </value>
+            <value>
+                <fullName>Claimant - PI-EL-EE</fullName>
+                <default>false</default>
+                <label>Claimant - PI-EL-EE</label>
+            </value>
+            <value>
+                <fullName>Claimant - PI-PL-EE</fullName>
+                <default>false</default>
+                <label>Claimant - PI-PL-EE</label>
+            </value>
+            <value>
+                <fullName>Defendant - PI-MV-EE</fullName>
+                <default>false</default>
+                <label>Defendant - PI-MV-EE</label>
+            </value>
+            <value>
+                <fullName>Defendant - PI-MV-AO</fullName>
+                <default>false</default>
+                <label>Defendant - PI-MV-AO</label>
+            </value>
+            <value>
+                <fullName>Defendant - PI-EL-EE</fullName>
+                <default>false</default>
+                <label>Defendant - PI-EL-EE</label>
+            </value>
+            <value>
+                <fullName>Defendant - PI-PL-EE</fullName>
+                <default>false</default>
+                <label>Defendant - PI-PL-EE</label>
+            </value>
+            <value>
+                <fullName>Case - PI-MV-EE</fullName>
+                <default>false</default>
+                <label>Case - PI-MV-EE</label>
+            </value>
+            <value>
+                <fullName>Case - PI-MV-AO</fullName>
+                <default>false</default>
+                <label>Case - PI-MV-AO</label>
+            </value>
+            <value>
+                <fullName>Case - PI-EL-EE</fullName>
+                <default>false</default>
+                <label>Case - PI-EL-EE</label>
+            </value>
+            <value>
+                <fullName>Case - PI-PL-EE</fullName>
+                <default>false</default>
+                <label>Case - PI-PL-EE</label>
+            </value>
+            <value>
+                <fullName>Case Arbribtration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Case Arbribtration</label>
+            </value>
+            <value>
+                <fullName>Case EndtoEnd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Case EndtoEnd</label>
+            </value>
+            <value>
+                <fullName>Claimant Arbitration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Claimant Arbitration</label>
+            </value>
+            <value>
+                <fullName>Claimant EndtoEnd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Claimant EndtoEnd</label>
+            </value>
+            <value>
+                <fullName>Defendant Arbitration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Defendant Arbitration</label>
+            </value>
+            <value>
+                <fullName>Defendant EndtoEnd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Defendant EndtoEnd</label>
+            </value>
+            <value>
+                <fullName>Incident Arbitration</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Incident Arbitration</label>
+            </value>
+            <value>
+                <fullName>Incident EndtoEnd</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Incident EndtoEnd</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Claimant</controllingFieldValue>
+            <valueName>Claimant - PI-MV-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Claimant</controllingFieldValue>
+            <valueName>Claimant - PI-MV-AO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Claimant</controllingFieldValue>
+            <valueName>Claimant - PI-EL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Claimant</controllingFieldValue>
+            <valueName>Claimant - PI-PL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Defendant</controllingFieldValue>
+            <valueName>Defendant - PI-MV-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Defendant</controllingFieldValue>
+            <valueName>Defendant - PI-MV-AO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Defendant</controllingFieldValue>
+            <valueName>Defendant - PI-EL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Defendant</controllingFieldValue>
+            <valueName>Defendant - PI-PL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Incident</controllingFieldValue>
+            <valueName>Incident - PI-MV-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Incident</controllingFieldValue>
+            <valueName>Incident - PI-MV-AO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Incident</controllingFieldValue>
+            <valueName>Incident - PI-EL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Incident</controllingFieldValue>
+            <valueName>Incident - PI-PL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Case - PI-MV-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Case - PI-MV-AO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Case - PI-EL-EE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Case - PI-PL-EE</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

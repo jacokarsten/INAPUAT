@@ -1,0 +1,13 @@
+Dear  {!Case.Arbitrator_First_Name__c}<br>
+
+You have been invited to arbitrate a case. <br><br>
+
+Type: {!Case_User_Invitation__c.Case_Type__c}<br><br>
+
+
+ Please accept or decline the invitation.<br><br>
+ <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case-user-invitation/{!Case_User_Invitation__c.Id}/{!Case_User_Invitation__c.Name}"> Respond to invitation </a> <br><br>
+
+Regards<br><br>
+
+Nuvalaw

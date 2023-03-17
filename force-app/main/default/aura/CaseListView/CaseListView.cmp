@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <lightning:listView aura:id="listViewCases"
+    objectApiName="Case"
+    listName="My_Team_Cases"
+    showSearchBar="true"
+    showActionBar="false"
+    enableInlineEdit="flase"
+    showRowLevelActions="false"
+/>
+    
+</aura:component>

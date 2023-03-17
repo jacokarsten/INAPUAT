@@ -1,0 +1,87 @@
+<apex:page showHeader="false" standardController="Account" standardStylesheets="false" sidebar="false" docType="html-5.0">
+ 
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<head>
+ 
+<!-- Import the Lightning Design System style sheet -->
+<apex:slds />
+</head>
+ 
+</html>
+ 
+<body>
+ 
+<!-- REQUIRED SLDS WRAPPER -->
+<div class="slds-scope">
+<p class="slds-text-heading--label slds-m-bottom--small"> Hi ! This is Your Visualforce Page with Lightning Design System</p>
+ 
+ 
+ 
+ <!-- Modal -->
+<div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open slds-modal--medium">
+<div class="modal-container slds-modal__container">
+<!-- Modal Header -->
+<div class="slds-modal__header">
+<button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close">
+<svg class="slds-button__icon slds-button__icon--large" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+</svg>
+<span class="slds-assistive-text">Close</span>
+</button>
+<h2 id="header43" class="slds-text-heading--medium">Create Account</h2>
+</div>
+<!-- / Modal Header -->
+<!-- Modal Content -->
+<div class="slds-modal__content slds-p-around--medium">
+<h3 class="slds-section-title--divider">Account Information</h3>
+<fieldset class="slds-form--compound">
+<div class="slds-form-element__group">
+<div class="slds-form-element__row">
+<div class="slds-form-element slds-size--1-of-2">
+<span class="slds-form-element__label">Account Owner</span>
+<div class="slds-form-element__control ">
+<span class="slds-form-element__static">Sagar Sindhi</span></div>
+</div>
+<div class="slds-form-element slds-size--1-of-2">
+<label class="slds-form-element__label" for="select-01">Rating</label>
+<div class="slds-form-element__control">
+<div class="slds-select_container">
+<select id="select-01" class="slds-select">
+<option>--None--</option>
+<option>Hot</option>
+<option>Warm</option>
+<option>Cold</option>
+</select></div>
+</div>
+</div>
+</div>
+<div class="slds-form-element__row">
+<div class="slds-form-element slds-size--1-of-2">
+<label class="slds-form-element__label" for="input-03">
+<abbr class="slds-required" title="required">*</abbr> Account Name</label>
+<input type="text" required="" id="input-03" class="slds-input" /></div>
+<div class="slds-form-element slds-size--1-of-2">
+<label class="slds-form-element__label" for="input-04">Phone</label>
+<input type="text" id="input-04" class="slds-input" /></div>
+</div>
+</div></fieldset>
+
+
+</div>
+<!-- / Modal Content -->
+<!-- Modal Footer -->
+<div class="slds-modal__footer">
+<button class="slds-button slds-button--neutral">Cancel</button>
+<button class="slds-button slds-button--brand">Save</button></div>
+<!-- / Modal Footer --></div>
+</div>
+<!-- / Modal -->
+<div class="slds-backdrop slds-backdrop--open"></div>
+
+ 
+ 
+ 
+ 
+</div>
+</body>
+</apex:page>

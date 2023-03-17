@@ -1,0 +1,67 @@
+<apex:page standardController="Case" extensions="CaseHandler" lightningStylesheets="true">
+ <!-- 
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+ <script>
+                     window.onload = Showmodal;
+                     function Showmodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModal').modal('show');
+                                        }); 
+                         }
+                         
+                    
+ 
+ </script>
+ 
+ <apex:form >
+ <div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create new Case</h5>
+        
+      </div>
+      <div class="modal-body">
+                          <p> Select Protocol:<br/><apex:inputField value="{!NewCase.Protocol__c}"/>
+                          <br/><br/>
+                          
+                          Source: <apex:inputField value="{!NewCase.Case_Source__c}"/>
+                         
+                          <br/> <br/> <br/>
+                                  <apex:commandButton action="{!SaveCase}" value="Create Case" oncomplete="OpenNew();" rerender="OpenNew1" /></p>
+      
+<apex:outputPanel id="OpenNew1">
+ <script>                  
+        function OpenNew()
+        {
+           
+           top.location ="/lightning/r/Case/"+'{!NewCase.id}'+"/view";                           
+        }
+                         
+ </script>
+ </apex:outputPanel> 
+  
+      
+      
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+ 
+  
+
+
+</apex:form>
+-->
+
+
+</apex:page>

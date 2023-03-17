@@ -1,0 +1,639 @@
+<apex:component controller="CaseQuickActions" allowDML="true">
+  <div class="slds-scope">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+     
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<!--
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+-->
+
+<style>
+.lookupInput a{
+position: absolute;
+width: 33px !important;
+margin-left: 5px;
+background-image: url(/img/setup/search-icon.png) !important;
+background-repeat: no-repeat !important;
+background-position: center !important;
+display: inline-flex !important;
+}
+.lookupInput input{
+width:50% !important;
+}
+.lookupInput a img{
+display:none !important;
+}
+
+
+</style>
+
+<div id="spinner" class="slds-spinner_container slds-is-fixed" >
+                    <div role="status" class="slds-spinner slds-spinner_medium slds-spinner--brand">
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+
+
+<script>
+ 
+  function StartSpin() {        
+        document.getElementById("spinner").style.display = "block";        
+        
+    }
+
+  function StopSpin() {        
+              
+        document.getElementById("spinner").style.display = "none";
+    }
+  
+function reloadpage(){
+    
+       
+         top.location ='/s/case/'+'{!CaseQuick.Id}' +'/detail?tabset-a6dfa=1';
+      
+         //top.location ='/lightning/r/Case/+'{!CaseQuick.Id}' +'/view';
+        
+}
+</script>
+<apex:outputPanel id="pagerefresh">
+<!--
+<script>
+    function checkClaimDefen(){
+       var claim = Number('{!CaseQuick.Claimant_Minimum_Personal_Details__c}');
+       var def =Number('{!CaseQuick.Defendant_Minimum_Personal_Details__c}');
+           
+        if(claim<=0 || def<=0){
+              console.log(claim);
+              console.log(def);
+              return true;
+        }
+        else{
+              return false;
+        }
+        
+    }
+    
+    
+    function checkMinRequirements(){
+       var MinReq = '{!CaseQuick.Merit_Minimum_Requirements__c}';
+       var defFirm = '{!CaseQuick.Defendant_Firm__c}';
+           
+           console.log(MinReq);
+          console.log(defFirm);
+        if(MinReq=='false' ){
+          
+         return true;
+        }
+        else{
+         return false;
+        }
+        
+    }
+</script>
+-->
+
+</apex:outputPanel>
+<!--
+<script>
+  var trigger =  setInterval(function() {
+        pagerefresh();
+        
+        var check=checkClaimDefen();
+        if(check==false){
+            clearInterval(trigger);
+        }
+        console.log(check);
+        pagerefresh();
+       
+    }, 1000);
+</script>
+
+<script>
+  var trigger2 =  setInterval(function() {
+        pagerefresh2();
+        
+        var check=checkMinRequirements();
+        if(check==false){
+            clearInterval(trigger2);
+        }
+        console.log(check);
+        pagerefresh2();
+       
+    }, 1000);
+</script>
+</apex:outputPanel>
+
+
+-->
+
+
+<apex:pageMessages id="msgId" />
+
+  <apex:form >
+  <span class="slds-text-heading--medium slds-m-bottom--medium">
+  
+
+<apex:actionFunction name="updaterefer" action="{!updaterefer}"  oncomplete="sendToLC();" rerender="msgId" />
+<apex:actionFunction name="AgreeArbitration" action="{!AgreeArbitration}"  oncomplete="sendToLC();" rerender=" msgId" />
+
+<apex:actionFunction name="updateDefTeam" action="{!updateDefTeam}"  oncomplete="sendToLC();" rerender="msgId" />
+<apex:actionFunction name="updateClaimTeam" action="{!updateClaimTeam}"  oncomplete="sendToLC();"  />
+<apex:actionFunction name="updateFacCon" action="{!updateFacCon}"  oncomplete="sendToLC();" rerender="msgId" />
+<apex:actionFunction name="updateDefFirm" action="{!addDefendentFirm}"  oncomplete="sendToLC();" rerender=" msgId" />
+<apex:actionFunction name="AcceptReject" action="{!AcceptReject}"  oncomplete="sendToLC();" rerender=" msgId" />
+<apex:actionFunction name="Facilitator" action="{!Facilitator}"  oncomplete="sendToLC();" rerender=" msgId" />
+<apex:actionFunction name="Arbitrate" action="{!Arbitrator}"  oncomplete="sendToLC();" rerender=" msgId" />
+<apex:actionFunction name="UpdateArbCon" action="{!updateArbCon}"  oncomplete="sendToLC();" rerender=" msgId" />
+<apex:actionFunction name="ResetArb" action="{!ArbitratorReset}"  oncomplete="sendToLC();" rerender=" msgId" />
+
+
+
+<apex:actionFunction name="ClaimantSubmitSOL" action="{!ClaimantSubmitSOL}"  oncomplete="sendToLC();" rerender=" msgId" />
+<apex:actionFunction name="ClaimantFinalise" action="{!ClaimantFinalise}"  oncomplete="sendToLC();" rerender=" msgId" />
+
+<!--
+<apex:actionFunction name="DefendantSubmitSOL" action="{!DefendantSubmitSOL}"  oncomplete="sendToLC();" rerender=" msgId" />
+-->
+<!--
+<apex:actionFunction name="subjectChange" action="{!subjectChange}" oncomplete="sendToLC();" />
+-->
+
+
+<apex:actionFunction name="pagerefresh" action="{!checkMinRequirements}"  /> <!-- rerender="Container,pagerefresh,MinClaimDef" -->
+<apex:actionFunction name="pagerefresh2" action="{!checkMinRequirements}"  /> <!-- rerender="Container,pagerefresh,MeritReq,agreeArb" -->
+<!--
+<apex:actionFunction name="subjectChangerender" rerender="Container,Tester,defFirm,AddClaiamantTeam,agreeArb,refer,referArb,defFirmTeam,Accept,Facilitator,FacCon,Arbitrate,ArbitrateContact,SubDef,SubClaim,ClaimFinal" />
+-->
+
+
+<apex:outputPanel id="Container">  
+
+
+<!-- Step 1 -->
+<apex:outputPanel id="MinClaimDef" rendered="{! If( OR(CaseQuick.Claimant_Minimum_Personal_Details__c<=0,CaseQuick.Defendant_Minimum_Personal_Details__c<=0),True,False)}">
+ 
+ <b>Step 1:</b><br/><br/>
+ Please make sure that you have entered both Claimant and Defendant Details in!
+ 
+</apex:outputPanel>
+
+
+<!-- Step 2 -->
+<apex:outputpanel id="AddClaiamantFirm" rendered="{! If( AND(CaseQuick.Claimant_Minimum_Personal_Details__c>=1,CaseQuick.Defendant_Minimum_Personal_Details__c>=1,CaseQuick.Claimant_Firm_Team__c=null,CaseQuick.ClaimantFirm__c !=null,CaseQuick.Defendant_Firm__c=null),True,False)}">
+ 
+  <b>Step 2:</b><br/><br/>
+   
+           <b>Assign Claimant Team </b>
+            
+            <br/><br/>
+               
+               <apex:SelectList value="{!ClaimFirm}" size="1" styleClass="slds-select" style="height:30px; width:250px;" >
+                  <apex:selectOptions value="{!ClaimFirmOptions}"  />
+                  </apex:SelectList>
+               <br/> <br/>   
+              <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updateClaimTeam();"  >Add </a>
+               
+</apex:outputpanel>
+
+<!-- If defendandt -->
+
+<apex:outputpanel id="AddClaiamantTeam" rendered="{! If( AND(CaseQuick.Claimant_Minimum_Personal_Details__c>=1,CaseQuick.Defendant_Minimum_Personal_Details__c>=1,CaseQuick.ClaimantFirm__c =null),True,False)}">
+ 
+  <b>Step 2:</b><br/><br/>
+   
+            Assign Claimant Firm  <br/><br/>
+         <apex:inputField value="{!CaseQuick.ClaimantFirm__c}" styleclass="slds-input" style="height:30px; width:100px;" /><br/><br/>
+         <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updateDefFirm();"  >Add </a>
+         
+               
+</apex:outputpanel>
+
+
+<!-- Step 3-->
+<apex:outputpanel id="defFirm" rendered="{! IF(AND(CaseQuick.ClaimantFirm__c !=null,  CaseQuick.Claimant_Firm_Team__c!=null,CaseQuick.Defendant_Firm__c=null),True,False)}">
+         <b>Step 3:</b><br/><br/>
+          Assign Defendant Firm  <br/><br/>
+         <apex:inputField value="{!CaseQuick.Defendant_Firm__c}" styleclass="slds-input" style="height:30px; width:100px;" /><br/><br/>
+         <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updateDefFirm();"  >Add </a>
+         
+              
+                       
+     </apex:outputpanel>
+
+<!-- Step 4 CaseQuick.Protocol__r.Mininmum_Schedule__c='Merit Required'--> 
+    <apex:outputPanel id="MeritReq" rendered="{! IF(AND(CaseQuick.Protocol__r.Mininmum_Schedule__c='Merit Required',CaseQuick.Merit_Minimum_Requirements__c=false,CaseQuick.Defendant_Firm__c!=null,CaseQuick.Claimant_Firm_Team__c!=null),true,false)}">
+        <b>Step 4:</b><br/><br/>
+        
+        Please enter a claimant position on merit!
+    </apex:outputpanel>
+
+ 
+    <apex:outputPanel id="MeritReqArb" rendered="{! IF(AND(CaseQuick.Protocol__r.Mininmum_Schedule__c='Merit and Damages Required',OR(CaseQuick.Merit_Minimum_Requirements__c=false,CaseQuick.Total_Obligation__c=0),CaseQuick.Defendant_Firm__c!=null,CaseQuick.Claimant_Firm_Team__c!=null),true,false)}">
+        <b>Step 4:</b><br/><br/>
+        
+        Please enter a claimant position on merit and an amount on Loss Item!
+    </apex:outputpanel>
+
+
+<!-- Step 5-->
+<apex:outputPanel id="agreeArb" rendered="{! IF(AND(CaseQuick.Protocol__r.Mininmum_Schedule__c='Merit Required',CaseQuick.Merit_Minimum_Requirements__c=true,CaseQuick.Defendant_Firm__c!=null,CaseQuick.Agree_to_Arbitration_Process__c=false),true,false)}">
+     <b>Step 5:</b><br/><br/>
+ 
+     Please agree to arbitration<br/>
+     
+     <a  href=""  onclick="Showmodal();"  >View Terms </a>    
+    <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();AgreeArbitration();"  >Agree </a>
+ </apex:outputpanel>
+     
+<!-- Step 6-->     
+<apex:outputPanel id="refer" rendered="{! IF(AND(CaseQuick.Status='Created',CaseQuick.Protocol__r.Mininmum_Schedule__c='Merit Required',CaseQuick.Merit_Minimum_Requirements__c=true,CaseQuick.Agree_to_Arbitration_Process__c=true),true,false)}">
+     <b>Step 6:</b><br/>
+     Please Refer this Case to the opposition party.<br/><br/>
+     <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updaterefer();"  >Refer </a>
+
+         <!--
+          <b> Validations: </b>
+           
+          <br/>
+          Protocol Sched: {!CaseQuick.Protocol__r.Mininmum_Schedule__c}
+          <br/>
+           Merit Min:{!CaseQuick.Merit_Minimum_Requirements__c}
+           <br/>
+           Total Obligation:<apex:outputfield value="{!CaseQuick.Total_Obligation__c}" />
+           
+           <br/>
+           -->          
+           
+</apex:outputPanel>
+
+
+<apex:outputPanel id="referArb" rendered="{! IF(AND(CaseQuick.Total_Obligation__c > 0,CaseQuick.Status='Created',CaseQuick.Protocol__r.Mininmum_Schedule__c='Merit and Damages Required',CaseQuick.Merit_Minimum_Requirements__c=true),true,false)}">
+     <b>Step 5:</b><br/>
+     Please Refer this Case to the opposition party.<br/><br/>
+     <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updaterefer();"  >Refer </a>
+
+         <!--
+          <b> Validations: </b>
+           
+          <br/>
+          Protocol Sched: {!CaseQuick.Protocol__r.Mininmum_Schedule__c}
+          <br/>
+           Merit Min:{!CaseQuick.Merit_Minimum_Requirements__c}
+           <br/>
+           Total Obligation:<apex:outputfield value="{!CaseQuick.Total_Obligation__c}" />
+           
+           <br/>
+           -->          
+           
+</apex:outputPanel>
+
+
+
+ <!-- Step 7-->    
+
+      <apex:outputLabel id="defFirmTeam" rendered="{! IF(AND(LOGGEDINUSER='Supervisor',CaseQuick.Status='Referred',CaseQuick.Defendant_Firm__c!=null,CaseQuick.Defendant_Firm_Team__c=null),True,False)}">
+        <b>Step 7:</b><br/>
+        <apex:outputText >Assign Defendant Firm Team</apex:outputText><br/><br/> 
+             
+           <apex:SelectList value="{!DefFirm}" size="1" styleclass="slds-input" style="height:30px; width:200px;">
+              <apex:selectOptions value="{!DefFirmOptions}" />
+          </apex:SelectList>
+              
+        <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updateDefTeam();"  >Add </a>
+   </apex:outputLabel>
+ 
+ 
+ <!-- Step 7 broad case Notice-->    
+
+      <apex:outputLabel id="defFirmTeamMsg" rendered="{! IF(AND(LOGGEDINUSER!='Supervisor',CaseQuick.Status='Referred',CaseQuick.Defendant_Firm__c!=null,CaseQuick.Defendant_Firm_Team__c=null),True,False)}">
+        <b>Step 7:</b><br/>
+        Supervisor has been notifified and needs to add a defendant team.
+   </apex:outputLabel>
+ 
+ 
+  
+ <!-- Step 8-->   
+      <apex:outputpanel id="Accept" layout="none"  rendered="{! IF( AND(LOGGEDINUSER='Defendant Handler',CaseQuick.Status='Pending_Acceptance',CaseQuick.Defendant_Firm__c!=null,CaseQuick.Defendant_Firm_Team__c!=null),True,False)}">  
+       <b>Step 8:</b><br/><br/>
+       
+       
+             <table width="40%"  class="slds-table slds-table_cell-buffer">
+             <tr><td>Accept or Reject</td>
+             <td>Agree to Arbitration</td>
+              
+             <td>Rejection Reason</td></tr>
+             <tr>
+             <td>
+              <apex:inputField value="{!CaseQuick.Defendant_Accept_Reject__c}" styleclass="slds-input"/> 
+                </td>
+           
+             <td align="center">
+             <apex:inputField value="{!CaseQuick.Defendant_Agree_to_Arbitration_Process__c}" styleclass="slds-checkbox"/>
+            </td>
+           
+             <td>
+              <apex:inputField style="height: 20px; width:250px" value="{!CaseQuick.Defendent_rejection_reason__c}" styleclass="slds-input"/>      
+              </td>
+            
+              </tr>
+              <tr>
+              <td colspan="3" align ="right">
+              
+                 <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();AcceptReject();"  >Update </a>
+   
+             
+             </td> 
+              </tr>        
+            </table>
+        
+            
+            
+               
+      </apex:outputpanel>
+  
+ <!-- Step 8-->   
+      <apex:outputpanel id="AcceptMsg" layout="none"  rendered="{! IF( AND(LOGGEDINUSER!='Defendant Handler',CaseQuick.Status='Pending_Acceptance',CaseQuick.Defendant_Firm__c!=null,CaseQuick.Defendant_Firm_Team__c!=null),True,False)}">  
+       <b>Step 8:</b><br/><br/>
+      
+      Pending Acceptance from Handler in the defendant team.
+      
+      </apex:outputpanel>
+  
+       
+<!-- Step 9-->        
+      <apex:outputLabel id="Facilitator" rendered="{! IF(AND(LOGGEDINUSER='System Administrator',CaseQuick.Status='Negotiating',CaseQuick.Facilitator_Firm__c=null ),True,False)}">
+        <b>Step 9:</b><br/><br/>
+        
+        Add Facilitator firm:<br/><br/>
+                <apex:inputField value="{!CaseQuick.Facilitator_Firm__c}" styleclass="slds-lookup__search-input slds-input" style="height:30px; width:100px;"/>          
+       <br/><br/>
+         <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();Facilitator();"  >Update </a>
+      
+          
+      </apex:outputLabel> 
+      
+      
+<!-- Step 10-->       
+      
+      <apex:outputLabel id="FacCon" rendered="{! IF(AND(LOGGEDINUSER='System Administrator',CaseQuick.Stage__c='Negotiation'),True,False)}"> <!-- ,CaseQuick.Facilitator_Firm__c!=null,CaseQuick.Facilitator_Contact__c==null  -->
+        <b>Step 10:</b><br/><br/>
+          Add Facilitator Contact<br/><br/>
+           
+          <apex:SelectList value="{!FacCon}" size="1" styleclass="slds-input" style="height: 20px; width:250px" >
+              <apex:selectOptions value="{!FacFirmOptions}"  />
+          </apex:SelectList>
+           <br/><br/>
+          <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();updateFacCon();"  >Add Faciltator Contact</a>
+           
+          
+          
+          
+      </apex:outputLabel> 
+      
+  
+      
+     <apex:outputLabel id="FacConMsg2" rendered="{! IF(AND(OR(CaseQuick.Status='Negotiating',CaseQuick.Status='Arbitrating')),True,False)}">
+         
+          <b>Please continue updating the schedule of losses </b><br/><br/>
+          
+          Items can only be referred to Arbitration on:<apex:outputText value="{0, date, MMMM d','  yyyy}">    <apex:param value="{!ScheduleofLoss.No_referral_date__c}" /> </apex:outputText>
+          <br/>
+          Bilateral referal End Date: <apex:outputText value="{0, date, MMMM d','  yyyy}">    <apex:param value="{!ScheduleofLoss.Bilateral_referral_date__c }" /> </apex:outputText>
+          <br/>
+          Unilateral Referal End Date: <apex:outputText value="{0, date, MMMM d','  yyyy}">    <apex:param value="{!ScheduleofLoss.Unilateral_referral_date__c }" /> </apex:outputText>
+           <br/><br/>
+          After this date items are automatically referred to Arbitration. Remember a settlement is always better!
+          <br/>
+          
+          
+           
+  </apex:outputLabel> 
+     
+      
+<!-- Step 10-->         
+        <apex:outputLabel id="Arbitrate" rendered="{! IF(AND(CaseQuick.Status='Arbitrating',CaseQuick.Invite_Arbitrator__c=true,CaseQuick.Arbitration_Firm__c=null,LOGGEDINUSER='System Administrator' ),True,False)}">
+     
+           <b>Step 10:</b><br/><br/>
+             
+             Assign Arbitrator Firm  <br/><br/>        
+                    <apex:inputField value="{!CaseQuick.Arbitration_Firm__c}" styleClass="slds-lookup__search-input slds-input" style="height: 20px; width:250px" />             
+             <br/><br/>
+              <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();Arbitrate();"  >Assign Firm</a>
+            
+               
+       </apex:outputLabel>
+       <apex:outputLabel id="ArbitrateContact" rendered="{! IF(AND(CaseQuick.Status='Arbitrating',CaseQuick.Arbitration_Firm__c!=null,CaseQuick.Arbitrator_Contact__c =null,LOGGEDINUSER='System Administrator' ),True,False)}">
+     
+           <b>Step 10:</b><br/><br/>
+             
+              Arbitrator Contact <br/><br/>
+              <apex:SelectList value="{!ArbCon}" size="1" styleclass="slds-input" style="height: 20px; width:250px">
+                  <apex:selectOptions value="{!ArbFirmOptions}" />
+              </apex:SelectList>
+            
+             <br/><br/>
+               
+               
+            <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();UpdateArbCon();"  >Add Arbitrator Contact</a>
+          
+       </apex:outputLabel>
+     
+     
+      <apex:outputLabel id="NewArbitration" rendered="{! IF(AND(CaseQuick.Status='Arbitrated',CaseQuick.Arbitration_Firm__c!=null,CaseQuick.Arbitrator_Contact__c!=null,LOGGEDINUSER='System Administrator',CaseQuick.Protocol__r.Mininmum_Schedule__c!='Merit and Damages Required' ),True,False)}">
+     
+           <b>Step 10:</b><br/><br/>
+             
+             Reset Arbitration Process and Select Arbitrator
+               
+               
+            <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();ResetArb();"  >Reset Arbitration</a>
+          
+       </apex:outputLabel>
+     
+     
+     
+      <!--OLD LOGIC
+     
+       <apex:outputpanel id="SubClaim" rendered="{!IF(AND(LOGGEDINUSER='Claimant Handler',OR(CaseQuick.Status="Partial Settlement",CaseQuick.Status="Settled",CaseQuick.Status="Settled"),CaseQuick.Submit_Schedule_of_Losses__c=false),True,False)}" > 
+        
+        NEW LOGIC
+        <apex:outputpanel id="SubClaim" rendered="{!IF(
+       AND(
+      
+       AND(CaseQuick.Stage__c="Negotiation",CaseQuick.Merit_Minimum_Requirements__c=true,CaseQuick.Facilitator_Contact__c!=null,CaseQuick.Submit_Schedule_of_Losses__c=false),
+       AND(CaseQuick.Settlement_Negotiation_Status_Count__c = 0,CaseQuick.Arbitration_Negotiation_Count__c = 0),
+       OR(CaseQuick.Arbitration_Completed_Count__c >0, CaseQuick.Settled_Status_Count__c >0 )
+      ),True,False)}" > 
+       
+            
+                 <b>Step 11:</b><br/>   
+               <b>Claimant Submit</b><br/>
+             
+          <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();ClaimantSubmitSOL();"  >Claimant Submit SOL</a>
+         
+        
+             <br/><br/>     
+       
+       </apex:outputpanel>
+    -->
+       
+    <!-- OLD LOGIC
+       <apex:outputpanel id="SubDef" rendered="{! IF(
+       AND(AND(CaseQuick.Status="Partial Settlement", CaseQuick.Stage__c="Negotiation",CaseQuick.Merit_Minimum_Requirements__c=true,CaseQuick.Facilitator_Contact__c!=null,CaseQuick.Submit_Schedule_of_Losses_Defendant__c=false),
+       AND(CaseQuick.Settlement_Negotiation_Status_Count__c= 0,CaseQuick.Arbitration_Negotiation_Count__c = 0
+          ),
+        OR(CaseQuick.Arbitration_Completed_Count__c > 1,CaseQuick.Settled_Status_Count__c> 1)  
+          ),True,False)}">
+     
+     NEW LOGIC  
+     <apex:outputpanel id="SubDef" rendered="{!IF(AND(LOGGEDINUSER='Defendant Handler',OR(CaseQuick.Status="Partial Settlement",CaseQuick.Status="Settled",CaseQuick.Status="Settled"),CaseQuick.Submit_Schedule_of_Losses_Defendant__c=false),True,False)}" > 
+        
+          <b>Step 11:</b><br/>   
+        
+       <b>Defendant Submit</b><br/>
+          <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();DefendantSubmitSOL();"  >Claimant Submit SOL</a>
+         
+       </apex:outputpanel>
+       -->
+       
+      <!-- AND(CaseQuick.Submit_Schedule_of_Losses_Defendant__c,CaseQuick.Submit_Schedule_of_Losses__c) -->
+      
+      <apex:outputpanel id="ClaimFinal"  
+      rendered="{! IF(AND(LOGGEDINUSER='Claimant Handler',
+      AND(LOGGEDINUSER="Claimant Handler", CaseQuick.Settlement_Negotiation_Status_Count__c = 0,CaseQuick.Arbitration_Negotiation_Count__c = 0,
+          OR(CaseQuick.Arbitration_Completed_Count__c >=1,CaseQuick.Settled_Status_Count__c>=1))),True,False)}">
+           <br/>
+           <b>Claimant Confirms Settled</b><br/>
+           
+           
+          <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();ClaimantFinalise();"  >Claimant Finalise</a>
+         
+         
+            <br/><br/>   
+       
+       </apex:outputpanel> 
+       
+        
+        
+  <!--      
+  </div>
+  -->
+
+
+    
+  
+  <!--    
+  <apex:outputpanel id="Tester" rendered="{!if(AND(CaseQuick.Claimant_Minimum_Personal_Details__c>=1,CaseQuick.Defendant_Minimum_Personal_Details__c>=1,CaseQuick.Arbitration_Firm__c=null),true,false) }">
+                   <input id="message" type="text" class="slds-input" style="height:30px; width:200px;"/><br/>
+                <button onclick="subjectChange();" class="slds-button slds-button_outline-brand">Send to LC</button>
+               <a  href="" class="slds-button slds-button_outline-brand" onclick="StartSpin();subjectChange();"  >Link Update</a>
+   <br/>
+   <br/>
+    
+   
+   </apex:outputpanel>
+   -->
+   
+   
+   </apex:outputPanel> 
+   
+   
+   <apex:outputPanel id="Modalterms">
+
+
+<div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewMdlterms">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Injury Code</h5>
+        
+      </div>
+      <div class="modal-body">
+            <p> 
+                Ipsum lipsum constricsum   Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum  <br/>            
+            Ipsum lipsum constricsum   Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum  <br/>           
+            Ipsum lipsum constricsum   Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum  <br/>            
+            Ipsum lipsum constricsum   Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum Ipsum lipsum constricsum  <br/>            
+            
+            </p>
+      <a  href="" class="btn " onclick="Hidemodal();">Close </a>
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+</apex:outputPanel>
+   
+ <script>
+                     //window.onload = Showmodal;
+                     function Showmodal()
+                        {
+                       
+                                         $(document).ready(function(){ 
+                                            $('#ViewMdlterms').modal('show');
+                                        }); 
+                         }
+                      function Hidemodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewMdlterms').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }    
+ </script>                          
+   
+   
+   
+      
+<script>
+    setTimeout(function(){ 
+    
+        document.getElementById("spinner").style.display = "none";
+    
+     }, 3000);
+    
+    var lexOrigin = "https://inap5-k3.cs108.force.com"; //"https://inap5--inap5.lightning.force.com";
+    
+    function sendToLC() {
+        //alert('Done');
+        
+        var message = 'vfOrigin'; //document.getElementById("message").value;
+        parent.postMessage(message, lexOrigin);
+      //  subjectChangerender();
+        pagerefresh2();
+        StopSpin();
+    }
+    
+</script>
+  
+       
+   </span>
+  </apex:form>
+  
+    
+
+   
+
+
+   
+       
+    
+
+</div>
+</apex:component>

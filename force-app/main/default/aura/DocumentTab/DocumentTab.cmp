@@ -1,0 +1,14 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="DocumentGridController2">
+    
+    <aura:attribute name="caseStatus" type="Boolean" />
+    
+    <aura:if isTrue="{!v.caseStatus}">
+        <c:DocumentGridNoUpload />
+        <aura:set attribute="else">
+            <c:DocumentGrid />
+        </aura:set>
+    </aura:if>
+    
+    
+    
+</aura:component>

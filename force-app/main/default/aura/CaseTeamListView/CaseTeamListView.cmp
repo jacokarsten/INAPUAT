@@ -1,0 +1,23 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="CaseTeamListController">
+    
+    
+    <!-- attributes -->
+    <aura:attribute name="gridData" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    
+
+    
+    
+    <!-- the container element determine the height of the datatable -->
+    <div style="height:auto; border: 1px solid #d4d4d4; border-radius: 0.125rem" >
+        <lightning:datatable
+                             keyField="id"
+                             data="{! v.gridData }"
+                             columns="{! v.columns }"
+                             hideCheckboxColumn="true"/>
+    </div>
+    
+</aura:component>

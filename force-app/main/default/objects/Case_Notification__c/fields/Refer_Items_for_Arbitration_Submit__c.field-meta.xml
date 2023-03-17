@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Refer_Items_for_Arbitration_Submit__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Notification sent to parties at 5 days before automated referral occurs.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Notification sent to parties at 5 days before automated referral occurs.</inlineHelpText>
+    <label>Refer Items for Arbitration/Submit</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AwardDocName__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(TEXT(Head_of_Loss_Type__c) =&apos;Bereavement&apos;,&apos;isforbereavement&apos;,
+if(TEXT(Head_of_Loss_Type__c) =&apos;Disadvantage on Labour Market&apos;,&apos;isfordisadvantageontheopenlabourmarket&apos;,
+if(TEXT(Head_of_Loss_Type__c) =&apos;Future Financial Losses&apos;,&apos;isforfuturefinanciallosses&apos;,
+if(TEXT(Head_of_Loss_Type__c) =&apos;Legal Costs&apos;,&apos;isforlegalcosts&apos;,
+if(TEXT(Head_of_Loss_Type__c) =&apos;Loss of Congenial Employment&apos;,&apos;isforlossofcongenialemployment&apos;,
+if(TEXT(Head_of_Loss_Type__c) =&apos;Past Financial Losses&apos;,&apos;isforpastfinanciallosses&apos;,
+if(TEXT(Head_of_Loss_Type__c) =&apos;Pain, Suffering &amp; Loss of Amenities&apos;,&apos;isforpersonalsufferingandlossofamenities&apos;,&apos;&apos;
+)))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>AwardDocName</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

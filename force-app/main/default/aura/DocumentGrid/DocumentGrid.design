@@ -1,0 +1,5 @@
+<design:component label="Document Grid">
+	
+    <design:attribute name="caseId" label="Case ID" />
+    
+</design:component>

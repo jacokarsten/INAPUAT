@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+    
+    
+    <lightning:buttonGroup>
+        <div class="slds-button-group-list slds-float_right" style="padding:0.5rem" role="group">
+            <lightning:button variant="neutral" label="Upload New Document" title="Upload document action" onclick="{! c.uploadDocument }"/>
+            <lightning:button variant="neutral" label="Link Document to Loss Item" title="Link document action" onclick="{! c.linkDocument }"/>
+            <lightning:button variant="neutral" label="Refresh" title="Refresh datatable action" onclick="{! c.refresh }"/>
+        </div>
+    </lightning:buttonGroup>
+    
+    
+</aura:component>

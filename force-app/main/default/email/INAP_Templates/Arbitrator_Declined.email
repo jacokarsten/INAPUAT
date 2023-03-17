@@ -1,0 +1,8 @@
+Dear Firm Admin<br>
+
+{!Case.Arbitration_Firm__c} declined your invitation. Please invite a new arbitrator.<br><br>
+ <a href="/{!Case.Id}"> View Case </a> <br><br>
+
+Regards<br><br>
+
+Nuvalaw

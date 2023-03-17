@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_type_and_Team_member_match</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Roles__c) = &apos;Case Handler&apos;, TEXT(Contact__r.Role__c) != &apos;Handler&apos;)</errorConditionFormula>
+    <errorMessage>A team handler must have a contact Handler role type</errorMessage>
+</ValidationRule>

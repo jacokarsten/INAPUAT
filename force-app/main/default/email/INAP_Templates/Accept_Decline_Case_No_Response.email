@@ -1,0 +1,8 @@
+{!Case.Defendant_Firm_Name__c} case handlers are failing to respond to case: {!Case.CaseNumber}, referred by {!Case.Claimant_Firm_Name__c} on {!Case.Status_Referred_Date__c}.
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Org_URL__c}/lightning/r/Case/{!Case_Notification__c.CaseId__c}/view">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+Regards,
+</br>
+INAP

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Protocol_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND 
+(Validate_and_Insert__c = true,
+ISBLANK(	Mapped_Protocol__c) = true
+	)</errorConditionFormula>
+    <errorDisplayField>Mapped_Protocol__c</errorDisplayField>
+    <errorMessage>One can not proceed that until the correct Protocol has been mapped</errorMessage>
+</ValidationRule>

@@ -1,0 +1,1181 @@
+<apex:component controller="LossItemViewLightningVF" allowDML="true">
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!--
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+  -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+  
+  <!-- 
+  <apex:stylesheet value="{!URLFOR($Resource.checkboxes, '/Checkboxes/bower_components/Font-Awesome/css/font-awesome.css')}"/>  
+  <apex:stylesheet value="{!URLFOR($Resource.checkboxes, '/Checkboxes/demo/build.css')}"/>
+  -->
+ 
+</head>
+<!--
+<style type="text/css">
+.datePicker {
+    z-index: 9999;/*Changed this css property which was 100 prior*/
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 17em;
+    background-color: #b7c6b2;
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+    margin: 0;
+    padding: 1px 1px 2px 2px;
+}
+</style>
+-->
+
+<style>
+.lookupInput a{
+    position: absolute;
+    width: 33px !important;
+    margin-left: 5px;
+    background-image: url(/img/setup/search-icon.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    display: inline-flex !important;
+}
+.lookupInput input{
+width:50% !important;
+}
+.lookupInput a img{
+display:none !important;
+}
+.calendar_table {
+    width:70%;
+}
+
+</style>
+
+<div id="spinner" class="slds-spinner_container slds-is-absolute" >
+                    <div role="status" class="slds-spinner slds-spinner_medium slds-spinner--brand">
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+
+
+<script>
+ 
+  function StartSpin() {        
+        document.getElementById("spinner").style.display = "block";        
+        
+    }
+
+  function StopSpin() {        
+              
+        document.getElementById("spinner").style.display = "none";
+    }
+
+function SaveValidate(){
+          var itemval =  parseFloat(document.getElementById('Newlossitem').value);
+        
+        if(isNaN(itemval)==false){  
+          var totalClaim = parseInt('{!TotalClaimant}');
+          var totalamount = itemval+totalClaim;
+          var ProtAmount = parseInt('{!ProtocolTotal}');
+            
+          var display =   totalamount +' - '+ProtAmount
+          
+          if(totalamount>ProtAmount){
+            var msg = 'You have exceeded the Max Claim of '+  '{!ProtocolTotal}'; 
+               alert(msg);
+               StopSpin();
+               
+          }
+          else{
+              SaveItemNow(itemval);
+          }
+        }    
+         else{
+           alert('Please enter a valid amount');
+           StopSpin();
+       }        
+}  
+
+function updateValidate(ItemId,OldPos){
+    
+          var itemval =  parseFloat(document.getElementById(ItemId).value);
+            
+      if(isNaN(itemval)==false){    
+          var PrevVal = parseInt(OldPos);
+          var totalClaim = parseInt('{!TotalClaimant}');
+          var totalamount = itemval+totalClaim-PrevVal;
+          var ProtAmount = parseInt('{!ProtocolTotal}');
+            
+          var display =   totalamount +' - '+ProtAmount
+          
+          if(totalamount>ProtAmount){
+            var msg = 'You have exceeded the Max Claim of '+  '{!ProtocolTotal}'; 
+               alert(msg);
+               sendToLC();
+          }
+          else{
+              
+              UpdateItemNow(ItemId,itemval);
+          } 
+       }
+       else{
+           alert('Please enter a valid amount');
+           sendToLC();
+       }           
+}  
+
+
+function updateMeritValidate(ItemId){
+        
+        var  MeritId;
+        var itemval;
+        
+        if('{!LOGGEDINUSER}' == 'Defendant Handler'){
+               MeritId = 'MerDef'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);         
+        }
+        else if('{!LOGGEDINUSER}' == 'Claimant Handler'){
+            
+              MeritId = 'MerCl'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);
+               
+        }
+        else if('{!LOGGEDINUSER}' == 'Owner'){
+            
+              MeritId = 'MerCl'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);
+               
+        }
+          
+        if(isNaN(itemval)==false){  
+              if(itemval>=1 && itemval<=100){
+                    UpdateMeritNow(ItemId,itemval);
+                   
+              }
+              else{
+                  var msg = 'Please enter a value between 1 and 100'; 
+                   alert(msg);
+                   sendToLC();
+              } 
+        }
+        else{
+            alert('Please enter a valid number.');
+            sendToLC();
+        }          
+}  
+
+
+
+function UpdateItem(RecId){
+     
+    UpdateItemNow(RecId);
+}
+
+
+function OpenItem(RecId){
+     
+    top.location ="/s/detail/"+RecId;
+}
+
+function NewItem(RecId){
+     
+    NewItemNow(RecId);
+}
+function NewCode(RecId){   
+    NewCodeNow(RecId);
+}
+
+
+function reloadpage(){
+            //alert('In')
+           // top.location ='/s/case/'+'{!CurrentCase.id}' +'/detail?tabset-a6dfa=3';
+            
+           top.location ='/s/case/'+'{!StartRecId}' +'/detail?tabset-a6dfa=3'; 
+    }
+
+</script>
+<script>
+    var enableTab = function(){
+        $('.nav-tabs').tab();        
+    }
+</script>
+
+
+<apex:outputPanel >
+<script id="pageloader">
+
+    
+</script>
+</apex:outputPanel>
+
+
+<body class="slds-scope" style="font-size:14px">
+<span class="slds-text-heading--medium slds-m-bottom--medium">
+<apex:outputPanel id="NoAccess" rendered="{! if(ViewItems='FALSE',True,False)}">
+    You do not have permission to view the SOL!
+</apex:outputPanel>
+
+
+
+<apex:outputPanel id="Access" rendered="{! if(ViewItems='TRUE',True,False)}">
+
+<apex:form >
+
+<!--
+
+<script>
+        
+        
+     
+        
+      
+
+
+</script>
+-->
+
+
+<apex:actionFunction name="UpdateMeritNow" action="{!UpdateMerit}" oncomplete="sendToLC();">
+<apex:param name="RecId" value=""/>
+<apex:param name="MerPerc" value=""/>
+</apex:actionFunction>
+
+
+<apex:actionFunction name="UpdateItemNow" action="{!UpdateItem}" oncomplete="sendToLC();" > 
+<apex:param name="RecId" value=""/>
+<apex:param name="Amount" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="InitateRationale" action="{!InitateRationale}" reRender="Rational" oncomplete="ShowRationalemodal();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+ <apex:actionFunction name="UpdateRationale" action="{!UpdateRationale}" oncomplete="sendToLC();"  /> <!-- oncomplete="Changerender();" -->
+
+<apex:actionFunction name="InitateInterest" action="{!InitateInterest}" reRender="ModalInterest"  oncomplete="ShowInterestmodal();"> <!-- reRender="ModalInterest" -->
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+ <apex:actionFunction name="UpdateInterest" action="{!UpdateInterest}" oncomplete="sendToLC();"  /> <!-- oncomplete="Changerender();" -->
+ <apex:actionFunction name="RemoveInterest" action="{!RemoveInterest}" oncomplete="sendToLC();"  /> <!-- oncomplete="Changerender();" -->
+
+
+<apex:actionFunction name="NewItemNow" action="{!NewItem}" reRender="ModalItem" oncomplete="Showmodal();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="SaveItemNow" action="{!SaveItem}" oncomplete="sendToLC();" > <!-- oncomplete="sendToLC();" -->
+<apex:param name="Amount" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="NewCodeNow" action="{!NewCode}" reRender="ModalCode" oncomplete="ShowCodemodal();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="RemoveCodeNow" action="{!DeleteCode}"   oncomplete="sendToLC();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="RemoveItemNow" action="{!DeleteLossitem}"   oncomplete="sendToLC();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="populateCaseFiles" action="{!populateCaseFiles}" reRender="FileLink"  oncomplete="ShowFilelinkmodal();"> <!-- reRender="ModalInterest" -->
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="SaveCaseFilesSelection" action="{!SaveCaseFilesSelection}" oncomplete="sendToLC();" />
+
+
+<apex:actionFunction name="SaveCodeNow" action="{!SaveCode}" oncomplete="sendToLC();"  /> <!-- oncomplete="Changerender();" -->
+
+<apex:actionFunction name="pagerefresh" action="{!Pagerefresh}"  reRender="Access,ModalItem,ModalCode,Rational,FileLink" oncomplete="StopSpin();Hidemodal();enableTab();"  />
+
+
+<!-- REFER
+<div class="container">
+<apex:actionFunction name="Refer" action="{!RefertoArbitration}" oncomplete="reloadpage();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="ReferMerit" action="{!ReferMerit}" oncomplete="reloadpage();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+-->
+
+<div class="tabbable boxed parentTabs">
+
+<!--
+<ul class="nav nav-tabs">
+
+
+
+    <apex:repeat value="{!lstScheduleofLoss}" var="schedule">
+    
+        <li><a data-toggle="tab active"  href="#{!schedule.ScheduleId}"><span class="slds-text-heading--medium slds-m-bottom--medium">{!schedule.ScheduleName}</span></a></li>
+         
+         
+    </apex:repeat>
+</ul>
+-->
+
+
+<!--
+<div class="panel-group">
+<div class="panel panel-default">  
+
+
+
+<div class="tab-content" id="SchedTop">
+
+<apex:outputPanel id="lossitems">
+-->
+<br/><br/>
+ <apex:repeat value="{!lstScheduleofLoss}" var="schedule"> 
+ 
+ 
+    <div id="{!schedule.ScheduleId}" class="tab-pane">
+    <div class="tabbable">  
+           
+          <!--           
+           <ul class="nav nav-tabs">
+           <li><a data-toggle="tab" href="#Mer{!schedule.ScheduleId}">Merits</a></li>    
+             <li><a data-toggle="tab" href="#Dam{!schedule.ScheduleId}">Damages</a></li>
+             
+           </ul>   
+           -->
+           
+   
+       <div class="tab-content" id="HodMerit">   
+       <!--
+       <div id="Mer{!schedule.ScheduleId}" class="tab-pane fade in"> 
+       -->
+       
+          
+                       <table width ="90%">
+                                <tr><td width="160px"><b>Status</b></td><td  width="220px"><b>Merit Name </b></td><td width="180px"><b>Claimant Position </b></td><td  width="180px"><b>Defendant Position </b></td><td width="170px"><b>Arbitrator's Award </b></td><td></td></tr>
+                  <apex:repeat value="{!schedule.lstMeritSched}" var="merit">
+    
+                    <tr>
+                    <td width="160px"><apex:outputText value="{!merit.Status}" /></td>
+                    <td width="200px"><apex:outputText value="{!merit.MeritName}" /></td>
+                    
+                                    <apex:outputPanel layout="none" rendered="{! if(AND(Claimant='Edit',merit.Status !='Arbitrated'),True,False)}">    
+                                        <!--
+                                        <td><apex:inputText value="{!merit.ClaimantPosition}" styleclass="slds-input" style="height:30px; width:130px; " /> </td>
+                                        -->
+                                        
+                                        <td  width="170px"> <input id="MerCl{!merit.MeritId}" value="{!merit.ClaimantPosition}" class="slds-input" style="height:25px; width:110px; text-align:right;" /> %</td>
+                                       
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(OR(Claimant='Readonly',merit.Status ='Arbitrated'),True,False)}">    
+                                        <td  width="170px" style="text-align:center"><apex:outputText value="{!merit.ClaimantPosition}"/> % </td>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Claimant='Hidden',True,False)}">    
+                                        <td> </td>
+                                    </apex:outputPanel> 
+                                    <apex:outputPanel layout="none" rendered="{! if(AND(Defendant='Edit',merit.Status !='Arbitrated'),True,False)}">   
+                                       <!--
+                                        <td><apex:inputText value="{!merit.DefendantPosition}" styleclass="slds-input" style="height:30px; width:130px;"/> </td>
+                                       -->
+                                        <td> <input  id="MerDef{!merit.MeritId}" value="{!merit.DefendantPosition}" class="slds-input" style="text-align:right; height:25px; width:110px;" /> %</td>
+                                       
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(OR(Defendant='Readonly',merit.Status ='Arbitrated'),True,False)}">   
+                                        <td  width="170px" style="text-align:center;"><apex:outputText value="{!merit.DefendantPosition}"/> % </td>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(Defendant='Hidden',True,False)}">   
+                                        <td></td>
+                                    </apex:outputPanel>
+                                    
+                                       
+                                          
+                                        <td  width="170px" style="text-align:center;"><apex:outputText value="{!merit.ArbitratorsPosition}"/> % </td>
+                                    
+                                     
+                    
+                    <td style="padding: 0px 0px 0px 0px;">
+                    
+                       <apex:outputPanel layout="none" rendered="{! if(AND(ViewInd='TRUE',UpdateItem='TRUE',merit.Status !='Arbitrated'),True,False)}"> 
+                                                <a  href="" data-toggle="tooltip" title="Save Changes" class="btn " onclick="StartSpin();updateMeritValidate('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Update-SmallBlack.jpg')}" width="14px;"/></a> <!-- UpdateMeritNow('{!merit.MeritId}');" -->
+                        </apex:outputPanel>
+                           <apex:outputPanel layout="none" rendered="{! if(AND(ViewInd='TRUE',merit.DefendantRationale = null,merit.ClaimantRationale=null),True,False)}">     
+                                            <a  href="" class="btn" data-toggle="tooltip" title="Rationale" onclick="InitateRationale('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                           </apex:outputPanel>
+                           <apex:outputPanel layout="none" rendered="{! if(AND(OR(merit.DefendantRationale != null,merit.ClaimantRationale!=null),ViewInd='TRUE'),True,False)}">     
+                                            <a  href="" class="btn" data-toggle="tooltip" title="Rationale" onclick="InitateRationale('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallGreen.jpg')}" width="14px;"/></a>
+                           </apex:outputPanel>
+                      </td>  
+                    </tr>
+            </apex:repeat>
+            </table>
+            <br/><br/><br/>
+     <!-- 
+       </div>                   
+       <div id="Dam{!schedule.ScheduleId}" class="tab-pane"> 
+      --> 
+   
+          <div class="panel-group">
+            <div class="panel panel-default">
+              
+              <apex:repeat value="{!schedule.lstLossCategory}" var="Category">
+            
+                  <div class="panel-heading">
+                    <!--<h4 class="panel-title"> -->
+                    <h4>
+                    
+                    <div class="row">
+                          <div class="col-sm-6">
+                               <a data-toggle="active" href="#{!Category.CategoryId}" >   
+                                  <apex:outputText value="{!Category.CategoryName}" style="font-size:16px; font-weight: 500" /> 
+                             </a>
+                          </div>
+                          <div class="col-sm-6">
+                                  <apex:outputPanel layout="none" rendered="{! if(CreateNew='TRUE',True,False)}">
+                                    <!--
+                                    <apex:outputPanel layout="none" rendered="{! if(And(CurrentCase.Protocol__r.Mininmum_Schedule__c=='Merit and Damages Required',CurrentCase.Defendant_Accept_Reject__c='Accept'),false,true)}">
+                                    </apex:outputPanel>        
+                                  
+                                   -->
+                                        <a  href="" data-toggle="tooltip" title="New Item" class="btn " onclick="NewItem('{!Category.CategoryId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Add-SmallBlue.jpg')}" width="18px;"/></a>
+                                        
+                                </apex:outputPanel>  
+                                <apex:outputPanel layout="none" rendered="{! if(AND(CreateNew='TRUE',Category.CategoryName='Pain, Suffering & Loss of Amenities'),true,false)}">  
+                                 <a  href="" class="btn " data-toggle="tooltip" title="New Injury Code" onclick="NewCode('{!Category.CategoryId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Injury-SmallBlue.jpg')}" width="18px;"/></a>
+                                </apex:outputPanel>
+  
+                              </div>
+  
+                            </div>
+                    
+                                       
+                            
+                    
+                      
+                      
+                      
+                    </h4>
+                  </div>
+              
+            <div id="{!Category.CategoryId}" class="panel-collapse">
+            
+                <div class="panel-body">  
+                
+                 <table width ="100%">
+                 <apex:outputPanel rendered="{! if(Category.LossItemCount>0,true,false)}">
+                                                           
+                            <tr>
+                            <!--
+                            <td width="50px"><b>Type</b></td>
+                            -->
+                            <td width="150px"><b>Status</b></td>
+                             <apex:outputPanel layout="none" rendered="{! IF(AND(CurrentCase.Protocol__r.Mininmum_Schedule__c='Merit Required'),true,false)}"> 
+                         
+                                <td width="150px"><b>Loss Item</b></td>
+                            </apex:outputPanel> 
+                            <td width="180px" style="text-align:right"><b>Claimant Position </b> </td><td width="180px" style="text-align:right"><b>Defendant Position  </b> </td><td width="180px" style="text-align:right"><b>Arbitrator's Award  </b> </td> 
+                            
+                            
+                            <td align="Center"></td>
+                            
+                            </tr>
+                  </apex:outputPanel>         
+                              <apex:repeat value="{!Category.lstLossItems}" var="Item">
+                                        
+                                        
+                                        <tr>
+                                        <!--
+                                        <td><apex:outputText value="{!Item.Type}" /> </td>
+                                        -->
+                                        <td><apex:outputText value="{!Item.Status}"/> </td>
+                                 <apex:outputPanel layout="none" rendered="{! IF(AND(CurrentCase.Protocol__r.Mininmum_Schedule__c='Merit Required'),true,false)}"> 
+                         
+                                         <td><apex:outputText value="{!Item.PastFutureFinancialLosses}"/> </td>
+                                        
+                                 </apex:outputPanel>   
+                                    <apex:outputPanel layout="none" rendered="{! if(AND(Claimant='Edit',Item.Status !='Arbitrated'),True,False)}">    
+                                        <!--
+                                        <td><apex:inputText value="{!Item.ClaimantPosition}" styleclass="slds-input" style="height:25px; width:130px;"/> </td>
+                                        -->
+                                       <td style="text-align:right"> £ <input  id="{!Item.RecId}" value="{!Item.ClaimantPosition}" class="slds-input" style="height:25px; width:130px;text-align:right" /></td>
+                                        
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(OR(Claimant='Readonly',Item.Status ='Arbitrated'),True,False)}">    
+                                        <td style="text-align:right">£ &nbsp;<apex:outputText value="{!Item.ClaimantPosition}"/> </td>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Claimant='Hidden',True,False)}">    
+                                        <td> </td>
+                                    </apex:outputPanel> 
+                                    <apex:outputPanel layout="none" rendered="{! if(AND(Defendant='Edit',Item.Status !='Arbitrated'),True,False)}">   
+                                        <td style="text-align:right">£ &nbsp;<apex:inputText value="{!Item.DefendantPosition}" styleclass="slds-input" style="height:25px; width:130px;text-align:right"/> </td>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(OR(Defendant='Readonly',Item.Status ='Arbitrated'),True,False)}">   
+                                        <td style="text-align:right">£ &nbsp;<apex:outputText value="{!Item.DefendantPosition}" /> </td>  
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(Defendant='Hidden',True,False)}">   
+                                        <td></td>
+                                    </apex:outputPanel>
+                                    
+                                    
+                                     <td style="text-align:right">£ &nbsp;<apex:outputText value="{!Item.ArbitratorsPosition}"/> </td> 
+                                     
+                                        
+                                        <td style="padding: 0px 00px 0px 50px;">
+                                        <apex:outputPanel layout="none" rendered="{! if(AND(LOGGEDINUSER=='Claimant Handler',UpdateItem='TRUE', ViewInd='TRUE',Item.Status !='Arbitrated'),True,False)}"> 
+                                            
+                                            <a  href="" data-toggle="tooltip" title="Save Changes" class="btn " onclick="StartSpin();updateValidate('{!Item.RecId}','{!Item.ClaimantPosition}');">
+                                            
+                                            <apex:image url="{!URLFOR($Resource.icons,'/Icons/Update-SmallBlack.jpg')}" width="14px;"/>
+                                            
+                                            
+                                            </a> 
+                                            
+                                             <!--  UpdateItem('{!Item.RecId}')-->
+                                        
+                                        </apex:outputPanel> 
+                                         <apex:outputPanel layout="none" rendered="{! if(AND(LOGGEDINUSER!='Claimant Handler',UpdateItem='TRUE', ViewInd='TRUE',Item.Status !='Arbitrated'),True,False)}"> 
+                                            <a  href="" class="btn " data-toggle="tooltip" title="Save Changes" onclick="StartSpin();UpdateItem('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Update-SmallBlack.jpg')}" width="14px;"/></a>  
+                                        </apex:outputPanel>
+                                        <!--
+                                        <apex:outputPanel layout="none" rendered="{! if(ViewInd='TRUE',True,False)}">     
+                                            <a  href="/s/detail/{!Item.RecId}" class="btn" target="_blank" >Full View</a> 
+                                        </apex:outputPanel>   
+                                        -->
+                                        <apex:outputPanel layout="none" rendered="{! if(AND(ViewInd='TRUE',Item.DefendantRationale =null ,Item.ClaimantRationale=null),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="Rationale"  class="btn" onclick="InitateRationale('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{! if(AND(OR(Item.DefendantRationale !=null ,Item.ClaimantRationale!=null),ViewInd='TRUE'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="Rationale"  class="btn" onclick="InitateRationale('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallGreen.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                       
+                                        <apex:outputPanel rendered="{! if(And(Item.Interest =0,Category.CategoryName='Past Financial Losses'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="Interest" class="btn" onclick="InitateInterest('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Interest_SmallBlack.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{! if(And(Item.Interest > 0,Category.CategoryName='Past Financial Losses'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="View Interest" class="btn" onclick="InitateInterest('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Interest_SmallGreen.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                         <apex:outputPanel rendered="{! if(AND(Item.FileCount=0,ViewInd='TRUE'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="Linked Documents" class="btn" onclick="populateCaseFiles('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Documents_SmallBlack.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{! if(AND(Item.FileCount>0,ViewInd='TRUE'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="View and Link Documents" class="btn" onclick="populateCaseFiles('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Documents_SmallGreen.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel layout="none" rendered="{! if(AND(Item.DefendantRationale =null,LOGGEDINUSER=='Claimant Handler',Item.DefendantPosition <=0, Item.ArbitratorsPosition<=0,ViewInd='TRUE',Item.Status !='Arbitrated'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="Remove Item" class="btn" onclick="StartSpin();RemoveItemNow('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Delete_SmallBlack.jpg')}" width="14px;"/></a>
+                                        </apex:outputPanel>
+                                         <!-- LOGGEDINUSER=='Claimant Handler' -->
+                                        </td>
+                                        </tr>
+                             
+                          
+                          
+                              </apex:repeat> 
+                  
+                 </table>  
+                <apex:outputPanel layout="none" rendered="{! if(AND( Category.InjuryCodeCount >  0,Category.CategoryName='Pain, Suffering & Loss of Amenities'),true,false)}"> 
+                 <br/><br/>
+                 <table width ="70%">
+                            <tr><td style="width:280px;"><b>Injury Code</b></td><td style="width:400px;"><b>Block</b></td><td style="width:200px;"><b>Category</b></td><td></td></tr>
+                           <apex:repeat value="{!Category.lstInjuryCode}" var="code"> 
+                            <tr><td><apex:outputText value="{!code.CodeName}"/></td>
+                             <td><apex:outputText value="{!code.Block}"/></td>
+                             <td><apex:outputText value="{!code.Category}"/></td>
+                            <td>
+                            
+                            <apex:outputPanel layout="none" rendered="{! if(AND(LOGGEDINUSER=='Claimant Handler',ViewInd='TRUE'),True,False)}">     
+                                            <a  href="" data-toggle="tooltip" title="Remove Code" class="btn" onclick="StartSpin();RemoveCodeNow('{!code.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Delete_SmallBlack.jpg')}" width="14px;"/></a>
+                            </apex:outputPanel>
+                                       
+                                        
+                             </td>
+                            </tr>
+                           </apex:repeat>  
+                 </table> 
+                 </apex:outputPanel>
+                 </div>
+                </div>
+              
+            
+              
+              
+              
+              
+              
+              
+                 
+              </apex:repeat>
+              
+         <!-- Panel  
+             </div>
+          -->   
+            </div> 
+       
+       
+       <br/><br/>
+       
+       <div class="slds-grid slds-gutters">
+<div class="slds-col slds-size_10-of-12">
+
+       
+                <table  style="font=size:22px;" cellpadding="22">
+                                    <tr>
+                                    <td width="250px"></td><td width="170px" style="text-align:right"><b>Claimant Position</b></td><td width="160px" style="text-align:right"><b>Defendant Position</b></td><td width="160px" style="text-align:right"><b>Arbitrator's Award</b></td><td style="text-align:right" width="180px"><b>Provisional Amount Payable</b></td></tr>
+                                    <tr>
+                                    <td style="text-align:right">Total (Exc Interest)</td>
+                                    <td style="text-align:right">£ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalClaimant_NoInt}" /></apex:outputText>  </td>
+                                    <td style="text-align:right">£ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalDefendant_NoInt}" /></apex:outputText>   </td>
+                                    <td style="text-align:right">£ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalArbitration_NoInt}" /></apex:outputText> </td>
+                                    <td style="text-align:right">£ &nbsp;
+                                    <apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalMeritAmount_NoInt}" /></apex:outputText>
+                                     
+                                    </td> 
+                                    </tr>
+                                    <tr>
+                                    <td  style="text-align:right">Total (Incl Interest)</td>
+                                    <td style="text-align:right">£ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalClaimant}" /></apex:outputText> </td>
+                                    <td style="text-align:right">£ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalDefendant}" /></apex:outputText> </td>
+                                    <td style="text-align:right">£ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalArbitration}" /></apex:outputText> </td>
+                                    <td style="text-align:right">
+                                    £ &nbsp;<apex:outputText value="{0, number, 00.00}"><apex:param value="{!schedule.TotalMeritAmount}" /></apex:outputText>
+                                     
+                                    </td> 
+                                    </tr>
+                                    
+                  </table>
+                  
+</div>
+<div class="slds-col slds-size_2-of-12">
+
+</div>
+</div>
+           <!-- Damages Tabes-->
+             
+            </div>
+          
+         
+         
+        
+               
+         </div>
+          
+          <br/>
+          
+      <!-- PANEL OF SCHEDULE 
+        </div> 
+      -->
+        </div> 
+        </div>
+       </apex:repeat> 
+       <!--
+     </apex:outputPanel> 
+        
+        
+   </div>
+   </div> 
+  </div> 
+  --> 
+  
+</div>
+<!--
+</div>
+-->
+
+<!-- Modal -->
+
+ <!-- NEW ITEM MODAL-->          
+              <apex:outputPanel id="ModalItem">
+
+
+                        <div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewModal">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">New Loss Item</h5>
+                                
+                              </div>
+                              <div class="modal-body">
+                                                  <p> 
+                                                  
+                                                 <apex:outputPanel layout="None"  rendered="{! IF(AND(ShowItemCategory=true),true,false)}"> <!-- CurrentCase.Protocol__r.Mininmum_Schedule__c='Merit Required', -->
+                                                  Select Loss Type (required):<br/> <br/><apex:inputField value="{!NewLossItem.Loss_Type__c}" styleClass="slds-input" style="height:40px; width:550px;" required="true" />
+                                                 </apex:outputPanel> 
+                                                  <br/> <br/>
+                                                   Claimant Amount (required):<br/><br/>
+                                                   <input id="Newlossitem" value="{!NewLossItem.Claimant_Position__c}" class="slds-input" style="height:40px; width:200px;" />
+                                            
+                                            <!--
+                                             <apex:inputField value="{!NewLossItem.Claimant_Position__c}" styleClass="slds-input" style="height:35px; width:200px;" required="true"/>
+                                                -->
+                                                 
+                                                  <br/> <br/><br/>
+                                                          <a  href="" class="btn " onclick="StartSpin();SaveValidate();">Save </a><a  href="" class="btn " onclick="Hidemodal();">Close </a>
+                                                   
+                                                 
+                                                   <!-- SaveItemNow() -->
+                        </p>
+                              
+                              </div>
+                              <div class="modal-footer">
+                                
+                                
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+
+
+            </apex:outputPanel>
+<!-- NEW ITEM MODAL-->     
+
+
+
+
+
+
+
+<apex:outputPanel id="ModalCode">
+
+
+<div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewModalCode">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Injury Code</h5>
+        
+      </div>
+      <div class="modal-body">
+            <p> Injury Code:<br/><br/><apex:inputField value="{!NewInjuryCode.ICD_JC_Items__c}" styleClass="slds-input" style="height:40px; width:750px;"/>
+                         <br/> <br/><br/>
+                                  <a  href="" class="btn " onclick="StartSpin();SaveCodeNow();">Save </a><a  href="" class="btn " onclick="HideCodemodal();">Close </a>
+                           
+                          <br/>
+                          <br/>                        
+            </p>
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+</apex:outputPanel>
+
+ 
+<apex:outputPanel id="Rational">                          
+ <div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewModalRationale">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Rationale</h5>
+        
+      </div>
+      <div class="modal-body">
+             
+            <table>
+            <tr>
+            <td>
+            <apex:outputPanel layout="none" rendered="{! if(OR(ItemStatus ='Arbitrated',Claimant='Readonly'),True,False)}">  
+            Claimant Rationale: (Read only)<br/> <br/>
+                          <apex:outputtext value="{!ItemClaimantRationale}" styleClass="slds-input" style="height:200px; width:400px;"/>
+             </apex:outputPanel>
+              <apex:outputPanel layout="none" rendered="{! if(AND(ItemStatus !='Arbitrated',Claimant='Edit'),True,False)}">  
+                    Claimant Rationale:<br/><br/>
+                    <apex:inputtextarea value="{!ItemClaimantRationale}" styleClass="slds-input" style="height:200px; width:400px;"/>
+                </apex:outputPanel> 
+             </td>
+            
+            <td> 
+            <apex:outputPanel layout="none" rendered="{! if(AND(ItemStatus !='Arbitrated',Defendant='Edit'),True,False)}">    
+            Defendant Rationale:<br/><br/>
+                                       <apex:inputtextarea value="{!ItemDefendantRationale}" styleClass="slds-input" style="height:200px; width:400px;"/>
+            </apex:outputPanel> 
+            <apex:outputPanel layout="none" rendered="{! if(OR(ItemStatus ='Arbitrated',Defendant='Readonly'),True,False)}"> 
+                 Defendant Rationale: (Read only)<br/> <br/>
+                    <apex:outputtext value="{!ItemDefendantRationale}" styleClass="slds-input" style="height:200px; width:400px;"/>
+                </apex:outputPanel>
+            </td>
+            
+             </tr>
+           
+                </table>
+            <br/> 
+                               <apex:outputPanel rendered="{! if(AND(ItemStatus !='Arbitrated',OR(LOGGEDINUSER=='Owner',LOGGEDINUSER=='Claimant Handler',AND(LOGGEDINUSER=='Defendant Handler',Defendant!='Readonly'))),true,false) }">
+                           
+                                  <a  href="" class="btn " onclick="StartSpin();UpdateRationale();">Update</a>  
+                                </apex:outputPanel> 
+                                <a  href="" class="btn " onclick="HideRationalemodal();">Close </a>
+                          <br/>
+                          <br/>                        
+            
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+</apex:outputPanel>
+
+<!-- NEW ITEM INTEREST-->          
+              <apex:outputPanel id="ModalInterest" layout="None">
+
+
+                        <div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewInterest">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Interest on loss item</h5>
+        
+      </div>
+      <div class="modal-body">
+            <p>  <div class="form-group">
+                         
+              
+           <apex:outputPanel rendered="{! if(LOGGEDINUSER!='Claimant Handler',true,false) }">
+               Incursion date: {!StartDate}
+           <br/>
+           </apex:outputpanel>
+           <apex:outputPanel rendered="{! if(AND(OR(LOGGEDINUSER=='Owner',LOGGEDINUSER=='Claimant Handler'),NewLossItem.Status__c !='Arbitrated'),true,false) }">   
+              Please select the date your expense was incurred:<br/><br/>
+
+          <div class="form-group">
+                <div class='input-group date' id='datetimepicker1' style="width:200px;">
+                
+                 <apex:inputtext id="datepickerE" value="{!StartDate}" title="Username" styleclass="form-control"   /> 
+   
+                 
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+             
+            
+          </apex:outputPanel>
+               <br/>
+              Interest based on Claimant position: £ {!NewLossItem.Interest__c} <br/>
+              Interest based on Arbitrator's position: £  {!NewLossItem.Arbitration_Interest__c} <br/>
+              Interest based on Defendant position: £ {!NewLossItem.Defendant_Interest__c}    <br/>
+              
+              <br/><br/>
+      </div>         
+      <apex:outputPanel rendered="{! if(AND(NewLossItem.Status__c !='Arbitrated',OR(LOGGEDINUSER=='Owner',LOGGEDINUSER=='Claimant Handler')),true,false) }"> 
+          <a  href="" class="btn " onclick="StartSpin();UpdateInterest();">Save </a><a  href="" class="btn " onclick="StartSpin();RemoveInterest();">Remove Interest</a>
+        </apex:outputPanel>      
+          <a  href="" class="btn " onclick="HideInterestmodal();">Close </a>             
+            </p>
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+            </apex:outputPanel>
+        
+<apex:outputpanel id="FileLink">
+
+
+<div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewFileLink">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Link file to Loss Item</h5>
+        
+      </div>
+      <div class="modal-body">
+            <table CELLSPACING="20"> 
+                         <tr style="font-weight:bold;padding: 5px">
+                         <td style="padding: 5px;width:130px"> Name</td><td style="padding: 5px;width:200px">Document Type </td><td style="padding: 5px;width:150px">Sharing</td>
+                         <!-- <td>View</td> -->
+                         <td style="padding: 5px;width:110px;text-align:center">Claimant</td><td style="padding: 5px;width:110px;text-align:center">Defendant</td> <td></td></tr>  
+                         <apex:repeat value="{!CaseFileslist}" var="file">
+                         <tr >
+                             <td style="padding: 5px"><a href="{!file.DocumentLink}" target="_blank">{!file.DocumentName}</a> </td>
+                             <td style="padding: 5px">{!file.DocumentType}</td> 
+                             <td style="padding: 5px">{!file.SharingStatus}</td>
+                             <!--
+                             <td style="padding: 5px"><a href="{!file.DocumentLink}" target="_blank">View File</a></td> -->
+                             
+                             <td style="padding: 5px;text-align:center">
+                                <apex:outputPanel rendered="{! if(LOGGEDINUSER!='Claimant Handler',true,false)}">
+                                 <apex:inputCheckbox value="{!file.LossItemSelectClaimant}" disabled="true" />
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{! if(LOGGEDINUSER=='Claimant Handler',true,false)}">
+                                 <apex:inputCheckbox value="{!file.LossItemSelectClaimant}" />
+                                </apex:outputPanel>                            
+                             </td>
+                             <td style="padding: 5px;text-align:center">
+                                <apex:outputPanel rendered="{! if(LOGGEDINUSER=='Defendant Handler',true,false)}">
+                                 <apex:inputCheckbox value="{!file.LossItemSelectDefendant}" />
+                                </apex:outputPanel>
+                                <apex:outputPanel rendered="{! if(LOGGEDINUSER!='Defendant Handler',true,false)}">
+                                 <apex:inputCheckbox value="{!file.LossItemSelectDefendant}" disabled="true" />
+                                </apex:outputPanel>
+                            
+                             </td>
+                         <td></td>
+                         
+                         </tr>
+                         </apex:repeat>
+                         </table>
+                        <br/><br/>
+                        <apex:outputPanel rendered="{! if(OR(LOGGEDINUSER=='Claimant Handler',AND(LOGGEDINUSER=='Defendant Handler',Defendant!='Readonly')),true,false) }">
+                        <a  href="" class="btn " onclick="StartSpin();SaveCaseFilesSelection();">Save </a>
+                        </apex:outputPanel>
+                        <a  href="" class="btn " onclick="HideFilelinkmodal();">Close </a>
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+</apex:outputpanel>
+
+
+
+  </apex:form>  
+</apex:outputPanel>  
+  </span>  
+</body>
+<script>
+                     //window.onload = Showmodal;
+                     function Showmodal()
+                        {
+                       
+                                         $(document).ready(function(){ 
+                                            $('#ViewModal').modal('show');
+                                        }); 
+                         }
+                      function Hidemodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModal').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }    
+                    function ShowCodemodal()
+                        {
+                       
+                                         $(document).ready(function(){ 
+                                            $('#ViewModalCode').modal('show');
+                                        }); 
+                         }
+                    function HideCodemodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModalCode').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }
+                    function ShowRationalemodal()
+                        {
+                       
+                                         $(document).ready(function(){ 
+                                            $('#ViewModalRationale').modal('show');
+                                        }); 
+                         }
+                    function HideRationalemodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModalRationale').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }
+                    
+                    function ShowInterestmodal()
+                        {
+                                        ShowInterestdate();
+                                         $(document).ready(function(){ 
+                                            $('#ViewInterest').modal('show');
+                                        }); 
+                         }
+                    function HideInterestmodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewInterest').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }
+                         
+                    function ShowFilelinkmodal()
+                        {                     
+                                         $(document).ready(function(){ 
+                                            $('#ViewFileLink').modal('show');
+                                        }); 
+                         }
+                    function HideFilelinkmodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewFileLink').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }     
+ 
+ </script>
+ 
+ <script>
+ 
+    setTimeout(function(){ 
+    
+        document.getElementById("spinner").style.display = "none";
+    
+     }, 1000);
+  
+   
+    var lexOrigin = "/"; //"https://inap5-k3.cs108.force.com"; 
+    
+    function sendToLC() {
+        //alert('Done');
+        
+        var message = 'vfOriginL'; //document.getElementById("message").value;
+        parent.postMessage(message, lexOrigin);
+       // pagerefresh();
+        location.reload(true);
+    }
+    
+    window.addEventListener("message", function(event) {
+            
+            console.log('VBFailITEM -' +event.data);
+            if (event.data != 'vfArbOrigin') {
+                
+                console.log('VBFailITEM');
+                return;
+            }
+            // Handle the message
+            console.log('vfArbSuccess23');
+           // StartSpin();
+            pagerefresh();
+         
+          location.reload(true);
+     
+            
+           
+        },false);
+    
+</script>
+
+
+ <!--  
+<script type="text/javascript">
+$(function() {
+      
+        $('[id$=datepickerE]').datepicker({dateFormat: 'yy-mm-dd'});
+        
+    });
+</script>  
+-->
+
+<script>
+function ShowInterestdate()
+                        {
+                        
+$(function () {
+
+   var bindDatePicker = function() {
+   
+       var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+        
+       
+        var startDate = '{!StartDate}';
+        
+        $('[id$=datepickerE]').datepicker({
+          
+        format:'yyyy-mm-dd',
+         autoclose:true,
+            startDate:startDate,
+            endDate: today,
+            
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down"
+            }
+        }).find('input:first').on("blur",function () {
+            // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+            // update the format if it's yyyy-mm-dd
+            var date = parseDate($(this).val());
+
+            if (! isValidDate(date)) {
+                //create date based on momentjs (we have that)
+                date = moment().format('YYYY-MM-DD');
+            }
+
+            $(this).val(date);
+        });
+    }
+   
+   var isValidDate = function(value, format) {
+        format = format || false;
+        // lets parse the date to the best of our knowledge
+        if (format) {
+            value = parseDate(value);
+        }
+
+        var timestamp = Date.parse(value);
+
+        return isNaN(timestamp) == false;
+   }
+   
+   var parseDate = function(value) {
+        var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+        if (m)
+            value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+        return value;
+   }
+   
+   bindDatePicker();
+ });
+}
+
+</script>
+
+
+ 
+<script>
+  $("ul.nav-tabs a").click(function (e) {
+  e.preventDefault();  
+    $(this).tab('show');
+});
+  
+  </script>
+</apex:component>

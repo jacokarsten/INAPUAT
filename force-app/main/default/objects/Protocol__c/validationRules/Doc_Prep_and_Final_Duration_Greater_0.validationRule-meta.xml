@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Doc_Prep_and_Final_Duration_Greater_0</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(Final_Offers_Duration__c=0,  Doc_Prep_Duration__c =0)</errorConditionFormula>
+    <errorMessage>Doc Prep and Final Offers duration must both be greater than 0</errorMessage>
+</ValidationRule>

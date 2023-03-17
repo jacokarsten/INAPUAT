@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_referral_date_passed__c</fullName>
+    <externalId>false</externalId>
+    <formula>If(OR(No_referral_date__c &gt; Today(),ISNULL(No_referral_date__c) ),false,true)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>No referral (date) passed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

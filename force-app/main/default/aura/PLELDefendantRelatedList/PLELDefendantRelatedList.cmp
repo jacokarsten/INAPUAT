@@ -1,0 +1,33 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="DefendantRelatedList">
+    
+    <!-- attributes -->
+    <aura:attribute name="caseId" type="String" access="global" />
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="caseStatus" type="boolean" default="false" />
+    
+    
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+    <aura:handler name="dRefresh" event="c:DataTableRefresh" action="{!c.refresh}" />
+    
+    
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    
+    
+    <!-- the container element determine the height of the datatable -->
+   
+        <div class="slds-border slds-border_top" style="height: 300px , display: block" >
+            <lightning:datatable
+                                 columns="{! v.columns }"
+                                 data="{! v.data }"
+                                 keyField="id"
+                                 hideCheckboxColumn="true"
+                                 onrowaction="{! c.viewRecord }"/>
+        </div>
+
+    
+    
+</aura:component>

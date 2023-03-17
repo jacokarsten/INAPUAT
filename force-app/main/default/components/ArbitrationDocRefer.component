@@ -1,0 +1,265 @@
+<apex:component controller="LossItemViewLightningVF" allowDML="true">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script>
+
+function UpdateItem(RecId){
+
+    UpdateItemNow(RecId);
+}
+
+function reloadpage(){
+    //alert('In')
+    top.location ="/s/case/5001l000000gyFbAAI/detail?tabset-a6dfa=3";
+}
+
+function OpenItem(RecId){
+
+    top.location ="/s/detail/"+RecId;
+}
+
+function NewItem(RecId){
+
+    NewItemNow(RecId);
+    }
+    
+    
+</script>
+    
+
+</head>
+<body>
+
+
+<apex:outputPanel rendered="{! if(ViewItems='TRUE',True,False)}">
+
+<apex:form >
+
+
+<apex:actionFunction name="UpdateItemNow" action="{!UpdateItem}" oncomplete="reloadpage();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="NewItemNow" action="{!NewItem}" reRender="ModalItem" oncomplete="Showmodal();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="SaveItemNow" action="{!SaveItem}" reRender="ModalItem" oncomplete="Hidemodal();reloadpage();">
+
+</apex:actionFunction>
+
+<!--
+<div class="container">
+-->
+
+
+<div class="panel-group">
+<div class="panel panel-default">  
+
+<div class="tab-content">
+ <apex:repeat value="{!lstScheduleofLoss}" var="schedule"> 
+ 
+ 
+    <div id="{!schedule.ScheduleId}" class="tab-pane fade in">
+    <div class="tabbable">  
+         <!--
+                 <div class="panel-heading">
+                        <h4 class="panel-title">
+                      <a data-toggle="collapse" href="#{!schedule.ScheduleId}" >{!schedule.ScheduleName}</a> 
+            
+                        </h4>
+                      </div>
+         -->
+         <!--
+             <div id="{!schedule.ScheduleId}" class="panel-collapse collapse">  
+         --> 
+            
+           <ul class="nav nav-tabs">
+           <li><a data-toggle="tab" href="#Mer{!schedule.ScheduleId}">Merits</a></li>    
+             <li><a data-toggle="tab" href="#Dam{!schedule.ScheduleId}">Damages</a></li>
+             
+           </ul>   
+   
+   
+       <div class="tab-content">   
+       
+       <div id="Mer{!schedule.ScheduleId}" class="tab-pane fade in"> 
+   
+                       <table width ="100%">
+                       <tr><td><b>Merit Name </b></td><td><b>Claimant Positio</b></td><td><b>Defendant Position</b></td></tr>
+               <apex:repeat value="{!schedule.lstMeritSched}" var="merit">
+    
+                    <tr><td><apex:outputText value="{!merit.MeritName}" /></td>
+                    <td><apex:outputText value="{!merit.ClaimantPosition}" /></td>
+                    <td><apex:outputText value="{!merit.DefendantPosition}" /></td></tr>
+            </apex:repeat>
+            </table>
+             </div> 
+       <div id="Dam{!schedule.ScheduleId}" class="tab-pane fade in"> 
+       
+   
+          <div class="panel-group">
+            <div class="panel panel-default">
+              
+              <apex:repeat value="{!schedule.lstLossCategory}" var="Category">
+            
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                    <table width ="100%">
+                    <tr><td>
+                    
+                    <a data-toggle="collapse" href="#{!Category.CategoryId}" >{!Category.CategoryName}</a>
+                    </td><td align="right">
+                        <apex:outputPanel rendered="{! if(CreateNew='TRUE',True,False)}">
+                            <a  href="#" class="btn " onclick="NewItem('{!Category.CategoryId}');">New Item</a>
+                        </apex:outputPanel>    
+                            </td>
+                    </tr></table>
+                      
+                      
+                      
+                    </h4>
+                  </div>
+              
+            <div id="{!Category.CategoryId}" class="panel-collapse collapse">
+                <div class="panel-body">  
+                
+                 <table width ="100%">
+                            <tr><td><b>Type</b></td><td><b>Status</b></td><td><b>Loss Item</b></td><td><b>Sub Type</b></td><td ><b>Claimant Position</b> </td><td ><b>Defendant Position</b> </td><td ><b>Arbitrators Position</b> </td> <td align="Center"><b>Actions</b></td></tr>
+                           
+                              <apex:repeat value="{!Category.lstLossItems}" var="Item">
+                                        
+                                        
+                                        <tr>
+                                        <td><apex:outputText value="{!Item.Type}" /> </td>
+                                        <td><apex:outputText value="{!Item.Status}"/> </td>
+                                         <td><apex:outputText value="{!Item.PastFutureFinancialLosses}"/> </td>
+                                        <td><apex:outputText value="{!Item.SubCategory}"/> </td>
+                                    <apex:outputPanel rendered="{! if(Claimant='Edit',True,False)}">    
+                                        <td><apex:inputText value="{!Item.ClaimantPosition}"/> </td>
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel rendered="{! if(Claimant='Readonly',True,False)}">    
+                                        <td><apex:outputText value="{!Item.ClaimantPosition}"/> </td>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel rendered="{! if(Claimant='Hidden',True,False)}">    
+                                        <td> </td>
+                                    </apex:outputPanel> 
+                                    <apex:outputPanel rendered="{! if(Defendant='Edit',True,False)}">   
+                                        <td><apex:inputText value="{!Item.DefendantPosition}"/> </td>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{! if(Defendant='Readonly',True,False)}">   
+                                        <td><apex:outputText value="{!Item.DefendantPosition}"/> </td>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{! if(Defendant='Hidden',True,False)}">   
+                                        <td></td>
+                                    </apex:outputPanel>
+                                    
+                                     <apex:outputPanel rendered="{! if(Arbitrator='Edit',True,False)}">     
+                                        <td><apex:inputText value="{!Item.ArbitratorsPosition}"/> </td>
+                                     </apex:outputPanel>  
+                                     <apex:outputPanel rendered="{! if(Arbitrator='Readonly',True,False)}">     
+                                        <td><apex:outputText value="{!Item.ArbitratorsPosition}"/> </td>
+                                     </apex:outputPanel>
+                                     <apex:outputPanel rendered="{! if(Arbitrator='Hidden',True,False)}">     
+                                        <td> </td>
+                                     </apex:outputPanel>
+                                        
+                                        <td align="right">
+                                        <apex:outputPanel rendered="{! if(UpdateItem='TRUE',True,False)}"> 
+                                            <a  href="#" class="btn " onclick="UpdateItem('{!Item.RecId}');">Update</a>
+                                        </apex:outputPanel>    
+                                        <apex:outputPanel rendered="{! if(ViewInd='TRUE',True,False)}">     
+                                            <a  href="#" class="btn" onclick="OpenItem('{!Item.RecId}');">Full View</a>
+                                        </apex:outputPanel>
+                                        </td>
+                                        </tr>
+                                        
+                          
+                              </apex:repeat> 
+                  
+                 </table>   
+                 </div>
+                </div>
+                 
+              </apex:repeat>
+              
+         <!-- Panel --> 
+             </div>
+            </div> 
+       
+       
+       
+                <table width ="100%">
+                                    <tr><td ><b>Total Claimant Position</b></td><td><b>Total Defendant Liability</b></td></tr>
+                                    <tr>
+                                    <td><apex:outputText value="{!schedule.TotalClaimant}"/> </td><td><apex:outputText value="{!schedule.TotalDefendant}"/>  </td> 
+                                    </tr>
+                                    
+                  </table>
+           <!-- Damages Tabes-->
+             
+            </div>
+          
+         
+         
+        
+               
+         </div>
+          
+          <br/>
+          
+      <!-- PANEL OF SCHEDULE 
+        </div> 
+      -->
+        </div> 
+        </div>
+       </apex:repeat>  
+   </div>
+
+ 
+
+
+
+
+</div>
+</div>
+
+
+</apex:form>  
+</apex:outputPanel>  
+  
+</body>
+<script>
+                     //window.onload = Showmodal;
+                     function Showmodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModal').modal('show');
+                                        }); 
+                         }
+                      function Hidemodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModal').modal('hide');
+                                        }); 
+                         }    
+                    
+ 
+ </script>
+ 
+ 
+<script>
+  $("ul.nav-tabs a").click(function (e) {
+  e.preventDefault();  
+    $(this).tab('show');
+});
+  
+  </script>
+</apex:component>

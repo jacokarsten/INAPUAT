@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>43.0</apiVersion>
+    <description>This is a generic Lightning Component to use a button to set a single field value in a record.
+
+I created this to replace JavaScript buttons that I had primarily been using to set values in fields with the purpose of triggering a Process Builder.</description>
+</AuraDefinitionBundle>

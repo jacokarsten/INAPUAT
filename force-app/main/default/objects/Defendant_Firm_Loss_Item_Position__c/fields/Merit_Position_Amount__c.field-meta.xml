@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Merit_Position_Amount__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(Arbitrator_Award__c = null,
+ Loss_Sub_Category__r.Merit__r.Claimant_Position__c * Claimant_Position__c,
+Loss_Sub_Category__r.Merit__r.Claimant_Position__c * Arbitrator_Award__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Merit Position Amount</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

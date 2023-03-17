@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Value_cannot_exceed_25000_GBP</fullName>
+    <active>false</active>
+    <errorConditionFormula>Total_Claimant_Position__c &gt; 25000</errorConditionFormula>
+    <errorMessage>Total value cannot exceed 25,000 GBP</errorMessage>
+</ValidationRule>

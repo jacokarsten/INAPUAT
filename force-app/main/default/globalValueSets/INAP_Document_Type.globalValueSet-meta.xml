@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Written Argument</fullName>
+        <default>false</default>
+        <label>Written Argument</label>
+    </customValue>
+    <customValue>
+        <fullName>Arbitration Requirements</fullName>
+        <default>false</default>
+        <label>Arbitration Requirements</label>
+    </customValue>
+    <customValue>
+        <fullName>Earlier Award</fullName>
+        <default>false</default>
+        <label>Earlier Award</label>
+    </customValue>
+    <customValue>
+        <fullName>Case Law</fullName>
+        <default>false</default>
+        <label>Case Law</label>
+    </customValue>
+    <customValue>
+        <fullName>Argument Other</fullName>
+        <default>false</default>
+        <label>Argument Other</label>
+    </customValue>
+    <customValue>
+        <fullName>GTA Payment Pack</fullName>
+        <default>false</default>
+        <label>GTA Payment Pack</label>
+    </customValue>
+    <customValue>
+        <fullName>Hire Invoice</fullName>
+        <default>false</default>
+        <label>Hire Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>Impecuniosity Documents</fullName>
+        <default>false</default>
+        <label>Impecuniosity Documents</label>
+    </customValue>
+    <customValue>
+        <fullName>Hire Rate and Period Evidence</fullName>
+        <default>false</default>
+        <label>Hire Rate and Period Evidence</label>
+    </customValue>
+    <customValue>
+        <fullName>Credit Hire Other</fullName>
+        <default>false</default>
+        <label>Credit Hire Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Wage Loss Statement</fullName>
+        <default>false</default>
+        <label>Wage Loss Statement</label>
+    </customValue>
+    <customValue>
+        <fullName>Schedule of Loss</fullName>
+        <default>false</default>
+        <label>Schedule of Loss</label>
+    </customValue>
+    <customValue>
+        <fullName>Invoice</fullName>
+        <default>false</default>
+        <label>Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>Estimate</fullName>
+        <default>false</default>
+        <label>Estimate</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial Loss Other</fullName>
+        <default>false</default>
+        <label>Financial Loss Other</label>
+    </customValue>
+    <customValue>
+        <fullName>GP Report</fullName>
+        <default>false</default>
+        <label>GP Report</label>
+    </customValue>
+    <customValue>
+        <fullName>Accident &amp; Emergency</fullName>
+        <default>false</default>
+        <label>Accident &amp; Emergency</label>
+    </customValue>
+    <customValue>
+        <fullName>Orthopaedic</fullName>
+        <default>false</default>
+        <label>Orthopaedic</label>
+    </customValue>
+    <customValue>
+        <fullName>Psychiatrist</fullName>
+        <default>false</default>
+        <label>Psychiatrist</label>
+    </customValue>
+    <customValue>
+        <fullName>Psychologist</fullName>
+        <default>false</default>
+        <label>Psychologist</label>
+    </customValue>
+    <customValue>
+        <fullName>Ear nose and throat</fullName>
+        <default>false</default>
+        <label>Ear nose and throat</label>
+    </customValue>
+    <customValue>
+        <fullName>Nuero surgeon</fullName>
+        <default>false</default>
+        <label>Nuero surgeon</label>
+    </customValue>
+    <customValue>
+        <fullName>Neurology</fullName>
+        <default>false</default>
+        <label>Neurology</label>
+    </customValue>
+    <customValue>
+        <fullName>Gastric</fullName>
+        <default>false</default>
+        <label>Gastric</label>
+    </customValue>
+    <customValue>
+        <fullName>Vascular</fullName>
+        <default>false</default>
+        <label>Vascular</label>
+    </customValue>
+    <customValue>
+        <fullName>Oncology</fullName>
+        <default>false</default>
+        <label>Oncology</label>
+    </customValue>
+    <customValue>
+        <fullName>Plastic Surgeon</fullName>
+        <default>false</default>
+        <label>Plastic Surgeon</label>
+    </customValue>
+    <customValue>
+        <fullName>Hand surgeon</fullName>
+        <default>false</default>
+        <label>Hand surgeon</label>
+    </customValue>
+    <customValue>
+        <fullName>Genito- Urinary</fullName>
+        <default>false</default>
+        <label>Genito- Urinary</label>
+    </customValue>
+    <customValue>
+        <fullName>Opthalmic</fullName>
+        <default>false</default>
+        <label>Opthalmic</label>
+    </customValue>
+    <customValue>
+        <fullName>Dental</fullName>
+        <default>false</default>
+        <label>Dental</label>
+    </customValue>
+    <customValue>
+        <fullName>Paediatrician</fullName>
+        <default>false</default>
+        <label>Paediatrician</label>
+    </customValue>
+    <customValue>
+        <fullName>Cardio-Thoracic</fullName>
+        <default>false</default>
+        <label>Cardio-Thoracic</label>
+    </customValue>
+    <customValue>
+        <fullName>Sex Therapist</fullName>
+        <default>false</default>
+        <label>Sex Therapist</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical Other</fullName>
+        <default>false</default>
+        <label>Medical Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Employment Expert Report</fullName>
+        <default>false</default>
+        <label>Employment Expert Report</label>
+    </customValue>
+    <customValue>
+        <fullName>Forensic acountant</fullName>
+        <default>false</default>
+        <label>Forensic acountant</label>
+    </customValue>
+    <customValue>
+        <fullName>Non-Medical Expert Other</fullName>
+        <default>false</default>
+        <label>Non-Medical Expert Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Stage 1 Claim Notification Form</fullName>
+        <default>false</default>
+        <label>Stage 1 Claim Notification Form</label>
+    </customValue>
+    <customValue>
+        <fullName>Stage 2 Settlement PacK</fullName>
+        <default>false</default>
+        <label>Stage 2 Settlement PacK</label>
+    </customValue>
+    <customValue>
+        <fullName>Stage 3 Court Proceedings Pack</fullName>
+        <default>false</default>
+        <label>Stage 3 Court Proceedings Pack</label>
+    </customValue>
+    <customValue>
+        <fullName>N208</fullName>
+        <default>false</default>
+        <label>N208</label>
+    </customValue>
+    <customValue>
+        <fullName>Notice of Hearing Stage 3</fullName>
+        <default>false</default>
+        <label>Notice of Hearing Stage 3</label>
+    </customValue>
+    <customValue>
+        <fullName>Stage 3 Other</fullName>
+        <default>false</default>
+        <label>Stage 3 Other</label>
+    </customValue>
+    <customValue>
+        <fullName>N1</fullName>
+        <default>false</default>
+        <label>N1</label>
+    </customValue>
+    <customValue>
+        <fullName>Statement of Case</fullName>
+        <default>false</default>
+        <label>Statement of Case</label>
+    </customValue>
+    <customValue>
+        <fullName>Defence</fullName>
+        <default>false</default>
+        <label>Defence</label>
+    </customValue>
+    <customValue>
+        <fullName>Disclosure List</fullName>
+        <default>false</default>
+        <label>Disclosure List</label>
+    </customValue>
+    <customValue>
+        <fullName>Notice of Hearing - Part 7</fullName>
+        <default>false</default>
+        <label>Notice of Hearing - Part 7</label>
+    </customValue>
+    <customValue>
+        <fullName>Part 7 Other</fullName>
+        <default>false</default>
+        <label>Part 7 Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Traffic Reconstruction report</fullName>
+        <default>false</default>
+        <label>Traffic Reconstruction report</label>
+    </customValue>
+    <customValue>
+        <fullName>Police accident report search</fullName>
+        <default>false</default>
+        <label>Police accident report search</label>
+    </customValue>
+    <customValue>
+        <fullName>Police accident report</fullName>
+        <default>false</default>
+        <label>Police accident report</label>
+    </customValue>
+    <customValue>
+        <fullName>Photographs - Location</fullName>
+        <default>false</default>
+        <label>Photographs - Location</label>
+    </customValue>
+    <customValue>
+        <fullName>Sketch or Google Map</fullName>
+        <default>false</default>
+        <label>Sketch or Google Map</label>
+    </customValue>
+    <customValue>
+        <fullName>Repair Estimate</fullName>
+        <default>false</default>
+        <label>Repair Estimate</label>
+    </customValue>
+    <customValue>
+        <fullName>Repair Invoice</fullName>
+        <default>false</default>
+        <label>Repair Invoice</label>
+    </customValue>
+    <customValue>
+        <fullName>Tachograph</fullName>
+        <default>false</default>
+        <label>Tachograph</label>
+    </customValue>
+    <customValue>
+        <fullName>Tachograph Analysis</fullName>
+        <default>false</default>
+        <label>Tachograph Analysis</label>
+    </customValue>
+    <customValue>
+        <fullName>Telematics report</fullName>
+        <default>false</default>
+        <label>Telematics report</label>
+    </customValue>
+    <customValue>
+        <fullName>Consulting Engineer Report- Motor</fullName>
+        <default>false</default>
+        <label>Consulting Engineer Report- Motor</label>
+    </customValue>
+    <customValue>
+        <fullName>V5 Form</fullName>
+        <default>false</default>
+        <label>V5 Form</label>
+    </customValue>
+    <customValue>
+        <fullName>Photographs - Vehicle</fullName>
+        <default>false</default>
+        <label>Photographs - Vehicle</label>
+    </customValue>
+    <customValue>
+        <fullName>Loss Adjusters Report</fullName>
+        <default>false</default>
+        <label>Loss Adjusters Report</label>
+    </customValue>
+    <customValue>
+        <fullName>Vehicle Other</fullName>
+        <default>false</default>
+        <label>Vehicle Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Claimant Statement</fullName>
+        <default>false</default>
+        <label>Claimant Statement</label>
+    </customValue>
+    <customValue>
+        <fullName>Defendant Statement</fullName>
+        <default>false</default>
+        <label>Defendant Statement</label>
+    </customValue>
+    <customValue>
+        <fullName>Witness Statement</fullName>
+        <default>false</default>
+        <label>Witness Statement</label>
+    </customValue>
+    <customValue>
+        <fullName>Investigators Report</fullName>
+        <default>false</default>
+        <label>Investigators Report</label>
+    </customValue>
+    <customValue>
+        <fullName>FNoL Documentation</fullName>
+        <default>false</default>
+        <label>FNoL Documentation</label>
+    </customValue>
+    <customValue>
+        <fullName>Claim Form - Insurance Company</fullName>
+        <default>false</default>
+        <label>Claim Form - Insurance Company</label>
+    </customValue>
+    <customValue>
+        <fullName>Witness Evidence Other</fullName>
+        <default>false</default>
+        <label>Witness Evidence Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Award Document</fullName>
+        <default>false</default>
+        <label>Award Document</label>
+    </customValue>
+    <customValue>
+        <fullName>Commencement</fullName>
+        <default>false</default>
+        <label>Commencement</label>
+    </customValue>
+    <customValue>
+        <fullName>1</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>1</label>
+    </customValue>
+    <customValue>
+        <fullName>4</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>4</label>
+    </customValue>
+    <customValue>
+        <fullName>3</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>3</label>
+    </customValue>
+    <customValue>
+        <fullName>2</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>2</label>
+    </customValue>
+    <masterLabel>INAP Document Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

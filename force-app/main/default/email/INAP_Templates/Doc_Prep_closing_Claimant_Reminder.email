@@ -1,0 +1,11 @@
+There are 2 days remaining in the Document Preparation step for Arbitration. Please submit the relevant documents before the items are automatically progressed to Final Offers.
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com

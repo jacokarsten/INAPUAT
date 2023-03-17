@@ -1,0 +1,15 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="Selected_Case_Id" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+                    
+                    
+                    <body>
+                        <div class="custom-background"> 
+                            <lightning:flow aura:id="flowData" onstatuschange="{!c.handleStatusChange}" />
+                        </div>
+                    </body>
+    
+</aura:component>

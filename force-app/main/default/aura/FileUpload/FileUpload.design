@@ -1,0 +1,8 @@
+<design:component label="File Upload">
+    
+    <design:attribute name="contentIds" label="Content Document Collection" />
+    <design:attribute name="fileNames" label="Uploaded Files" />
+    <design:attribute name="files" label="Uploaded Files" />
+    <design:attribute name="caseID" label="Case ID" />
+    
+</design:component>

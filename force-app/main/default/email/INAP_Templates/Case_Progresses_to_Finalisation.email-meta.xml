@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to Case Handlers informing them that the Case has Progressed to Finalisation, and the amount payable to the Claimant.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Case Progresses to Finalisation</name>
+    <style>none</style>
+    <subject>INAP Case {!Case_Notification__c.Case__c}: Amount Payable to Claimant</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

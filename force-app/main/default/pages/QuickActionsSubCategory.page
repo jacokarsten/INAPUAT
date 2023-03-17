@@ -1,0 +1,20 @@
+<apex:page lightningStylesheets="true" standardController="Loss_Sub_Categories__c">
+  
+  <apex:form >
+  
+   <apex:commandButton styleClass="btn btn-default"   value="Back to Case" onclick="BacktoCase();"  />
+
+  </apex:form>
+  
+  <script>
+  
+  function BacktoCase(){   
+    
+          top.location ="/lightning/r/Case/"+'{!Loss_Sub_Categories__c.Loss_Category__r.Case__c}'+"/view";
+        
+  }      
+  function Finish(Caseid){
+          top.location ="/lightning/r/Case/"+Caseid+"/view";    
+  }
+  </script>
+</apex:page>

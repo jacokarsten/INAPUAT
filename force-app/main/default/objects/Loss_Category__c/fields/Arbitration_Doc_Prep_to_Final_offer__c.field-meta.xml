@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arbitration_Doc_Prep_to_Final_offer__c</fullName>
+    <defaultValue>false</defaultValue>
+    <externalId>false</externalId>
+    <label>Arbitration Doc Prep to Final offer</label>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

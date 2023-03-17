@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Must_be_two_Handlers</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Status__c) =&apos;Active&apos;, Must_have_Active_Members_Validation__c=true)</errorConditionFormula>
+    <errorMessage>You must have at least 2 active handlers in an active team</errorMessage>
+</ValidationRule>

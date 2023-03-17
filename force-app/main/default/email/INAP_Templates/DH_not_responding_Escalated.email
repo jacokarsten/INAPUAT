@@ -1,0 +1,11 @@
+Case {!Case_Notification__c.Case__c} has been referred from {!Case_Notification__c.Claimant_Firm__c} to {!Case_Notification__c.Defendant_Firm__c} and although the supervisor assigned team {!Case_Notification__c.Defendant_Firm_Team__c} to the case more than {!Case_Notification__c.DH_not_responding_MM_Notification__c} day(s) ago, the defendant handler hasn't yet accepted/declined the case. Please follow up with the defendant handlers.
+<br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Org_URL__c}/lightning/r/Case/{!Case_Notification__c.CaseId__c}/view">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please email admin@nuvalaw.com

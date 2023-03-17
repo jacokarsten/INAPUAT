@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Arbitration_Accepted_Loss_Sub_Category</fullName>
+        <description>Arbitration Accepted - Loss Sub Category</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jacok@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Loss_Item_Arbitration_Accepted</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitration_Declined_Loss_Sub_Category</fullName>
+        <description>Arbitration Declined - Loss Sub Category</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jacok@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Loss_Item_Arbitration_Declined</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Confirm_Abritrated_Reward</fullName>
+        <field>Status__c</field>
+        <literalValue>Arbitrated</literalValue>
+        <name>Confirm Abritrated Reward</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Refered_to_Arbitration</fullName>
+        <field>Status__c</field>
+        <literalValue>Referred to Arbitration</literalValue>
+        <name>Refered to Arbitration</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_to_Arbitrated_on_Loss_item</fullName>
+        <field>Status__c</field>
+        <literalValue>Arbitrated</literalValue>
+        <name>Status to Arbitrated on Loss item</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Status_to_Arbitration_Prep</fullName>
+        <field>Status__c</field>
+        <literalValue>Arbitration_Doc_Prep</literalValue>
+        <name>Update Status to Arbitration Prep</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>status_arbitration_doc_prep</fullName>
+        <field>Status__c</field>
+        <literalValue>Arbitration_Doc_Prep</literalValue>
+        <name>status arbitration doc prep</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Neg-Arbitrated-1-Confirm Arbitrated Reward</fullName>
+        <actions>
+            <name>Confirm_Abritrated_Reward</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Loss_Sub_Categories__c.Confirm_Arbitration_Reward__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-1-Case Accepted AO</fullName>
+        <actions>
+            <name>status_arbitration_doc_prep</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates Loss item status to Arbitration Doc Prep
+When case is Accepted by defendant handler the stage-status changes to  Negotiation - Arbitrating, and the loss item status is &quot;&quot;Arbitration Doc Prep</description>
+        <formula>AND(  Case__r.Protocol__r.Case_Protocol__c  = &apos;Case Arbribtration&apos;, TEXT( Status__c) = &apos;Arbitrating&apos;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-9-Timeout Arbitration Doc Prep</fullName>
+        <actions>
+            <name>Update_Status_to_Arbitration_Prep</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Loss_Sub_Categories__c.Negotiation_Timeout__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Loss_Sub_Categories__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Negotiating</value>
+        </criteriaItems>
+        <description>Timeout on Negotiation stage occurs (triggering settlement confirmation) - conditional on loss items being in status “Settled” or “Arbitrated” - i.e. loss items cannot be in Negotiating.
+Updates all items still in negotiation to Arbitration Doc Prep</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

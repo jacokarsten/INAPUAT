@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Argument</fullName>
+        <default>false</default>
+        <label>Argument</label>
+    </customValue>
+    <customValue>
+        <fullName>Credit Hire</fullName>
+        <default>false</default>
+        <label>Credit Hire</label>
+    </customValue>
+    <customValue>
+        <fullName>Financial Losses</fullName>
+        <default>false</default>
+        <label>Financial Losses</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical Report</fullName>
+        <default>false</default>
+        <label>Medical Report</label>
+    </customValue>
+    <customValue>
+        <fullName>Non-Medical Experts</fullName>
+        <default>false</default>
+        <label>Non-Medical Experts</label>
+    </customValue>
+    <customValue>
+        <fullName>Previous Proceedings - Non-MoJ Portal Part 7 Cases</fullName>
+        <default>false</default>
+        <label>Previous Proceedings - Non-MoJ Portal Part 7 Cases</label>
+    </customValue>
+    <customValue>
+        <fullName>Scene of Accident</fullName>
+        <default>false</default>
+        <label>Scene of Accident</label>
+    </customValue>
+    <customValue>
+        <fullName>Vehicle and Vehicle Damage</fullName>
+        <default>false</default>
+        <label>Vehicle and Vehicle Damage</label>
+    </customValue>
+    <customValue>
+        <fullName>Witness Evidence</fullName>
+        <default>false</default>
+        <label>Witness Evidence</label>
+    </customValue>
+    <masterLabel>Document Type Categories</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

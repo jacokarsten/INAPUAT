@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defendant_Agree_to_Arbitration</fullName>
+    <active>false</active>
+    <description>Cannot assign team, please agree to arbitration first</description>
+    <errorConditionFormula>AND( Defendant_Agree_to_Arbitration_Process__c = False,   Defendant_Firm_Team__c  &lt;&gt; &quot;&quot;, TEXT (Defendant_Accept_Reject__c) = &apos;Accept&apos; )</errorConditionFormula>
+    <errorDisplayField>Defendant_Agree_to_Arbitration_Process__c</errorDisplayField>
+    <errorMessage>Cannot assign team, please agree to arbitration first</errorMessage>
+</ValidationRule>

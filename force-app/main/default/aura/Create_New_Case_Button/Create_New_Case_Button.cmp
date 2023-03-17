@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride" access="global" >
+	
+    
+    <lightning:button variant="brand" label="Upload New Document" title="Upload New Document" onclick="{! c.handleClick }"/>
+    
+    
+    
+</aura:component>

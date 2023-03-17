@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Case$CaseNumber</field>
+    </columns>
+    <columns>
+        <field>Case.Bid_Offer_Histories__r$Schedule_of_losses__c</field>
+    </columns>
+    <columns>
+        <field>Case.Bid_Offer_Histories__r$Loss_Category__c</field>
+    </columns>
+    <columns>
+        <field>Case.Bid_Offer_Histories__r$Loss_Item__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Bid_Offer_Histories__r$Merit_Cl_Pos__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Bid_Offer_Histories__r$Merit_Def_Pos__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Bid_Offer_Histories__r$Quantum_Cl_Pos__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Case.Bid_Offer_Histories__r$Quantum_Def_Pos__c</field>
+    </columns>
+    <columns>
+        <field>Case.Bid_Offer_Histories__r$Pos_Last_Modified_By__c</field>
+    </columns>
+    <columns>
+        <field>Case.Bid_Offer_Histories__r$Pos_Last_Modified_Date__c</field>
+    </columns>
+    <currency>GBP</currency>
+    <description>List of all bids and offers made by negotiating parties on a case</description>
+    <format>Tabular</format>
+    <name>Bid/offer history</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Cases_with_Bid_Offer_Histories__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Case$CaseNumber</sortColumn>
+    <sortOrder>Desc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Case$ClosedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

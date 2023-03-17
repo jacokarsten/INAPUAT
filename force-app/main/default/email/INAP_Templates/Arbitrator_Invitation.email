@@ -1,0 +1,11 @@
+You have been invited to arbitrate case {!Case_User_Invitation__c.Case__c}. Please accept/decline this invitation. If you accept the case you will be expected to provide an award within the time allocated for Arbitration. 
+</br>
+</br>
+View Case <a href="{!Case_User_Invitation__c.INAP_Community_URL__c}/s/case-user-invitation/{!Case_User_Invitation__c.Id}/{!Case_User_Invitation__c.Name}">{!Case_User_Invitation__c.Case_Number__c}: {!Case_User_Invitation__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com.  (place holder email)

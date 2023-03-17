@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_requirements__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF
+(OR
+(AND
+(  Defendant_First_Name__c  != &apos;&apos;,  Defendant_Last_Name__c  != &apos;&apos;, ISNULL(Defendant_Date_of_Birth__c )=false),
+AND
+(Company_Employer_Name__c != null, Address_Line_1__c != null, City__c != null, Country__c != null, Postal_Code__c != null)
+),true,false)</formula>
+    <label>Minimum requirements</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

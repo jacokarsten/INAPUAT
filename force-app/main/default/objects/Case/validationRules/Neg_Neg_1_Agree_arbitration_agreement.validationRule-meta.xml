@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Neg_Neg_1_Agree_arbitration_agreement</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Defendant_Accept_Reject__c) =&apos;Accept&apos;,Defendant_Agree_to_Arbitration_Process__c=false)</errorConditionFormula>
+    <errorDisplayField>Defendant_Agree_to_Arbitration_Process__c</errorDisplayField>
+    <errorMessage>Please confirm that you agree to an arbitration agreement</errorMessage>
+</ValidationRule>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Head_of_Loss_Header</fullName>
+    <fields>Name</fields>
+    <fields>Loss_Category_Types__c</fields>
+    <fields>Total_Claimant_Position__c</fields>
+    <fields>Total_Defendant_Position__c</fields>
+    <label>Head of Loss Header</label>
+</CompactLayout>

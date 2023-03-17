@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defendant_Percentage_Value_Rule</fullName>
+    <active>true</active>
+    <description>Only values between 0-100 allowed</description>
+    <errorConditionFormula>OR(
+ Defendant_Position__c &gt; 1.0, 
+	Defendant_Position__c &lt; 0.0
+)</errorConditionFormula>
+    <errorDisplayField>Defendant_Position__c</errorDisplayField>
+    <errorMessage>Please enter a value between 0 - 100</errorMessage>
+</ValidationRule>

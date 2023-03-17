@@ -1,0 +1,10 @@
+The arbitrator assigned to case {!Case_Notification__c.Case__c} has failed to respond. Please contact them directly or assign a new arbitrator to the case.
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Org_URL__c}/lightning/r/Case/{!Case_Notification__c.CaseId__c}/view">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+</br>
+</br>
+INAP

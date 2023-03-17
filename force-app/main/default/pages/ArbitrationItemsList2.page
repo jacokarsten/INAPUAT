@@ -1,0 +1,7 @@
+<apex:page cache="false" StandardController="Case" standardStylesheets="false" showHeader="false" lightningStylesheets="false" >
+  <apex:slds />
+ 
+ <apex:outputPanel id="arbfull">
+  <c:Arbitrationitem2 />
+ </apex:outputPanel> 
+</apex:page>

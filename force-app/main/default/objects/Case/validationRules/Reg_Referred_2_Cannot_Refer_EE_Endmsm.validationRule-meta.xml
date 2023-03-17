@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reg_Referred_2_Cannot_Refer_EE_Endmsm</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Merit_Minimum_Requirements__c = False , TEXT(Status) = &apos;Referred&apos;)</errorConditionFormula>
+    <errorMessage>You cannot refer this case.  Please enter a claimant position on the Merit</errorMessage>
+</ValidationRule>

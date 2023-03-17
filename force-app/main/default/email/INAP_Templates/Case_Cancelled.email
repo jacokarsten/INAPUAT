@@ -1,0 +1,11 @@
+The market maker has cancelled the case <case number>: <case subject> and no further activity will be allowed on the case.
+</br>
+</br>
+View Case: <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com.

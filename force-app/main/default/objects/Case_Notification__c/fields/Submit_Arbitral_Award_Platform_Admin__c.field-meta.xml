@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submit_Arbitral_Award_Platform_Admin__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Notification to platform admin after 10 days allocated to arbitral award step has expired - notify that new arbitrator appointment is needed.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Notification to platform admin after 10 days allocated to arbitral award step has expired - notify that new arbitrator appointment is needed.</inlineHelpText>
+    <label>Submit Arbitral Award - Platform Admin</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

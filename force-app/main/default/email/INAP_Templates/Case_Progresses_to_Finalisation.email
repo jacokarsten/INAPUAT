@@ -1,0 +1,11 @@
+The total amount payable to the claimant in the case {!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}, is: {!Case_Notification__c.Final_Award__c}. Please go to the Documents section of the case to view all legal documentation related to this final settlement/award amount.
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com.

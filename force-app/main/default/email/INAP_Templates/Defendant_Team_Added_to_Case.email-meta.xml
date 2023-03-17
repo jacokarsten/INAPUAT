@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to Defendant Case Handler informing them of a new case, and that they must accept or decline the case</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Defendant Team Added to Case</name>
+    <style>none</style>
+    <subject>INAP Case {!Case_Notification__c.Case__c}: New Case Assignment - Please Accept or Decline</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

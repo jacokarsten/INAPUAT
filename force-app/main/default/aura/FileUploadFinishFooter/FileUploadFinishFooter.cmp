@@ -1,0 +1,18 @@
+<aura:component implements="lightning:availableForFlowScreens,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="canBack" type="Boolean" />
+    <aura:attribute name="canNext" type="Boolean" />
+    <aura:attribute name="canFinish" type="Boolean" />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    
+    <div aura:id="actionButtonBar" class="slds-clearfix slds-p-top_medium">
+        <div class="slds-float_right">
+            <aura:if isTrue="{!v.canNext}">
+                <lightning:button aura:id="NEXT" label="Finish"
+                                  variant="brand" onclick="{!c.onButtonPressed}" />
+            </aura:if>
+        </div>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,5 @@
+<design:component label="Incident Matching TreeGrid">
+   <design:attribute name="postalCode" label="Postal Code" />
+   <design:attribute name="incidentDate" label="Incident Date" />
+   <design:attribute name="incidentID" label="Incident ID" />
+</design:component>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reg_Created_1_Agree_to_Arbitration_C</fullName>
+    <active>false</active>
+    <description>If the Claimant firm has been added, please confirm agreement to abitration.</description>
+    <errorConditionFormula>AND(  Claimant_Firm_Team__c  &lt;&gt; &quot;&quot;,  Agree_to_Arbitration_Process__c = False)</errorConditionFormula>
+    <errorDisplayField>Agree_to_Arbitration_Process__c</errorDisplayField>
+    <errorMessage>Please agree to arbitration process as the claimant firm</errorMessage>
+</ValidationRule>

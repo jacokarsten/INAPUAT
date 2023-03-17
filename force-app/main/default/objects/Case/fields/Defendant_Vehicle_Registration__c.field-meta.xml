@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Defendant_Vehicle_Registration__c</fullName>
+    <description>Checks if registration number was entered.</description>
+    <externalId>false</externalId>
+    <label>Reg-Created-1-Defendant Veh Reg</label>
+    <summaryFilterItems>
+        <field>Defendant_Information__c.RecordTypeId</field>
+        <operation>equals</operation>
+        <value>End to End</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Defendant_Information__c.Defendant_Vehicle_Registration_Number__c</field>
+        <operation>notEqual</operation>
+        <value></value>
+    </summaryFilterItems>
+    <summaryForeignKey>Defendant_Information__c.Case__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

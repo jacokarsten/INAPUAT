@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Negotiation_Status_Count__c</fullName>
+    <externalId>false</externalId>
+    <label>Neg-Neg-5-Negotiation Status Count</label>
+    <summaryFilterItems>
+        <field>Loss_Sub_Categories__c.Status__c</field>
+        <operation>notEqual</operation>
+        <value>Settled, Arbitration Prep, Arbitration Final Offers, Arbitrating, Arbitrated,, Arbitration Doc Prep</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Loss_Sub_Categories__c.Loss_Category__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

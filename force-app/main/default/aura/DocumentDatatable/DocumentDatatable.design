@@ -1,0 +1,8 @@
+<design:component label="Document Datatable">
+    
+    <design:attribute name="caseId" label="Case ID" />
+    <design:attribute name="DocumentList" label="Document List" />
+
+    
+	
+</design:component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Neg_Neg_2_Defendant_Rejection_Reason</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(Defendent_rejection_reason__c =null,  TEXT(Defendant_Accept_Reject__c) =&apos;Reject&apos;)</errorConditionFormula>
+    <errorDisplayField>Defendent_rejection_reason__c</errorDisplayField>
+    <errorMessage>Please provide a reason for rejecting the Case</errorMessage>
+</ValidationRule>

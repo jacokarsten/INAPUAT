@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Neg_Neg_3_Merit_ClaimantPosition_novalue</fullName>
+    <active>true</active>
+    <description>End to End Protocol only. The claimant position must be updated before submitting SOL</description>
+    <errorConditionFormula>AND(Claimant_Position__c != NULL, Submit_Schedule_of_Losses__c = TRUE) &amp;&amp;   Protocol__r.Case_Protocol__c  = &apos;Case EndtoEnd&apos;</errorConditionFormula>
+    <errorMessage>Merit Claimant Position has been omitted, please complete the Claimant Position on the Merit</errorMessage>
+</ValidationRule>

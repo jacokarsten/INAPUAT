@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Neg_Neg_5_Cap_on_Quantum</fullName>
+    <active>true</active>
+    <description>A cap of GBP 40,000 on entire case damages.</description>
+    <errorConditionFormula>Total_Case_Damages__c &gt;=  Protocol__r.Cap_on_Amount__c</errorConditionFormula>
+    <errorMessage>Your total damages claim cannot exceed GBP 40,000.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+There are 5 days remaining until all unresolved loss items on case: {!Case_Notification__c.Case__c} will be automatically submitted to the arbitration process.
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com.  (this email address is a placeholder for now)

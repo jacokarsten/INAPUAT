@@ -1,0 +1,29 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="vfHost" type="String" 
+        default="inap5-k3.cs108.force.com"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+     
+    
+        <iframe aura:id="vfFrame"  frameborder="0" width="1300px" height="1500px" 
+                            src="{!'/apex/LossitemsCategories?id=' + v.recordId}"/>
+                
+    <!--https://' + v.vfHost + '
+        <lightning:layout>
+            <lightning:layoutItem size="12">
+              
+				<lightning:card  class="vf-card">
+                    <iframe aura:id="vfFrame"  frameborder="0" width="1300px" height="1000px" 
+                            src="{!'https://' + v.visualforceDomain + '/apex/LossitemsCategories?id=' + v.recordId}"/>
+                </lightning:card>
+
+            </lightning:layoutItem>
+        </lightning:layout>
+       --> 
+   
+
+
+</aura:component>

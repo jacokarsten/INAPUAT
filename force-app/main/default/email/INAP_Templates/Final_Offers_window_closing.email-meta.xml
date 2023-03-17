@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Final Offers window closing</name>
+    <style>none</style>
+    <subject>Case {!Case_Notification__c.Case__c} - Final Offer window closing in X (2) days</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

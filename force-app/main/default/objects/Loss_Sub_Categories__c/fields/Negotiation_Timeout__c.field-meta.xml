@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Negotiation_Timeout__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Updates from Loss Category</description>
+    <externalId>false</externalId>
+    <label>Negotiation Timeout</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

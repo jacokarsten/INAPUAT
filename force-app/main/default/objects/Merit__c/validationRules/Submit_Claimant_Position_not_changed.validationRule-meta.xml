@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submit_Claimant_Position_not_changed</fullName>
+    <active>false</active>
+    <errorConditionFormula>NOT(ISCHANGED(Claimant_Position__c)) &amp;&amp;  
+NOT(ISCHANGED(Submit_Claimant__c) &amp;&amp; Submit_Claimant__c= TRUE &amp;&amp;
+				NOT(ISNEW()))</errorConditionFormula>
+    <errorDisplayField>Claimant_Position__c</errorDisplayField>
+    <errorMessage>You have not entered a new offer and you cannot resubmit the same value.</errorMessage>
+</ValidationRule>

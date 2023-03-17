@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Merit_Arbitration_Award__c</fullName>
+    <externalId>false</externalId>
+    <label>Neg-Neg-3-Merit Arbitration Award</label>
+    <summarizedField>Merit__c.Arbitrator_Award__c</summarizedField>
+    <summaryForeignKey>Merit__c.Related_Case__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

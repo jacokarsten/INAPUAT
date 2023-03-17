@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arbitration_Accept_and_Declilne</fullName>
+    <active>true</active>
+    <description>Arbitration Accepted and Declined cannot be selected at the same time</description>
+    <errorConditionFormula>AND( Accept_Arbitration__c = TRUE, Decline_Arbitration__c = TRUE)</errorConditionFormula>
+    <errorMessage>Arbitration Accepted and Declined cannot be selected at the same time</errorMessage>
+</ValidationRule>

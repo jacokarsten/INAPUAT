@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Claimant_and_Defendant_Not_same</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ClaimantFirm__c =  Defendant_Firm__c,  
+ISBLANK(ClaimantFirm__c) = false,
+ISBLANK(Defendant_Firm__c)=false 
+)</errorConditionFormula>
+    <errorMessage>The Claimant and the Defendant firm cannot be the same firm.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,17 @@
+<apex:page standardcontroller="Case" showHeader="false" title="{!$Label.site.error2}" cache="false">
+  
+  <script>
+  function reloadpage(){
+        //alert('In')
+         top.location ='/s/case/'+'{!Case.id}'+'/detail';
+}
+  </script>
+  
+  <div style="padding:20px;">
+  Something happened! Please <a href="#" onclick="reloadpage();"> reload </a> the page.
+  If this error persists please contact the Market Maker: 
+  
+  </div>
+  
+  
+</apex:page>

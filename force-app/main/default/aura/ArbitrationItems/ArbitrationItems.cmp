@@ -1,0 +1,26 @@
+<aura:component implements="lightning:availableForFlowActions,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    <!--
+   
+
+    <lightning:flow aura:id="flowData" onstatuschange="{!c.invoke}" />
+    -->
+    
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="vfHost" type="String" 
+        default="inap5-k3.cs108.force.com"/> 
+    
+    
+    
+    
+        <iframe aura:id="vfFrame"  frameborder="0" width="1300px" height="1500px" 
+                            src="{!'/apex/ArbitrationItemsList2?id=' + v.recordId}"/>
+                
+    <!--
+https://' + v.vfHost + '
+-->
+   
+
+
+</aura:component>

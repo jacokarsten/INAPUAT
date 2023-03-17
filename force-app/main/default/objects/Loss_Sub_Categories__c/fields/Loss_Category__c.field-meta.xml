@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loss_Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Head of Loss</label>
+    <referenceTo>Loss_Category__c</referenceTo>
+    <relationshipLabel>Loss Items</relationshipLabel>
+    <relationshipName>Loss_Items</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

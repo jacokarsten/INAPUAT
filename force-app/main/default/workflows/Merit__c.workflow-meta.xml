@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Merit_Settlement_Request</fullName>
+        <description>Merit Settlement Request</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jacok@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Cases/Merit_Settlement_Request</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Merit_Status_Settled</fullName>
+        <field>Status__c</field>
+        <literalValue>Settled</literalValue>
+        <name>Merit Status Settled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Submit_Claimant</fullName>
+        <field>Submit_Claimant__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Submit Claimant - TRUE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Submit_Claimant_FALSE</fullName>
+        <field>Submit_Claimant__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Submit Claimant - FALSE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Submit_Defendant</fullName>
+        <field>Submit_Defendant__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Submit Defendant TRUE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Submit_Defendant_FALSE</fullName>
+        <field>Submit_Defendant__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Submit Defendant - FALSE</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Neg_Neg_4_AO_Cap_on_Quantum</fullName>
+    <active>false</active>
+    <description>A cap of GBP 25,000 on the entire case damages.</description>
+    <errorConditionFormula>AND(CONTAINS( Protocol__r.Case_Protocol__c , &apos;Case Arbribtration&apos;) ,  Total_Obligation__c &gt;  Protocol__r.Cap_on_Amount__c)</errorConditionFormula>
+    <errorMessage>Your total cannot exceed GBP 25,000</errorMessage>
+</ValidationRule>

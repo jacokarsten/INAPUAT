@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Claimant Handler</fullName>
+        <default>false</default>
+        <label>Claimant Handler</label>
+    </customValue>
+    <customValue>
+        <fullName>Defendant Handler</fullName>
+        <default>false</default>
+        <label>Defendant Handler</label>
+    </customValue>
+    <masterLabel>Case Team Roles</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

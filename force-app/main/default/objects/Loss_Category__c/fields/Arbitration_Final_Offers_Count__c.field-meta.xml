@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arbitration_Final_Offers_Count__c</fullName>
+    <externalId>false</externalId>
+    <label>Neg-Arb-2-Arbitration Final Offers</label>
+    <summaryFilterItems>
+        <field>Loss_Sub_Categories__c.Status__c</field>
+        <operation>equals</operation>
+        <value>Arbitration Final Offers</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Loss_Sub_Categories__c.Loss_Category__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

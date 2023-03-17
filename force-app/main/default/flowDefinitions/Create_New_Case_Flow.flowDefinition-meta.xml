@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionNumber>43</activeVersionNumber>
+    <description>Reinstalled Address Picker and Geolocation for Incident</description>
+    <masterLabel>Create New Case</masterLabel>
+</FlowDefinition>

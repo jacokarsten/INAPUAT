@@ -1,0 +1,11 @@
+Please note that for case {!Case_Notification__c.Case__c} the Doc Prep period has started, which means both parties have an opportunity to submit any documents for arbitral reviewal.
+<br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please emailadmin@nuvalaw.com

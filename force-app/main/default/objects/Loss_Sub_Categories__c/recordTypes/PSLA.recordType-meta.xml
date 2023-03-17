@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PSLA</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Loss_Item_View</compactLayoutAssignment>
+    <description>Personal Suffering &amp; Loss of Amenities</description>
+    <label>PSLA</label>
+    <picklistValues>
+        <picklist>Arbitration_Accepted_Status__c</picklist>
+        <values>
+            <fullName>Accepted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declined</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Arbitration_Referred_By__c</picklist>
+        <values>
+            <fullName>Claimant Handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defendant Handler</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loss_Type__c</picklist>
+        <values>
+            <fullName>Bus%2Ftaxi%2Ftrain fares</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Car Hire</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Care Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clothing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Domestic assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loss of Earnings %E2%80%93 Claimant</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loss of Earnings %E2%80%93 Employer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loss of Use of Vehicle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Treatment %2F Doctor%27s Expenses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Treatment %2F Hospital Expenses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Treatment %2F Medicine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Treatment %2F Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Miscellaneous Expenses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other Losses</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PSLA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recovery Charges</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Repairs or Total Loss</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Storage</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>Arbitrating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Arbitrated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arbitrating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arbitration Doc Prep</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arbitration Final Offers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Created</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiating</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Referred to Arbitration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Would_you_like_to_Settle__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

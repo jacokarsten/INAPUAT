@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirm_Case_Settlement__c</fullName>
+    <externalId>false</externalId>
+    <label>Neg-PS-3-Arbitration Completed Count</label>
+    <summaryFilterItems>
+        <field>Loss_Sub_Categories__c.Status__c</field>
+        <operation>equals</operation>
+        <value>Arbitrated</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Loss_Sub_Categories__c.Loss_Category__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

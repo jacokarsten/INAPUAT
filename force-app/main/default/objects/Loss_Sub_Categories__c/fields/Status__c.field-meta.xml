@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Negotiating</fullName>
+                <default>false</default>
+                <label>Negotiating</label>
+            </value>
+            <value>
+                <fullName>Settled</fullName>
+                <default>false</default>
+                <label>Settled</label>
+            </value>
+            <value>
+                <fullName>Referred to Arbitration</fullName>
+                <default>false</default>
+                <label>Referred to Arbitration</label>
+            </value>
+            <value>
+                <fullName>Arbitration Doc Prep</fullName>
+                <default>false</default>
+                <label>Arbitration Doc Prep</label>
+            </value>
+            <value>
+                <fullName>Arbitration Final Offers</fullName>
+                <default>false</default>
+                <label>Arbitration Final Offers</label>
+            </value>
+            <value>
+                <fullName>Arbitrating</fullName>
+                <default>false</default>
+                <label>Arbitrating</label>
+            </value>
+            <value>
+                <fullName>Arbitrated</fullName>
+                <default>false</default>
+                <label>Arbitrated</label>
+            </value>
+            <value>
+                <fullName>Created</fullName>
+                <default>true</default>
+                <label>Created</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

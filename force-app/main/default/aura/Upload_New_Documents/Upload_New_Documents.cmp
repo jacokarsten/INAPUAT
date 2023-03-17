@@ -1,0 +1,16 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+     <aura:attribute name="Uploaded_Document_Id" type="String" />
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+                    
+                    
+                    <body>
+                        <div class="custom-background"> 
+                            <p><lightning:formattedText value="{!v.Uploaded_Document_Id}" /></p>
+                            <lightning:flow aura:id="flowData" onstatuschange="{!c.handleStatusChange}" />
+                        </div>
+                    </body>
+    
+</aura:component>

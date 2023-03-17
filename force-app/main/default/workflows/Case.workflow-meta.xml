@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Admin_to_Notify_Arbitrtor</fullName>
+        <description>Admin to Notify Arbitrtor</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>lynette@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>sean@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>susannahb-rnwt@force.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Admin_to_Invite_Arbitrator</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitrator_Accepted_Invitation</fullName>
+        <description>Arbitrator Accepted Invitation</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jacok@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Arbitrator_Accepted</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitrator_Declined_Invitation</fullName>
+        <description>Arbitrator Declined Invitation</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jacok@inap.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Arbitrator_Declined</template>
+    </alerts>
+    <alerts>
+        <fullName>Claimant_Email_Handler_After_Case_Accepted</fullName>
+        <description>Claimant Email  Handler After Case Accepted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Claimant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Claimant_Email_Handler_After_Case_Accepted</template>
+    </alerts>
+    <alerts>
+        <fullName>Defendant_Handler_Email</fullName>
+        <description>Defendant Handler Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Defendant_CH_reminder_to_Accept_Reject_Case</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_Case_Notification_email</fullName>
+        <description>Facilitator Case Notification email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Facilitator_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Facilitator_Case_Notification_email</template>
+    </alerts>
+    <alerts>
+        <fullName>Follow_up_email_to_Defendant_Case_Handler</fullName>
+        <description>Follow up email to Defendant Case Handler</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Defendant_CH_reminder_to_Accept_Reject_Case</template>
+    </alerts>
+    <alerts>
+        <fullName>Market_Maker_Email_After_Case_Accepted</fullName>
+        <ccEmails>sean@cloudsmiths.co.za</ccEmails>
+        <description>Market Maker Email After Case Accepted</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Market_Maker_Email_After_Case_Accepted</template>
+    </alerts>
+    <alerts>
+        <fullName>Merit_schedule_of_losses_submitted</fullName>
+        <ccEmails>lynette.holtzhausen@cloudsmiths.co.za</ccEmails>
+        <description>Merit/schedule of losses submitted.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Cases/merit_schedule_of_losses_submitted</template>
+    </alerts>
+    <alerts>
+        <fullName>Notification_to_Claimant_New_Offer_Submitted</fullName>
+        <ccEmails>lynette.holtzhausen@cloudsmiths.co.za</ccEmails>
+        <description>Notification to Claimant - New Offer Submitted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Claimant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Cases/Defendant_Offer_Sumission</template>
+    </alerts>
+    <alerts>
+        <fullName>Notification_to_Defendant_Firm_New_Case</fullName>
+        <description>Notification to Defendant Firm - New Case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Supervisor_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Cases/Defendant_Firm_Case_Notification_Email_Supervisor</template>
+    </alerts>
+    <alerts>
+        <fullName>Notification_to_Defendant_New_Offer_Submitted</fullName>
+        <ccEmails>lynette.holtzhausen@cloudsmiths.co.za</ccEmails>
+        <description>Notification to Defendant - New Offer Submitted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Cases/Claimant_Offer_Sumission</template>
+    </alerts>
+    <alerts>
+        <fullName>Payment_Obligation_Email</fullName>
+        <description>Payment Obligation Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendent_Firm_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Cases/Payment_Obligation</template>
+    </alerts>
+    <alerts>
+        <fullName>Refer_to_Arbitration_Accept_or_Decline</fullName>
+        <description>Refer to Arbitration - Accept or Decline</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Claimant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Defendant_Handler_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Refer_to_Arbitration_Accept_or_Decline</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Arbitration_Response_Blank</fullName>
+        <field>Arbitrator_Accept_Decline__c</field>
+        <name>Arbitration Response Blank</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Arbitrator_Accept_Date</fullName>
+        <field>Arbitration_Accept_Date__c</field>
+        <formula>Today()</formula>
+        <name>Arbitrator Accept Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Arbitrator_Contact_Email</fullName>
+        <description>Updates Arbitrator Email Address</description>
+        <field>Arbitrator_Email__c</field>
+        <formula>Arbitrator_Contact__r.Email</formula>
+        <name>Arbitrator Contact Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cancel_Case</fullName>
+        <field>Status</field>
+        <literalValue>Cancelled</literalValue>
+        <name>Cancel Case</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Accepted_Negotiating</fullName>
+        <field>Status</field>
+        <literalValue>Negotiating</literalValue>
+        <name>Case Accepted-Negotiating</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Closed</fullName>
+        <field>Stage__c</field>
+        <literalValue>Closed</literalValue>
+        <name>Case Closed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Status_Referred</fullName>
+        <field>Status</field>
+        <literalValue>Referred</literalValue>
+        <name>Case Status Referred</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Checkbox_Update_Email_Sent</fullName>
+        <field>Payment_Obligation_Email_Sent__c</field>
+        <literalValue>1</literalValue>
+        <name>Checkbox Update Email Sent</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Claimant_Handler_Email</fullName>
+        <field>Claimant_Handler_Email__c</field>
+        <formula>Claimant_Handler_Contact__r.Email</formula>
+        <name>Claimant Handler Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Claimant_Supervisor_Email</fullName>
+        <field>Claimant_Supervisor_Email__c</field>
+        <formula>Claimant_Supervisor__r.Email</formula>
+        <name>Claimant Supervisor Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Arbitrator_Invited</fullName>
+        <field>Invite_Arbitrator_Time_Out__c</field>
+        <literalValue>0</literalValue>
+        <name>Clear Arbitrator Invited</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Defendant_Firm_Case_Notification_Sent</fullName>
+        <field>Defendant_Firm_Case_Notification_Sent__c</field>
+        <literalValue>1</literalValue>
+        <name>Defendant Firm Case Notification Sent</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Defendant_Firm_Email</fullName>
+        <field>Defendent_Firm_Email__c</field>
+        <formula>Defendant_Firm__r.Firm_Email__c</formula>
+        <name>Defendant Firm Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Defendant_Handler_Email_Invite_Sent</fullName>
+        <field>Defendant_Handler_Invite_Sent__c</field>
+        <literalValue>1</literalValue>
+        <name>Defendant Handler Email Invite Sent</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Defendant_Handler_Email_Update</fullName>
+        <field>Defendant_Handler_Email__c</field>
+        <formula>Defendant_Handler_Contact__r.Email</formula>
+        <name>Defendant Handler Email Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Defendant_Pending_Status_Update</fullName>
+        <field>Status</field>
+        <literalValue>Pending_Acceptance</literalValue>
+        <name>Reg-PA-Pending Acceptance Status Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Facilitator_Email_Update</fullName>
+        <field>Facilitator_Email__c</field>
+        <formula>Facilitator_Contact__r.Email</formula>
+        <name>Facilitator Email Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Facilitator_added_Case_Registered</fullName>
+        <field>Status</field>
+        <literalValue>Registered</literalValue>
+        <name>Facilitator added Case Registered</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Invite_Arbitrator</fullName>
+        <field>Invite_Arbitrator_Time_Out__c</field>
+        <literalValue>1</literalValue>
+        <name>Invite Arbitrator</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Negotiating_Status</fullName>
+        <field>Status</field>
+        <literalValue>Negotiation</literalValue>
+        <name>Negotiating Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Negotiation_Stage</fullName>
+        <field>Stage__c</field>
+        <literalValue>Negotiation</literalValue>
+        <name>Negotiation Stage</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Negotiation_Timeout_End</fullName>
+        <field>Negotiation_Timeout_End__c</field>
+        <literalValue>1</literalValue>
+        <name>Negotiation Timeout End</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Negotiation_Timeout_Start</fullName>
+        <field>Negotiation_Timeout_Start__c</field>
+        <literalValue>1</literalValue>
+        <name>Negotiation Timeout Start</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Negotiation_Timeout_Update</fullName>
+        <description>Stage:  Negotiation
+Timeout Start:  Updates to True</description>
+        <field>Negotiation_Timeout_Start__c</field>
+        <literalValue>1</literalValue>
+        <name>Negotiation Timeout Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reject_Case</fullName>
+        <field>Status</field>
+        <literalValue>Rejected</literalValue>
+        <name>Reject Case</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Pending_Acceptance_Start_Date</fullName>
+        <field>Status_Referred_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Status Pending Acceptance Start Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_duration_Pending_Acceptance_End</fullName>
+        <field>Status_Pending_Acceptance_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Status duration - Pending Acceptance End</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Invite_to_False</fullName>
+        <field>Invite_Arbitrator_Time_Out__c</field>
+        <literalValue>0</literalValue>
+        <name>Update Invite to False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Upddate_Case_Settled</fullName>
+        <field>Status</field>
+        <literalValue>Settled</literalValue>
+        <name>Upddate Case Settled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Neg-Arb-22-Update Arbitrator Accept Date</fullName>
+        <actions>
+            <name>Arbitrator_Accept_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Arbitrator_Accept_Decline__c</field>
+            <operation>equals</operation>
+            <value>Accept</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Arbitrating-1-Update Arbitrator Email</fullName>
+        <actions>
+            <name>Arbitrator_Contact_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates the email address on the case when the Arbitrator contact is added to the case.</description>
+        <formula>Arbitrator_Contact__c != NULL</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Arbitrating-4-Arbitrator Accepts Invitation</fullName>
+        <actions>
+            <name>Arbitrator_Accepted_Invitation</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Arbitrator_Accept_Decline__c</field>
+            <operation>equals</operation>
+            <value>Accept</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Invite_Arbitrator_Time_Out__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Arbitrating-5-Arbitrator Declined Invitation</fullName>
+        <actions>
+            <name>Arbitrator_Declined_Invitation</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Clear_Arbitrator_Invited</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Arbitrator_Accept_Decline__c</field>
+            <operation>equals</operation>
+            <value>Decline</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-1-Case Rejected</fullName>
+        <actions>
+            <name>Case_Closed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Reject_Case</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Defendant_Accept_Reject__c</field>
+            <operation>equals</operation>
+            <value>Reject</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-2-Stage Negotiation - Timeout Sart</fullName>
+        <actions>
+            <name>Negotiation_Timeout_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Negotiating</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-3-Update Facilitator Email</fullName>
+        <actions>
+            <name>Facilitator_Email_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>When the Faciliator contact has been updated on the case this rule will update the faciliator email address on the case</description>
+        <formula>Facilitator_Contact__c != Null</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-5-Facilitator Notification</fullName>
+        <actions>
+            <name>Facilitator_Case_Notification_email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Facilitator_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Notifies facilitator by email that they have been appointed and assigns a task to them to perform facilitator tasks.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Neg-6-Item Flagged for Arbitration Email</fullName>
+        <actions>
+            <name>Refer_to_Arbitration_Accept_or_Decline</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Refer_to_Arbitration_Count__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <description>Email notification to both parties</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Neg-Settlement-1-Payment Obligation Notification</fullName>
+        <actions>
+            <name>Payment_Obligation_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Checkbox_Update_Email_Sent</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 OR 3) and 4 and 5</booleanFilter>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Settled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Arbitrated</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Partial Settlement</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Claimant_Confirms_Case_Settled__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Stage__c</field>
+            <operation>equals</operation>
+            <value>Finalize</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Reg-Created-1-Defendant Handler Email Update</fullName>
+        <actions>
+            <name>Defendant_Handler_Email_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>Defendant_Handler_Contact__c !=null</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Reg-Created-2-Claimant Handler Email</fullName>
+        <actions>
+            <name>Claimant_Handler_Email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>Claimant_Handler_Contact__c != null</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Reg-Referred-1-Defendant Handler Email Invite</fullName>
+        <actions>
+            <name>Defendant_Handler_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Defendant_Handler_Email_Invite_Sent</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Pending_Acceptance</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Reg-Referred-2-Follow up email to Case Handler</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Pending_Acceptance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Defendant_Accept_Reject__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Defendant_Handler_Invite_Sent__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Follow_up_email_to_Defendant_Case_Handler</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

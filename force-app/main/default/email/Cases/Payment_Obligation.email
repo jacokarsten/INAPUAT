@@ -1,0 +1,6 @@
+Your client and defendant, {!Case.00N5E000002YOeM} {!Case.00N5E000002YOeR} , has a total obligation of {!Case.Total_Damages_Claimant_Position__c} payable within 30 days, to {!Case.00N1t00000KkAZU} {!Case.00N5E000002YNcK} .” <br><br>
+Please click here to view the case: <a href="https://inap-k3.cs84.force.com/s/case/{!Case.Id}> View </a> <br><br>
+<br><br>
+Regards, 
+<br><br>
+Nuvalaw

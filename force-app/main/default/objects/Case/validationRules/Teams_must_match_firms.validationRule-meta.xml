@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Teams_must_match_firms</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(
+AND(
+Claimant_Firm_Team__r.Firm__c != NUll,
+ClaimantFirm__c !=null,
+Claimant_Firm_Team__r.Firm__c != ClaimantFirm__c) ,
+AND(
+Defendant_Firm_Team__r.Firm__c != null,
+Defendant_Firm__c !=null,
+Defendant_Firm_Team__r.Firm__c !=  Defendant_Firm__c)
+)</errorConditionFormula>
+    <errorMessage>Defendant and Claimant teams must match their firms</errorMessage>
+</ValidationRule>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <interviewLabel>Submit Schedule of Losses Claimant {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Submit Schedule of Losses Claimant</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Submit_SOL_Claimant</name>
+        <label>Submit SOL Claimant</label>
+        <locationX>195</locationX>
+        <locationY>38</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varSOL</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Merit_Minimum_Requirements__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Submit_Schedule_of_Losses__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <startElementReference>Submit_SOL_Claimant</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>varSOL</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,1219 @@
+<apex:component controller="ArbitrationItemViewLightningVF_2" allowDML="true">
+ <head>
+   
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   
+</head>
+
+<div id="spinner" class="slds-spinner_container slds-is-fixed" >
+                    <div role="status" class="slds-spinner slds-spinner_medium slds-spinner--brand">
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+                
+
+                
+<script>
+function StartSpin() {        
+        document.getElementById("spinner").style.display = "block";        
+        
+    }
+
+  function StopSpin() {        
+              
+        document.getElementById("spinner").style.display = "none";
+    }
+  
+    function updateValidate(ItemId,OldPos){
+       
+        
+         
+          var itemval =  parseFloat(document.getElementById(ItemId).value);
+       if(isNaN(itemval)==false){    
+          var PrevVal = parseInt(OldPos);
+          var totalClaim = parseInt('{!TotalClaimant}');
+          var totalamount = itemval+totalClaim-PrevVal;
+          var ProtAmount = parseInt('{!ProtocolTotal}');
+            
+          var display =   totalamount +' - '+ProtAmount
+          
+          if(totalamount>ProtAmount){
+            var msg = 'You have exceeded the Max Claim of '+  '{!ProtocolTotal}'; 
+               alert(msg);
+               sendToLC();
+          }
+          else{
+              
+              UpdateItemNow(ItemId,itemval);
+          } 
+       }    
+         else{
+           alert('Please enter a valid amount');
+           StopSpin();
+       }      
+                 
+       
+}    
+
+function updateMeritValidate(ItemId){
+        
+        var  MeritId;
+        var itemval;
+        
+        if('{!LOGGEDINUSER}' == 'Defendant Handler'){
+               MeritId = 'MerDef'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);         
+        }
+        else if('{!LOGGEDINUSER}' == 'Claimant Handler'){
+            
+              MeritId = 'MerCl'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);
+               
+        }
+        else if('{!LOGGEDINUSER}' == 'Owner'){
+            
+              MeritId = 'MerCl'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);
+               
+        }
+        else if('{!LOGGEDINUSER}' == 'Arbitrator'){
+            
+              MeritId = 'MerArb'+ItemId;
+              itemval =  parseInt(document.getElementById(MeritId).value);
+               
+        }  
+      if(isNaN(itemval)==false){      
+          if(itemval>=1 && itemval<=100){
+                UpdateMeritNow(ItemId,itemval);
+               
+          }
+          else{
+              var msg = 'Please enter a value between 1 and 100'; 
+               alert(msg);
+               sendToLC();
+          } 
+      }    
+         else{
+           alert('Please enter a valid amount');
+           StopSpin();
+       }              
+}  
+
+
+
+    
+function UpdateItem(RecId){
+     
+    UpdateItemNow(RecId);
+}
+function reloadpage(){
+        //alert('In')
+         top.location ='/s/case/'+'{!StartRecId}'+'/detail?tabset-a6dfa=53b74';
+}
+
+function OpenItem(RecId){
+     
+    top.location ="/s/detail/"+RecId;
+}
+
+function NewItem(RecId){
+     
+    NewItemNow(RecId);
+}
+
+
+</script>
+<body class="slds-scope">
+
+
+
+
+<apex:form >
+
+
+<span class="slds-text-heading--medium slds-m-bottom--medium">
+
+<apex:actionFunction name="UpdateItemNow" action="{!UpdateItem}" oncomplete="sendToLC();">
+    <apex:param name="RecId" value=""/>
+    <apex:param name="Amount" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="UpdateMeritNow" action="{!UpdateMerit}" oncomplete="sendToLC();" >
+    <apex:param name="RecId" value=""/>
+    <apex:param name="MerPerc" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="InitateRationale" action="{!InitateRationale}" reRender="Rational" oncomplete="ShowRationalemodal();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+ <apex:actionFunction name="UpdateRationale" action="{!UpdateRationale}" oncomplete="sendToLC();"  /> <!-- oncomplete="Changerender();" -->
+
+
+
+
+<apex:actionFunction name="ReferMerit" action="{!ReferMerit}" oncomplete="sendToLC();" > <!-- reRender="arbfull,lossitems" oncomplete="sendToLC();" -->
+    <apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="ReferItem" action="{!ReferItem}" oncomplete="sendToLC();"  >
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="MerCancelReferItem" action="{!CancelReferMerit}" oncomplete="sendToLC();" > <!-- reRender="arbfull,lossitems" oncomplete="sendToLC();StopSpin();" -->
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="CancelReferItem" action="{!CancelReferItem}" oncomplete="sendToLC();" >
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+
+<apex:actionFunction name="SaveItemNow" action="{!SaveItem}" reRender="ModalItem" oncomplete="Hidemodal();">
+</apex:actionFunction>
+
+
+<apex:actionFunction name="DeclineArbitration" action="{!DeclineArbitration}" oncomplete="sendToLC();">
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="AcceptArbitration" action="{!AcceptArbitration}"  oncomplete="sendToLC();"    >
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="MerDeclineArbitration" action="{!DeclineMeritArbitration}" oncomplete="sendToLC();"   >
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+<apex:actionFunction name="MerAcceptArbitration" action="{!AcceptMeritArbitration}" oncomplete="sendToLC();"   >
+<apex:param name="RecId" value=""/>
+</apex:actionFunction>
+
+
+<apex:actionFunction name="SubmitItems" action="{!SubmitItems}"    oncomplete="sendToLC();">
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="ReferAllItems" action="{!ReferAllItems}"   oncomplete="sendToLC();"   >
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+
+<!--
+<apex:actionFunction name="ConfirmAllItems" action="{!ConfirmAllItems}" oncomplete="sendToLC();">
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+-->
+
+<apex:actionFunction name="ConfirmDocument" action="{!ConfirmDocumentUpload}" oncomplete="sendToLC();">
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="DocumentRefresh" action="{!DocumentRefresh}" oncomplete="sendToLC();" />
+
+
+<apex:actionFunction name="ShowSubmitAward" action="{!ShowSubmitAward}" oncomplete="sendToLC();" >
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="ShowArbitratorsAward" action="{!ShowArbitratorsAward}" oncomplete="sendToLC();" >
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="SaveCaseFilesSelection" action="{!SaveAllFilesSelection}" oncomplete="sendToLC();" >
+<apex:param name="ShedId" value=""/>
+</apex:actionFunction>
+
+<apex:actionFunction name="displayArbitrationAwardDoc" action="{!showAwardDocument}" oncomplete="sendToLC();"/>
+
+
+<apex:actionFunction name="pagerefresh" reRender="lossitems,ArbPath,ModalItem,GeneralDocs,AcceptReject" oncomplete="StopSpin();"  />
+
+
+
+<!--
+<div class="container">
+-->
+ 
+ 
+ 
+ 
+ <apex:outputPanel rendered="{! if(DisplayMsg !=null,true,false)}">
+ <div style="padding:50px 100px 50px 400px">
+ <apex:outputText value="{!DisplayMsg}" style="font-size:18px" />   
+  </div>   
+   
+                           
+         
+                        
+           
+ </apex:outputPanel>
+ 
+ <apex:outputPanel rendered="{!RefreshAwardDoc}">
+ <div style="padding:50px 50px 50px 200px">
+     Thank you for completing the Arbitration process. Please view items on the SOL.
+  </div>   
+   
+         <!--                  
+           <a href="" class="btn" onclick="StartSpin();displayArbitrationAwardDoc();" >Refresh Award Doc</a>
+           
+           <br/><br/>                 
+          File Name: {!AwardFile.DocumentName} - <a href="{!AwardFile.DocumentLink}" target="_blank">View File</a>
+             -->
+                         
+                        
+           
+ </apex:outputPanel>
+ 
+ <apex:outputPanel rendered="{!if(AND(UserVisible=false,RefreshAwardDoc=false),true,false)}">
+ <div style="padding:50px 50px 50px 200px">
+     The claimant and the defendant are still busy with Final Offers.     
+  </div>   
+                
+           
+ </apex:outputPanel>
+ 
+ 
+ 
+ <apex:outputPanel rendered="{! if(AND(DisplayMsg =null,UserVisible=true),true,false)}">
+
+<!--
+<div class="tabbable boxed parentTabs" >
+-->
+
+<!--
+    <ul class="nav nav-tabs">
+
+        <apex:repeat value="{!lstScheduleofLoss}" var="schedule">
+    
+
+        <li><a data-toggle="tab" href="#{!schedule.ScheduleId}"><span class="slds-text-heading--medium slds-m-bottom--medium"> {!schedule.ScheduleName}</span></a></li>
+     
+    </apex:repeat>
+    </ul>
+-->
+<apex:outputPanel id="AcceptReject" rendered="{! if(AllItemsResponded=true,true,false)}">
+             <div style="color:red"> Please Accept or Reject all Items referred to you! </div>
+         </apex:outputPanel>
+
+
+<div class="panel-group">
+<div class="panel panel-default">  
+
+
+
+<div class="tab-content" style="padding: 20px;">
+ 
+ <apex:outputPanel id="lossitems">
+ 
+  <apex:outputText value="{!DisplayMsg}" style="font-size:18px" />
+ 
+ <apex:repeat value="{!lstScheduleofLoss}" var="schedule"> 
+ 
+ 
+    <div id="{!schedule.ScheduleId}" class="tab-pane fade in">
+    <div class="tabbable">  
+ 
+       <div id="Mer{!schedule.ScheduleId}"  > 
+       
+       <br/>
+       <div style="padding:10px 0px 0px 100px;">
+       
+       
+       <apex:outputPanel id="ArbPath">
+<div class="slds-region_medium" style="width: 1000px;">
+  <article class="slds-card">
+  <div class="slds-path">
+    <div class="slds-grid slds-path__track">
+      <div class="slds-grid slds-path__scroller-container">
+        <div class="slds-path__scroller" role="application">
+          <div class="slds-path__scroller_inner">
+          
+            <ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+          
+               <li class="slds-path__item {!if(SubmitItems=true,'slds-is-complete','slds-is-current slds-is-active')}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-6" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title"> Referral to Arbitration</span>
+                </a>
+              </li>
+              <!--
+              <li class="slds-path__item {!if(And(SubmitItems=true,ConfirmItems=true),'slds-is-complete',if(And(SubmitItems=true,ConfirmItems=false),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-7" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Confirm Items for Arbitration</span>
+                </a>
+              </li>
+              -->
+              
+              <li class="slds-path__item {!if(And(SubmitItems=true,ConfirmDocument=true),'slds-is-complete',if(And(SubmitItems=true,ConfirmDocument=false),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-8" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text" >Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Document Preparation</span>
+                </a>
+              </li>
+              <li class="slds-path__item {!if(AND(SubmitItems=true, ConfirmFinal=true,ConfirmDocument=true),'slds-is-complete',if(AND(SubmitItems=true, ConfirmFinal=false,ConfirmDocument=true),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="true" class="slds-path__link" href="javascript:void(0);" id="path-9" role="option" tabindex="0">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Final Offers</span>
+                </a>
+              </li>
+              <li class="slds-path__item  {!if(AND(SubmitItems=true,SubmitAward=true, ConfirmFinal=true,ConfirmDocument=true),'slds-is-complete',if(AND(SubmitItems=true,SubmitAward=false, ConfirmFinal=true,ConfirmDocument=true),'slds-is-current slds-is-active','slds-is-incomplete'))}" role="presentation">
+                <a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-10" role="option" tabindex="-1">
+                  <span class="slds-path__stage">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+                    </svg>
+                    <span class="slds-assistive-text">Stage Complete</span>
+                  </span>
+                  <span class="slds-path__title">Arbitration</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</article>
+
+</div>
+</apex:outputPanel>
+       
+      <!--  
+         <c:ArbitrationPath />
+       -->
+       
+   
+       
+        <apex:outputPanel rendered="{!if(AND(ReferallItems=true,Schedule.UNILATERALREFER=false),true,false)}"> 
+         <a  href="" class="btn " onclick="StartSpin(); ReferAllItems('{!schedule.ScheduleId}');"  >Refer All Items</a>
+         </apex:outputPanel>
+         
+         <apex:outputPanel rendered="{!ShowSubmitItems}"> 
+         <a  href="" class="btn " onclick="StartSpin();SubmitItems('{!schedule.ScheduleId}');"  >Submit</a> 
+         </apex:outputPanel>
+         
+        <!--
+         <apex:outputPanel rendered="{!ShowConfirmItems}">          
+         <a  href="" class="btn " onclick="StartSpin();ConfirmAllItems('{!schedule.ScheduleId}');"  >Confirm Items</a>         
+         </apex:outputPanel> 
+         -->
+         
+         
+         
+         <apex:outputPanel rendered="{!ShowUpdateDocument}"> 
+         <a href="" class="btn" onclick="Showmodal();" >Document Sharing</a>
+         </apex:outputPanel>
+         <!--
+         <apex:outputPanel rendered="{!ShowConfirmDocument}"> 
+         <a href="" class="btn" onclick="StartSpin();DocumentRefresh('{!schedule.ScheduleId}');" >Refresh Uploads</a>
+        
+         </apex:outputPanel>
+          -->
+          
+         <apex:outputPanel rendered="{!ShowConfirmDocument}"> 
+         <a href="" class="btn" onclick="StartSpin();ConfirmDocument('{!schedule.ScheduleId}');" >Submit</a>
+        
+         </apex:outputPanel>
+         
+         <apex:outputPanel rendered="{!ShowConfirmFinal}">  
+          <a href="" class="btn" onclick="StartSpin();ShowSubmitAward('{!schedule.ScheduleId}');" >Submit</a>
+          </apex:outputPanel>
+         
+         <!-- 
+          <apex:outputPanel rendered="{!ShowPreviewAward}"> 
+           <a href="" class="btn"  >Preview Award Document</a>
+           </apex:outputPanel>
+          -->
+           
+          <apex:outputPanel rendered="{!ShowSubmitAward}">                  
+           <a href="" class="btn" onclick="StartSpin();ShowArbitratorsAward('{!schedule.ScheduleId}');" >Submit Award</a>
+            Please enter all awards before submitting!
+           </apex:outputPanel> 
+           
+           
+           
+           
+           
+      </div>   
+         <br/>
+       
+                           
+                           <br/><br/>
+                           
+                              <table width ="90%">
+                                  
+                           
+                                     <apex:repeat value="{!schedule.lstMeritSched}" var="merit">
+                                  <tr><td width="165px"  style="padding:0px 10px 0px 15px;"><b>Status</b></td><td width="160px"><b>Merit Name </b></td><td width="150px"><b>Claimant Position </b></td><td width="150px" ><b>Defendant Position </b></td><td width="150px" ><b>Arbitrator's Award </b></td><td width="100px" style="text-align:right"><b>Referred by</b></td><td width="120px" style="text-align:right"><b>Accept/Decline</b></td><td style="padding:0px 10px 0px 15px;"> </td></tr>
+                        
+                                     
+                                         
+                           
+                            <tr >
+                    <td style="padding:0px 10px 0px 15px;"><apex:outputText value="{!merit.Status}" /></td>
+                    <td><apex:outputText value="{!merit.MeritName}" /></td>
+                
+                            <apex:outputPanel layout="none" rendered="{! if(Claimant='Edit',True,False)}">    
+                                        <!--
+                                        <td><apex:inputText value="{!merit.ClaimantPosition}" styleclass="slds-input" style="height:25px; width:110px;"/> </td>
+                                        -->
+                                        
+                                        <td > <input id="MerCl{!merit.MeritId}" value="{!merit.ClaimantPosition}" class="slds-input" style="height:25px; width:110px; text-align:right" />&nbsp;%</td>
+                                       
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Claimant='Readonly',True,False)}">    
+                                        <td style="text-align:center;" ><apex:outputText value="{!merit.ClaimantPosition}" style="height:25px; width:110px; text-align:right"/>&nbsp;% </td>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Claimant='Hidden',True,False)}">    
+                                    
+                                        <td ><apex:inputText value="{!merit.ClaimantPosition}" styleclass="slds-input" style="height:25px; width:110px;"/>&nbsp;% </td>
+                                       
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Defendant='Edit',True,False)}">   
+                                       <!--
+                                        <td><apex:inputText value="{!merit.DefendantPosition}" styleclass="slds-input" style="height:25px; width:100px; text-align:right"/>&nbsp;% </td>
+                                       -->
+                                       
+                                        <td > <input id="MerDef{!merit.MeritId}" value="{!merit.DefendantPosition}" class="slds-input" style="height:25px; width:110px; text-align:right " />&nbsp;%</td>
+                                       
+                                    
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(Defendant='Readonly',True,False)}">   
+                                        <td style="text-align:center;"><apex:outputText value="{!merit.DefendantPosition}"/>&nbsp;% </td>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(Defendant='Hidden',True,False)}">   
+                                        <td></td>
+                                    </apex:outputPanel>
+                                    
+                                     <apex:outputPanel layout="none" rendered="{! if(Arbitrator='Edit',True,False)}">     
+                                     <!--
+                                        <td><apex:inputText value="{!merit.ArbitratorsPosition}" styleclass="slds-input" style="height:25px; width:110px;"/> </td>
+                                      -->
+                                         
+                                     <td > <input id="MerArb{!merit.MeritId}" value="{!merit.ArbitratorsPosition}" class="slds-input" style="height:25px; width:110px;text-align:right" />&nbsp;%</td>
+                                       
+                                     </apex:outputPanel>  
+                                     <apex:outputPanel layout="none" rendered="{! if(Arbitrator='Readonly',True,False)}">     
+                                        <td style="text-align:center;"><apex:outputText value="{!merit.ArbitratorsPosition}"/>&nbsp;% </td>
+                                     </apex:outputPanel>
+                                     <apex:outputPanel layout="none" rendered="{! if(Arbitrator='Hidden',True,False)}">     
+                                        <td> </td>
+                                     </apex:outputPanel>
+                                     
+                                     <td style="text-align:right">
+                                    <apex:outputText value="{!merit.ArbitrationReferredBy}"/> 
+                                    </td> 
+                                     
+                                    <td style="text-align:right">
+                                    <apex:outputText value="{!merit.ArbitrationAcceptedStatus}"/> 
+                                    </td>   
+                                   
+                    
+                    <td style="padding:0px 10px 0px 35px;">
+                    
+                       <apex:outputPanel layout="none" rendered="{! if(UpdateItem='TRUE',True,False)}"> 
+                                                <a  href="" data-toggle="tooltip" title="Save Changes" class="btn " onclick="StartSpin();updateMeritValidate('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Update-SmallBlack.jpg')}" width="14px;"/></a> <!-- UpdateMeritNow('{!merit.MeritId}') -->
+                        </apex:outputPanel>   
+                        <apex:outputPanel layout="none" rendered="{! AND(Schedule.UNILATERALREFER=false,merit.StageSubmit,ShowSubmitItems)}">     <!-- OR(schedule.Claimaint_Arbitration_Submitted=false,schedule.Defendant_Arbitration_Submitted=false) -->
+                           <a  href="" class="btn" data-toggle="tooltip" title="Refer Merit" onclick=" StartSpin();ReferMerit('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Refer-SmallBlack.jpg')}" width="14px;"/></a>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{! AND(ShowSubmitItems,merit.StageCancelSubmit)}">
+                            <a  href="" class="btn" data-toggle="tooltip" title="Cancel referal" onclick="StartSpin();MerCancelReferItem('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Refer-SmallGreen.jpg')}" width="14px;"/></a>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel layout="none" rendered="{! AND(merit.StageAccept,OR(ShowConfirmDocument,ShowSubmitItems))}">   
+                              <a  href="" class="btn " title="Accept referal" onclick="StartSpin();MerAcceptArbitration('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Accept_SmallBlack.jpg')}" width="14px;"/></a>
+                         </apex:outputPanel>
+                                                                        
+                         <apex:outputPanel layout="none" rendered="{! AND(merit.StageReject,OR(ShowConfirmDocument,ShowSubmitItems))}"> 
+                             <a  href="" class="btn" title="Decline referal" onclick="StartSpin();MerDeclineArbitration('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Decline_SmallBlack.jpg')}" width="14px;"/></a>
+                         </apex:outputPanel>
+                         
+                         <!--
+                         <apex:outputPanel layout="none" rendered="{! if(Arbitrator='Edit',True,False)}">     
+                                                <a  href="" data-toggle="tooltip" title="Add/Edit Rationale" class="btn" onclick="InitateRationale('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                         </apex:outputPanel>
+                         -->
+                         <apex:outputPanel layout="none" rendered="{! if(AND(Arbitrator='Edit',merit.ArbitrationRationale =null),True,False)}">     
+                                            <a  href="" class="btn" data-toggle="tooltip" title="Rationale" onclick="InitateRationale('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                           </apex:outputPanel>
+                           <apex:outputPanel layout="none" rendered="{! if(AND(Arbitrator='Edit',merit.ArbitrationRationale !=null),True,False)}">     
+                                            <a  href="" class="btn" data-toggle="tooltip" title="Rationale" onclick="InitateRationale('{!merit.MeritId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallGreen.jpg')}" width="14px;"/></a>
+                           </apex:outputPanel>
+                         
+                         
+                      </td>  
+                    </tr>
+                                    </apex:repeat>
+                       </table>               
+                           
+                                 <br/><br/> 
+                                   
+                                  <div class="panel-group">
+                                    
+                                    <div class="panel panel-default">
+                                      
+                                      <apex:repeat value="{!schedule.lstLossCategory}" var="Category">
+                                            
+                                          <div class="panel-heading">
+                                     <!-- <h4 class="panel-title"> -->
+                                     <h4>
+                                       <div class="row">
+                                              <div class="col-sm-10">
+                                             
+                                            <a data-toggle="collapse" href="#{!Category.CategoryId}" style="font-size:16px"> {!Category.CategoryName}</a>
+                                             
+                                         </div>
+                                      <div class="col-sm-2">
+                                            <!--
+                                            <apex:outputPanel layout="none" rendered="{! if(Arbitrator='Edit',True,False)}">     
+                                                <a  href="" data-toggle="tooltip" title="Add/Edit Rationale" class="btn" onclick="InitateRationale('{!Category.CategoryId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                                            </apex:outputPanel>
+                                            
+                                      <table><tr><td width="10px"></td> <td>
+                                            <apex:outputPanel layout="none" rendered="{! if(AND(Arbitrator='Edit',Category.ArbitrationRationale =null),True,False)}">     
+                                            <a  href="" class="btn" data-toggle="tooltip" title="Rationale" onclick="InitateRationale('{!Category.CategoryId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                                           </apex:outputPanel>
+                                           
+                                           <apex:outputPanel layout="none" rendered="{! if(AND(Arbitrator='Edit',Category.ArbitrationRationale !=null),True,False)}">     
+                                            <a  href="" class="btn" data-toggle="tooltip" title="Rationale" onclick="InitateRationale('{!Category.CategoryId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallGreen.jpg')}" width="14px;"/></a>
+                                           </apex:outputPanel>
+                                           
+                                        </td>     
+                                     </tr>
+                                     </table>
+                                     -->
+                                    </div>
+  
+                            </div>
+                                              
+                                              
+                                              
+                                            </h4>
+                                          </div>
+                                      <!--
+                                            <div id="{!Category.CategoryId}" class="panel-collapse collapse">
+                                       --> 
+                                       <div>    
+                                                <div class="panel-body">  
+                                                
+                                                 <table width ="100%">
+                                                            <tr>
+                                                            <!-- <td width="50px"><b>Type</b></td> -->
+                                                            
+                                                            <td width="150px"><b>Status</b></td><td width="120px"><b>Loss Item</b></td><td width="150px" style="text-align:right"><b>Claimant Position </b> </td><td width="155px" style="text-align:right"><b>Defendant Position </b> </td><td width="150px" style="text-align:right"><b>Arbitrator's Award  </b> </td> <td width="130px" style="text-align:right"><b>Referred by</b> </td><td width="120px" style="text-align:right"><b>Accept/Decline</b> </td><td align="Center"></td></tr>
+                                                           
+                                                              <apex:repeat value="{!Category.lstLossItems}" var="Item">
+                                                                        
+                                                                        
+                                                                        <tr>
+                                                                  <!--      <td><apex:outputText value="{!Item.Type}" /> </td> -->
+                                                                        <td><apex:outputText value="{!Item.Status}"/> </td>
+                                                                         <td><apex:outputText value="{!Item.PastFutureFinancialLosses}"/> </td>
+                                                                        
+                                                                        
+                                                                  
+                                    <apex:outputPanel layout="none" rendered="{! if(Item.ClaimantRWE='Edit',True,False)}">    
+                                         <!--
+                                         <td><apex:inputText value="{!Item.ClaimantPosition}" styleclass="slds-input" style="height:25px; width:110px;"/> </td>
+                                         -->
+                                         <td style="text-align:right">£ &nbsp;<input id="{!Item.RecId}" value="{!Item.ClaimantPosition}" class="slds-input" style="height:25px; width:110px;text-align:right" /></td>
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Item.ClaimantRWE='Readonly',True,False)}">    
+                                        <td style="text-align:right">£ &nbsp;<apex:outputText value="{!Item.ClaimantPosition}"/> </td>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Item.ClaimantRWE='Hidden',True,False)}">    
+                                        <td> </td>
+                                    </apex:outputPanel> 
+                                    
+                                    <apex:outputPanel layout="none" rendered="{! if(Item.DefendantRWE='Edit',True,False)}">   
+                                       <td style="text-align:right">£&nbsp;<apex:inputText value="{!Item.DefendantPosition}" styleclass="slds-input" style="height:25px; width:110px;text-align:right"/> </td> 
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(Item.DefendantRWE='Readonly',True,False)}">   
+                                        <td style="text-align:right">£ &nbsp;<apex:outputText value="{!Item.DefendantPosition}"/> </td>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{! if(Item.DefendantRWE='Hidden',True,False)}">   
+                                        <td></td>
+                                    </apex:outputPanel>
+                                    
+                                     <apex:outputPanel layout="none" rendered="{! if(Item.ArbitratorRWE='Edit',True,False)}">     
+                                        <td style="text-align:right">£ &nbsp;<apex:inputText value="{!Item.ArbitratorsPosition}" styleclass="slds-input" style="height:25px; width:110px;text-align:right"/> </td>
+                                     </apex:outputPanel>  
+                                     <apex:outputPanel layout="none" rendered="{! if(Item.ArbitratorRWE='Readonly',True,False)}">     
+                                        <td style="text-align:right">£ &nbsp;<apex:outputText value="{!Item.ArbitratorsPosition}"/> </td>
+                                     </apex:outputPanel>
+                                     <apex:outputPanel layout="none" rendered="{! if(Item.ArbitratorRWE='Hidden',True,False)}">     
+                                        <td> </td>
+                                     </apex:outputPanel>
+                                                                     
+                                                                  
+                                                                     
+                                                                     <td style="text-align:right"><apex:outputText value="{!Item.ArbitrationReferredBy}"/> </td>
+                                                                      <td style="text-align:right"><apex:outputText value="{!Item.ArbitrationAcceptedStatus}"/> </td>  
+                                                                        
+                                                                        <td style="padding:0px 10px 0px 40px;">
+                                                                         <apex:outputPanel rendered="{! if(AND(LOGGEDINUSER=='Claimant Handler',UpdateItem='TRUE'),True,False)}"> 
+                                                                            <a  href="" class="btn " data-toggle="tooltip" title="Save Changes" onclick="StartSpin(); updateValidate('{!Item.RecId}','{!Item.ClaimantPosition}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Update-SmallBlack.jpg')}" width="14px;"/></a>  <!-- UpdateItem('{!Item.RecId}') -->
+                                                                        </apex:outputPanel> 
+                                                                        <apex:outputPanel rendered="{! if(AND(LOGGEDINUSER!='Claimant Handler',UpdateItem='TRUE'),True,False)}"> 
+                                                                            <a  href="" class="btn " data-toggle="tooltip" title="Save Changes" onclick="StartSpin();UpdateItem('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Update-SmallBlack.jpg')}" width="14px;"/></a>  <!--  -->
+                                                                        </apex:outputPanel> 
+                                                                        <apex:outputPanel layout="none" rendered="{! AND(OR(LOGGEDINUSER=='Claimant Handler',LOGGEDINUSER=='Defendant Handler'),Item.StageAccept,OR(ShowConfirmDocument=true,ShowSubmitItems=true))}">   
+                                                                        <a  href="" class="btn " data-toggle="tooltip" title="Accept referal" onclick="StartSpin();AcceptArbitration('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Accept_SmallBlack.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        
+                                                                        <apex:outputPanel layout="none" rendered="{! AND(OR(LOGGEDINUSER=='Claimant Handler',LOGGEDINUSER=='Defendant Handler'),Item.StageReject,OR(ShowConfirmDocument=true,ShowSubmitItems=true))}"> 
+                                                                        <a  href="" class="btn" data-toggle="tooltip" title="Decline referal" onclick="StartSpin();DeclineArbitration('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Decline_SmallBlack.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel layout="none" rendered="{! AND(OR(LOGGEDINUSER=='Claimant Handler',LOGGEDINUSER=='Defendant Handler'),Schedule.UNILATERALREFER=false,Item.StageSubmit)}">
+                                                                        <a  href="" class="btn" data-toggle="tooltip" title="Refer Item" onclick="StartSpin();ReferItem('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Refer-SmallBlack.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel layout="none" rendered="{! AND(OR(LOGGEDINUSER=='Claimant Handler',LOGGEDINUSER=='Defendant Handler'),Item.StageCancelSubmit,ShowSubmitItems)}">
+                                                                        <a  href="" class="btn"  data-toggle="tooltip" title="Cancel referal" onclick="StartSpin();CancelReferItem('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Refer-SmallGreen.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        
+                                                                       <!-- 
+                                                                        <apex:outputPanel layout="none" rendered="{! if(Arbitrator='Edit',True,False)}">     
+                                                                            <a  href="" class="btn" data-toggle="tooltip" title="Add/Edit Rationale" onclick="InitateRationale('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        -->
+                                                                        
+                                                                        <apex:outputPanel layout="none" rendered="{! if(AND(Arbitrator='Edit',Item.ArbitrationRationale =null),True,False)}">     
+                                                                            <a  href="" data-toggle="tooltip" title="Rationale"  class="btn" onclick="InitateRationale('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallBlack.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        <apex:outputPanel layout="none" rendered="{! if(AND(Arbitrator='Edit',Item.ArbitrationRationale !=null),True,False)}">     
+                                                                            <a  href="" data-toggle="tooltip" title="Rationale"  class="btn" onclick="InitateRationale('{!Item.RecId}');"><apex:image url="{!URLFOR($Resource.icons,'/Icons/Rationale_SmallGreen.jpg')}" width="14px;"/></a>
+                                                                        </apex:outputPanel>
+                                                                        
+                                                                        
+                                                                        </td>
+                                                                        </tr>
+                                                                        
+                                                          
+                                                              </apex:repeat> 
+                                                  
+                                                 </table>  
+                                                 
+                         <apex:outputPanel rendered="{!If(Category.DocumentCount=1,true,false)}">
+                         <br/><br/>
+                                                  <b>Documents</b>  
+                         <table style= "width:100%"> 
+                             <tr style="font-weight:bold"> 
+                             <td style= "width:150px"> Name</td><td style= "width:130px">Document Type </td> <td style= "width:180px"></td> <td style= "width:200px">Loss Item reference</td> <td style= "width:80px"></td> <td style= "width:120px;text-align:right">Referred by</td> <td></td>
+                             <!--
+                             <td>View</td> -->
+                             
+                             </tr>  
+                             <apex:repeat value="{!Category.lstLossFiles}" var="file">
+                             
+                             <tr><td ><a href="{!file.DocumentLink}" target="_blank">{!file.DocumentName}</a> </td><td >{!file.DocumentType}</td> <td></td> <td >{!file.LossItem}</td> <td></td> <td style= "text-align:right"><apex:outputtext value="{!file.ReferedBy}"/></td> <td></td>
+                             <!--
+                             <td><a href="{!file.DocumentLink}" target="_blank">View File</a></td> -->
+                             </tr>
+                             
+                             
+                             </apex:repeat>
+                             
+                   </table>
+                   </apex:outputPanel>
+                                              <!--    
+                                               <table width ="100%">
+                                                <apex:repeat value="{!Category.lstDocuments}" var="doc">
+                                                    <tr><td><apex:outputText value="{!doc.DocumentName}" /></td>
+                                                    <td><apex:outputText value="{!doc.DocumentType}" /></td>
+                                                    <td><apex:outputText value="{!doc.LossItem}" /></td>
+                                                    <td><a href="{!doc.DocumentLink}" target="_blank">View File</a></td></tr>
+                                                    
+                                                </apex:repeat> 
+                                            </table> 
+                                           -->      
+                                                  
+                                                 </div>
+                                                </div>
+                                              
+                                                 
+                                                 
+                                      </apex:repeat>
+                                      
+                                 <!-- Panel --> 
+                                     </div>
+                                    </div> 
+                               
+                               <!--
+                               
+                                        <table width ="100%">
+                                                            <tr><td ><b>Total Claimant Position</b></td><td><b>Total Defendant Liability</b></td></tr>
+                                                            <tr>
+                                                            <td><apex:outputText value="{!schedule.TotalClaimant}"/> </td><td><apex:outputText value="{!schedule.TotalDefendant}"/>  </td> 
+                                                            </tr>
+                                                            
+                                          </table>
+                                 -->         
+                                   <!-- Damages Tabes-->
+             
+            
+                           
+                           
+                           
+                   
+      </div> 
+       <div id="Dam{!schedule.ScheduleId}"  > 
+   
+          </div>
+          
+         
+        <!--       
+         </div>
+        -->  
+          
+      <hr/>
+      <div style="padding:0px 0px 0px 15px;"><b> General Documents for Arbitration</b> </div>
+      <br/> <br/>
+      <apex:outputPanel id="GeneralDocs"> <!-- rendered="{! OR(ConfirmDocument=True,ConfirmFinal=true, SubmitAward=true) -->
+                   
+                   <table style= "width:100%"> 
+                             <tr style="font-weight:bold;" > 
+                             <td style= "width:165px;padding:0px 0px 0px 15px;" > Name</td><td style= "width:130px">Document Type </td> <td style= "width:180px"></td> <td style= "width:200px"></td> <td style= "width:80px"></td> <td style= "width:120px;text-align:right">Referred by</td> <td></td>
+                             <!--
+                             <td>View</td> -->
+                             
+                             </tr>  
+                             <apex:repeat value="{!CaseFilesSelectedlist}" var="file">
+                            <apex:outputPanel layout="none" rendered="{! if(OR(file.ClaimantSelect=True,file.DefendantSelect=True),true,false)}">
+                         
+                             <tr >
+                             <td style="padding:0px 0px 0px 15px;"><a href="{!file.DocumentLink}" target="_blank">{!file.DocumentName}</a> </td><td >{!file.DocumentType}</td> <td></td> <td >{!file.LossItem}</td> <td></td> <td style="text-align:right" ><apex:outputtext value="{!file.ReferedBy}"/></td> <td></td>
+                             
+                             <!--
+                             <td><a href="{!file.DocumentLink}" target="_blank">View File</a></td> -->
+                             </tr>
+                             </apex:outputPanel>
+                             
+                             </apex:repeat>
+                   </table>
+                   
+                   
+                   <!--
+                   <table> 
+                         <tr style="font-weight:bold">
+                         <td> Name</td><td>Document Type </td><td>Referred by</td><td>View</td></tr>  
+                         <apex:repeat value="{!CaseFilesSelectedlist}" var="file">
+                         <apex:outputPanel layout="none" rendered="{! if(OR(file.ClaimantSelect=True,file.DefendantSelect=True),true,false)}">
+                        
+                         <tr><td>{!file.DocumentName} </td><td>{!file.DocumentType}</td><td><apex:outputtext value="{!file.ReferedBy}"/></td><td><a href="{!file.DocumentLink}" target="_blank">View File</a></td></tr>
+                         
+                          
+                         </apex:outputPanel>
+                         </apex:repeat>
+                   </table>
+                   -->
+                   
+       </apex:outputPanel> 
+       
+       
+          
+      <!-- PANEL OF SCHEDULE 
+        </div> 
+      -->
+        </div> 
+        </div>
+       </apex:repeat>
+      </apex:outputPanel>   
+       
+        
+   </div>
+   </div> 
+  </div> 
+ 
+ <!-- SOL Tab
+</div>
+-->
+
+</apex:outputPanel>
+
+<!--
+</div>
+-->
+
+<!-- Modal -->
+<apex:outputPanel id="ModalItem">
+
+
+
+
+<div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select Document for Arbitration</h5>
+        
+      </div>
+      <div class="modal-body">
+                  
+                         <table> 
+                         <tr style="font-weight:bold">
+                         <td> Name</td><td>Document Type </td><td>Loss Item reference</td><td>Claimant</td><td>Defendant</td></tr>  
+                         <apex:repeat value="{!CaseFileslist}" var="file">
+                         <tr><td>{!file.DocumentName} </td><td>{!file.DocumentType}</td><td>{!file.LossItem}</td>
+                         <apex:outputPanel layout="none" rendered="{! if(AND(Claimant='Edit',file.DefendantSelect=false),True,False)}">
+                             <td><apex:inputCheckbox value="{!file.ClaimantSelect}"/></td>
+                         </apex:outputPanel> 
+                         <apex:outputPanel layout="none" rendered="{! if(AND(Claimant='Edit',file.DefendantSelect=true),True,False)}">
+                            <td><apex:inputCheckbox value="{!file.ClaimantSelect}" disabled="true"/></td>
+                         </apex:outputPanel>   
+                         <apex:outputPanel layout="none" rendered="{! if(Claimant='Readonly',True,False)}">
+                            <td><apex:inputCheckbox value="{!file.ClaimantSelect}" disabled="true"/></td>
+                         </apex:outputPanel> 
+                           
+                        <apex:outputPanel layout="none" rendered="{! if(Defendant='Edit',True,False)}">     
+                         <td> <apex:inputCheckbox value="{!file.DefendantSelect}" /></td>
+                         </apex:outputPanel>
+                         <apex:outputPanel layout="none" rendered="{! if(Defendant='Readonly',True,False)}">     
+                         <td> <apex:inputCheckbox value="{!file.DefendantSelect}" disabled="true" /></td>
+                         </apex:outputPanel>
+                         </tr>
+                         </apex:repeat>
+                         </table>
+                         
+                         
+                         
+                                  <a  href="" class="btn " onclick="Hidemodal();">Save </a>
+                                  <a  href="" class="btn " onclick="Closemodal();">Close </a>
+                                  
+                                 
+                            
+      
+      
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+</apex:outputPanel>
+
+
+<apex:outputPanel id="Rational">                          
+ <div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="ViewModalRationale">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Rationale</h5>
+        
+      </div>
+          <div class="modal-body">
+            <p> 
+            
+            
+                    <apex:outputPanel layout="none" >  
+                        Rationale:<br/> 
+                                  <apex:inputtextarea value="{!ItemArbitrationRationale}" styleClass="slds-input" style="height:200px; width:500px;"/>
+                     </apex:outputPanel>
+             
+           
+            
+             </p>
+            <p> 
+                
+             <a  href="" class="btn " onclick="StartSpin();UpdateRationale();">Update</a>  <a  href="" class="btn " onclick="HideRationalemodal();">Close </a>
+                           
+                                                 
+            </p>
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+</apex:outputPanel>
+
+<!-- ******************************************************************************************** -->
+
+<apex:outputPanel id="ModalFileLink">
+
+
+
+
+<div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="FileLink">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select Document for Arbitration</h5>
+        
+      </div>
+      <div class="modal-body">
+                  
+        
+   <apex:repeat value="{!lstFileCategory}" var="head">  
+   
+    <u><b>  {!head.CategoryName} </b></u><br/><br/>
+    
+    <table>   
+    <tr style="font-weight:bold">
+                         
+                         <apex:outputPanel rendered="{!if(head.CategoryName='General', true,false)}">
+                         <td width="150px"> Name</td><td width="150px">Document Type </td> <td width="200px"></td>
+                         <td width="100px" style="text-align:center">Claimant</td><td style="text-align:center" width="100px">Defendant</td>
+                         </apex:outputPanel>
+                         <apex:outputPanel rendered="{!if(head.CategoryName!='General', true,false)}"> 
+                         <td width="150px"> Name</td><td width="150px">Document Type </td>
+                         <td width="200px">Loss Item</td>
+                         <td width="100px" style="text-align:center">Claimant</td><td width="100px" style="text-align:center">Defendant</td>
+                         </apex:outputPanel>
+                         </tr>
+        <apex:repeat value="{!head.lstLossFiles}" var="file">
+                     
+                           
+
+                         <tr><td valign="top">{!file.DocumentName} </td><td valign="top">{!file.DocumentType}</td>
+          <apex:outputPanel rendered="{!if(head.CategoryName!='General', true,false)}">                 
+                         <td colspan="3">
+                             <table>
+                                 <apex:repeat value="{!file.lstLossFiles}" var="Selection">
+                                     <tr><td width="200px" >{!Selection.LossItemName}</td>
+                                     <apex:outputPanel layout="none" rendered="{! if(AND(Claimant='Edit',OR(Selection.LinkedBy=LOGGEDINUSER,Selection.LinkedBy='Both Parties') ),True,False)}">
+                                         <td width="100px" style="text-align:center"><apex:inputCheckbox value="{!Selection.ClaimantSelect}" /></td>
+                                     </apex:outputPanel>
+                                     <apex:outputPanel layout="none" rendered="{! if(OR(Claimant='Readonly',AND(Selection.LinkedBy!=LOGGEDINUSER,Selection.LinkedBy!='Both Parties')),True,False)}">
+                                         <td width="100px" style="text-align:center"><apex:inputCheckbox value="{!Selection.ClaimantSelect}" disabled="true" /></td>
+                                     </apex:outputPanel>
+                                     <apex:outputPanel layout="none" rendered="{! if(AND(Defendant='Edit',OR(Selection.LinkedBy=LOGGEDINUSER,Selection.LinkedBy='Both Parties')),True,False)}">
+                                         <td width="100px" style="text-align:center"><apex:inputCheckbox value="{!Selection.DefendantSelect}" /></td>
+                                     </apex:outputPanel>
+                                     <apex:outputPanel layout="none" rendered="{! if(OR(Defendant='Readonly',AND(Selection.LinkedBy!=LOGGEDINUSER,Selection.LinkedBy!='Both Parties')),True,False)}">
+                                         <td width="100px" style="text-align:center"><apex:inputCheckbox value="{!Selection.DefendantSelect}" disabled="true" /></td>
+                                     </apex:outputPanel>
+                                     
+                                     
+                                     
+                                     </tr>                                                     
+                                 </apex:repeat>
+                             </table>
+                         </td>
+         </apex:outputPanel>     
+         <apex:outputPanel rendered="{!if(head.CategoryName='General', true,false)}">           
+                        <td width="150px"></td>
+                        <td> 
+                         <table>
+                         
+                         <tr>
+                         <apex:outputPanel layout="none" rendered="{! if(AND(Claimant='Edit'),True,False)}">
+                             <td width="100px" style="text-align:center"><apex:inputCheckbox value="{!file.ClaimantSelect}"/></td>
+                         </apex:outputPanel> 
+                         
+                         
+                         
+                         <apex:outputPanel layout="none" rendered="{! if(Claimant='Readonly',True,False)}">
+                            <td width="100px" style="text-align:center"><apex:inputCheckbox value="{!file.ClaimantSelect}" disabled="true"/></td>
+                         </apex:outputPanel> 
+                           
+                       
+                         </tr>
+                        </table> 
+                         </td>
+                         
+                         <td>
+                          <table >
+                         
+                         <tr>
+                          <apex:outputPanel layout="none" rendered="{! if(Defendant='Edit',True,False)}">     
+                             <td width="100px" style="text-align:center"> <apex:inputCheckbox value="{!file.DefendantSelect}" /></td>
+                         </apex:outputPanel>
+                         
+                         <apex:outputPanel layout="none" rendered="{! if(Defendant='Readonly',True,False)}">     
+                             <td width="100px" style="text-align:center"> <apex:inputCheckbox value="{!file.DefendantSelect}" disabled="true" /></td>
+                         </apex:outputPanel>
+                         
+                         </tr>
+                        </table> 
+                         </td>
+                         
+                         
+        </apex:outputPanel> 
+        
+                       
+                         </tr>
+      </apex:repeat>
+      
+                         </table>
+                         <br/><br/>
+       </apex:repeat>                  
+                         
+                         
+                                  <a  href="" class="btn " onclick="Hidemodal();">Save </a>
+                                  <a  href="" class="btn " onclick="Closemodal();">Close </a>
+                                  
+                                 
+                            
+      
+      
+      
+      </div>
+      <div class="modal-footer">
+        
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+</apex:outputPanel>
+
+<!-- ********************************************************************************************-->
+
+
+
+
+  </span>  
+  
+  
+  </apex:form>  
+  
+</body>
+<script>
+                     //window.onload = Showmodal;
+                     function Showmodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#FileLink').modal('show');
+                                        }); 
+                         }
+                      function Hidemodal()
+                        {
+                                        
+                                     StartSpin();
+                                     SaveCaseFilesSelection();   
+                                        
+                                         $(document).ready(function(){ 
+                                            $('#FileLink').modal('hide');
+                                        }); 
+                         }
+                         function Closemodal()
+                        {
+                                        
+                                    
+                                        
+                                         $(document).ready(function(){ 
+                                            $('#FileLink').modal('hide');
+                                        }); 
+                         }
+                      function ShowRationalemodal()
+                        {
+                       
+                                         $(document).ready(function(){ 
+                                            $('#ViewModalRationale').modal('show');
+                                        }); 
+                         }
+                    function HideRationalemodal()
+                        {
+                                         $(document).ready(function(){ 
+                                            $('#ViewModalRationale').modal('hide');
+                                            $('body').removeClass('modal-open');
+                                            $('.modal-backdrop').remove();
+                                        }); 
+                         }   
+                             
+                    
+ 
+ </script>
+ <script>
+ 
+    setTimeout(function(){ 
+    
+        document.getElementById("spinner").style.display = "none";
+    
+     }, 1000);
+   
+    
+    var lexOrigin = "/"; // "https://inap5-k3.cs108.force.com"; 
+    
+    function sendToLC() {
+        //alert('Done');
+        
+        var message = 'vfOriginA'; //document.getElementById("message").value;
+        parent.postMessage(message, lexOrigin);
+        
+       location.reload(true);
+       pagerefresh();        
+        
+       /* 
+        if('{!ShowSubmitAward}'=='true' || '{!RefreshAwardDoc}'=='true'){
+            location.reload(true);
+        }    
+        */
+        
+        StopSpin();
+    }
+    
+     window.addEventListener("message", function(event) {
+            
+            console.log('VBARB -' +event.data);
+            if (event.data != 'vfITEMOrigin') {
+                // Not the expected origin: Reject the message!
+                console.log('VBARB');
+                return;
+            }
+            // Handle the message
+            console.log('vfArbSuccess23');
+           // StartSpin();
+       
+        pagerefresh();
+        location.reload(true);
+     
+            
+           
+        },false);
+    
+    
+</script>
+
+ 
+<script>
+  $("ul.nav-tabs a").click(function (e) {
+  e.preventDefault();  
+    $(this).tab('show');
+});
+  
+  </script>
+ 
+  
+  
+  
+  
+</apex:component>

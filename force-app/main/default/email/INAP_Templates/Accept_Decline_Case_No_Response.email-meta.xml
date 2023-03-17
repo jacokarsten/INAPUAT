@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to notify Market Maker that Defendant Firm has not responded to accept or decline case</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Accept / Decline Case - No Response</name>
+    <style>none</style>
+    <subject>INAP Case {!Case.CaseNumber}: No Response from {!Case.Defendant_Firm_Name__c} Case Handlers</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

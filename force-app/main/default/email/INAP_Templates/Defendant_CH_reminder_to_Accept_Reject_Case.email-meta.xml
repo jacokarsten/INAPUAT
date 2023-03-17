@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Case Handler has not Accepted or Rejected.  This is an email reminder to complete the request</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Defendant CH reminder to Accept/Reject Case</name>
+    <style>none</style>
+    <subject>Respond to Case Reminder:  Accept or Reject Case {!Case.CaseNumber}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

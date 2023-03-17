@@ -1,0 +1,11 @@
+There are 2 days remaining in the Final Offers step for Arbitration. Please update your current offers, if necessary, before items are automatically progressed to Arbitration.
+</br>
+</br>
+View Case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+</br>
+</br>
+Regards,
+Nuvalaw
+</br>
+</br>
+For support queries please email admin@nuvalaw.com.  (placeholder email)

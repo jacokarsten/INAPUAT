@@ -1,0 +1,6 @@
+<design:component label="File List View">
+	
+    <design:attribute name="fileNames" label="Filenames" />
+    <design:attribute name="caseId" label="Case ID" />
+    
+</design:component>

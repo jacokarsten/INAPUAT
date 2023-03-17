@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reg_Created_Incident_Cannot_be_in_future</fullName>
+    <active>true</active>
+    <description>Prevents the user from saving the case if the Incident Date is in the future</description>
+    <errorConditionFormula>Incident_Information__r.Incident_Date__c  &gt; NOW()</errorConditionFormula>
+    <errorDisplayField>Incident_Date__c</errorDisplayField>
+    <errorMessage>You cannot enter a date in the future</errorMessage>
+</ValidationRule>

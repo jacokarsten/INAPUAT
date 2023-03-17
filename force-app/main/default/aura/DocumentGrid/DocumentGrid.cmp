@@ -1,0 +1,76 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:availableForFlowScreens" access="global" controller="DocumentGridController2">
+    
+    <!-- attributes -->
+    <aura:attribute name="caseId" type="String" access="global" />
+    <aura:attribute name="caseStatus" type="Boolean" access="global" />
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="selectedDocumentId" type="string"/>
+    <aura:attribute name="files" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="errors" type="Object" default="[]"/>
+    <aura:attribute name="draftValues" type="Object" default="[]" />
+    <aura:attribute name="DocumentList" type="ContentVersion[]" description="store documents list"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" default="false" description="flag for rendered save and cancel buttons in aura:if "/>
+    
+    
+    <!-- handlers-->
+    <aura:handler event="force:refreshView" action="{!c.refresh}" />
+    <aura:handler name="init" value="{!this}" action="{!c.initRecords}"/>
+    
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    
+    <!-- buttons-->
+    <div style="padding-bottom:10px">
+        <lightning:buttonGroup>
+            <div class="slds-button-group-list slds-float_right" style="padding-top:1.5rem" role="group">
+                <lightning:button variant="brand" label="Upload" title="Upload document action" onclick="{! c.uploadDocument }"/>
+            </div>
+        </lightning:buttonGroup>
+    </div>
+    
+    <div class="slds-m-around_small" style="min-height:400px">
+        
+        
+        <!--Data Table-->     
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps">
+                    <th scope="col"><div class="slds-truncate" title="Id">No</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Title">Title</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Document Type">Document Type</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Sharing Permissions">Sharing Permissions</div></th>
+                    <th scope="col"><div class="slds-truncate" title="Timestamp">Date / Time</div></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <!--### display all records of AccountList attribute one by one by aura:iteration ###-->
+                <aura:iteration items="{!v.DocumentList}" var="doc" indexVar="sNo">
+                    <!-- Child Lightning Component --> 
+                    <c:FileListView2 singleRec="{!doc}"
+                                     showSaveCancelBtn="{!v.showSaveCancelBtn}"
+                                     sNo="{!sNo + 1}" />
+                </aura:iteration>
+            </tbody>
+        </table>
+        <!-- use aura:if for show/hide buttons --> 
+        <aura:if isTrue="{!v.showSaveCancelBtn}">
+            <!--button for save and cancel Record after Inline Edit-->
+            <div class="slds-float_left">
+                <lightning:buttonGroup class="slds-m-around_medium">
+                    <lightning:button label="Cancel" onclick="{!c.cancel}"/>
+                    <lightning:button label="Save" onclick="{!c.Save}" variant="brand"/>
+                </lightning:buttonGroup>
+                
+            </div>
+        </aura:if>
+        
+    </div>
+    
+    
+    
+    
+</aura:component>

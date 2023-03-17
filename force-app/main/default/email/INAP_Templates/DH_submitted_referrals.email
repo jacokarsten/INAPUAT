@@ -1,0 +1,11 @@
+One or more items for case {!Case_Notification__c.Case__c} have been referred/reviewed for arbitration by {!Case_Notification__c.Defendant_Firm__c}. Please review (accept/decline) these items and refer any additional items if required.
+ <br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Community_URL__c}/s/case/{!Case_Notification__c.CaseId__c}">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please emailadmin@nuvalaw.com

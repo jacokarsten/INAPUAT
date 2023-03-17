@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="recID" type="String" />
+    <aura:attribute name="caseID" type="String" />
+    
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner />
+    </aura:if>
+    <aura:if isTrue="{!!v.saved}">
+        <lightning:recordEditForm
+            onload="{!c.handleLoad}"
+            onsubmit="{!c.handleSubmit}"
+            onsuccess="{!c.refresh}"
+            recordId="{!v.recID}"
+            objectApiName="Defendant_Information__c">
+            <!-- the messages component is for error messages -->
+            <lightning:messages />
+
+            <lightning:outputField fieldName="Name" />
+            <lightning:outputField fieldName="Case__c" />
+            <lightning:inputField required="true" aura:id="CompanyName" fieldName="Company_Employer_Name__c"/>
+            <lightning:inputField required="true" aura:id="ContactFirstName"  fieldName="Contact_First_Name__c" />
+            <lightning:inputField required="true" aura:id="ContactLastName"  fieldName="Contact_Last_Name__c" />
+            <lightning:inputField required="true" aura:id="AddressLine1"  fieldName="Address_Line_1__c" />
+            <lightning:inputField required="true" aura:id="City"  fieldName="City__c" />
+            <lightning:inputField required="true" aura:id="Country"  fieldName="Country__c" />
+            <lightning:inputField required="true" aura:id="PostalCode"  fieldName="Postal_Code__c" />
+            <div class="slds-m-top_medium">
+                <lightning:button disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+            </div>
+        </lightning:recordEditForm>
+        <aura:set attribute="else">
+            <p>Saved!</p>
+        </aura:set>
+    </aura:if>
+</aura:component>

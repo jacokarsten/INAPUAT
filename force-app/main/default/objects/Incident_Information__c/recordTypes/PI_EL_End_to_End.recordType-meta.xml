@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PI_EL_End_to_End</fullName>
+    <active>true</active>
+    <label>PI-EL-End to End</label>
+    <picklistValues>
+        <picklist>City__c</picklist>
+        <values>
+            <fullName>Cardiff</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>London</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Country__c</picklist>
+        <values>
+            <fullName>United Kingdom</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Incident_Type__c</picklist>
+        <values>
+            <fullName>Employment Accident</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Motor Vehicle Accident</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Accident</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

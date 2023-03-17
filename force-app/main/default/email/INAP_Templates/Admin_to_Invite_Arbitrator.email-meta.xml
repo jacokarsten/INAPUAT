@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Admin to Invite Arbitrator</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Admin to Invite Arbitrator</name>
+    <style>none</style>
+    <subject>Please invite Arbitrator to: {!Case.CaseNumber}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT" description="Datatable Refresh">
+
+    
+</aura:event>

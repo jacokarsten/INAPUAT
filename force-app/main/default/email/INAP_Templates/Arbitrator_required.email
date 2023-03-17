@@ -1,0 +1,11 @@
+Case {!Case_Notification__c.Case__c} needs to be arbitrated. Please invite an Arbitrator to the case.
+<br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Org_URL__c}/lightning/r/Case/{!Case_Notification__c.CaseId__c}/view">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please email admin@nuvalaw.com

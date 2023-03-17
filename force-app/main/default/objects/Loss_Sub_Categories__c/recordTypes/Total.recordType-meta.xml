@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total</fullName>
+    <active>true</active>
+    <label>Total Amount</label>
+    <picklistValues>
+        <picklist>Arbitration_Accepted_Status__c</picklist>
+        <values>
+            <fullName>Accepted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Declined</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Arbitration_Referred_By__c</picklist>
+        <values>
+            <fullName>Claimant Handler</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Defendant Handler</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Loss_Type__c</picklist>
+        <values>
+            <fullName>Bereavement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disadvantage on Labour Market</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal Costs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Loss of Congenial Employment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Total Loss Amount</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>Arbitrating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negotiating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Arbitrated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arbitrating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arbitration Doc Prep</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arbitration Final Offers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Created</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Negotiating</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referred to Arbitration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Would_you_like_to_Settle__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

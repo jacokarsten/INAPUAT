@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Must_belong_to_Firm_of_Team</fullName>
+    <active>true</active>
+    <errorConditionFormula>Contact__r.AccountId !=  Firm_Team__r.Firm__c</errorConditionFormula>
+    <errorMessage>Contact must belong to the same Firm as the Firm of the team</errorMessage>
+</ValidationRule>

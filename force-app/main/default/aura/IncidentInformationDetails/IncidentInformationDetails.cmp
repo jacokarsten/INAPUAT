@@ -1,0 +1,43 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <div class="slds-page-header slds-page-header_record-home slds-box">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-opportunity">
+                            <lightning:icon iconName="custom:custom31" alternativeText="Indicates approval"/>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span>Incident Information</span>
+                                    <span class="slds-page-header__title slds-truncate" title="Details">Details</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Incident_Information__c">
+        <div class="slds-section slds-is-open">
+        <div aria-hidden="false" class="slds-section__content" style="padding-left:5px; padding-right:5px">
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Incident_Type__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Incident_Date__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Address_Line_1__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Address_Line_2__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="City2__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Country__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Postal_Code__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="State_County__c" />
+            <lightning:outputField  class="slds-form-element_readonly" fieldName="Description__c" />
+        </div>
+        </div>
+    </lightning:recordViewForm>
+    
+</aura:component>

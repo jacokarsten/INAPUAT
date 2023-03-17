@@ -1,0 +1,11 @@
+Case {!Case_Notification__c.Case__c} has been referred from {!Case_Notification__c.Claimant_Firm__c} to {!Case_Notification__c.Defendant_Firm__c} more than {!Case_Notification__c.DS_not_responding_MM_Notification__c} days ago. However, the defendant firm hasn't yet assigned a team to the case. Please follow up with the defendant firm supervisors.
+<br>
+<br>
+View case <a href="{!Case_Notification__c.INAP_Org_URL__c}/lightning/r/Case/{!Case_Notification__c.CaseId__c}/view">{!Case_Notification__c.Case__c}: {!Case_Notification__c.Case_Subject__c}</a>
+<br>
+<br>
+Regards
+Nuvalaw
+<br>
+<br>
+For support queries please email admin@nuvalaw.com

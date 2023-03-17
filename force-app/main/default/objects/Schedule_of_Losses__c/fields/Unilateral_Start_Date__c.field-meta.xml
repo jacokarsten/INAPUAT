@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unilateral_Start_Date__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(Case__r.Protocol__r.Bilateral_referral_days__c = 0,  No_referral_date__c , Bilateral_referral_date__c + 1)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Unilateral Start Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

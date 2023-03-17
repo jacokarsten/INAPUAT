@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Invitation to Arbitrator - Accept or Decline</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Invitation to Arbitrator - Accept or Decline</name>
+    <style>none</style>
+    <subject>Arbitration Request - Please Accept or Decline: {!Case_User_Invitation__c.Case__c}</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

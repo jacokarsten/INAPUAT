@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Position_Match_would_you_like_to_settle</fullName>
+    <active>false</active>
+    <description>Prompts the user to choose if they would like to settle or not</description>
+    <errorConditionFormula>AND(Claimant_Position__c = Defendant_Position__c,
+ISPICKVAL( Would_you_like_to_Settle__c,&quot;&quot;))
+||AND(Claimant_Position__c = Defendant_Position__c,
+ISPICKVAL( Would_you_like_to_Settle__c,&quot;No&quot;))</errorConditionFormula>
+    <errorDisplayField>Would_you_like_to_Settle__c</errorDisplayField>
+    <errorMessage>Would you like to settle?  Please select Yes to Settle.  If No, please update your position.</errorMessage>
+</ValidationRule>

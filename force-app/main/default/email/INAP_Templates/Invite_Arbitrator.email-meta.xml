@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to notify Market Maker to invite an Arbitrator</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Invite Arbitrator</name>
+    <style>none</style>
+    <subject>INAP Case {!Case_Notification__c.Case__c}: Arbitrator Required for Case</subject>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

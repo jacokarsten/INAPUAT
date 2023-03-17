@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accept_Decline_items_for_arbitration_sub__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Reminder notification every 24 hours if no response.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Reminder notification every 24 hours if no response.</inlineHelpText>
+    <label>Accept/Decline items for arbitration/sub</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

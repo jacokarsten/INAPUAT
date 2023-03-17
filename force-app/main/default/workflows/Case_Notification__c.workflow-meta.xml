@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Accept_Decline_Case_No_Response</fullName>
+        <description>Accept / Decline Case - No Response</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Accept_Decline_Case_No_Response</template>
+    </alerts>
+    <alerts>
+        <fullName>Appoint_Facilitator_to_Case</fullName>
+        <description>Appoint Facilitator to Case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Appoint_Facilitator_to_Case</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitration_Invitation</fullName>
+        <description>Arbitration Invitation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Arbitrator_Invitation</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitrator_Invitation_No_Response</fullName>
+        <description>Arbitrator Invitation - No Response</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Arbitrator_Invitation_No_Response</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitrator_declines_appointment</fullName>
+        <description>Arbitrator Declines Appointment</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Arbitrator_declines_appointment</template>
+    </alerts>
+    <alerts>
+        <fullName>Arbitrator_required</fullName>
+        <description>Arbitrator required</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Arbitrator_required</template>
+    </alerts>
+    <alerts>
+        <fullName>Assign_Case_to_Team_No_Response</fullName>
+        <description>Assign Case to Team - No Response</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Assign_Case_to_Team_No_Response</template>
+    </alerts>
+    <alerts>
+        <fullName>CH_Team_assigned_to_case</fullName>
+        <description>CH Team assigned to case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>INAP_Templates/CH_Team_assigned_to_case</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_Cancelled</fullName>
+        <description>Case Cancelled</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Case_Cancelled</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_Progresses_to_Finalisation</fullName>
+        <description>Case Progresses to Finalisation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Case_Progresses_to_Finalisation</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_referred</fullName>
+        <description>Case referred</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Firm_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>INAP_Templates/Case_referred</template>
+    </alerts>
+    <alerts>
+        <fullName>DH_accepted_case</fullName>
+        <description>DH accepted case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/DH_accepted_case</template>
+    </alerts>
+    <alerts>
+        <fullName>DH_declined_case</fullName>
+        <description>DH declined case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Dh_declined_case</template>
+    </alerts>
+    <alerts>
+        <fullName>DH_not_responding</fullName>
+        <description>DH not responding</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/DH_not_responding</template>
+    </alerts>
+    <alerts>
+        <fullName>DH_not_responding_Escalated</fullName>
+        <description>DH not responding (Escalated)</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/DH_not_responding_Escalated</template>
+    </alerts>
+    <alerts>
+        <fullName>DH_submitted_referrals</fullName>
+        <description>DH submitted referrals</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/DH_submitted_referrals</template>
+    </alerts>
+    <alerts>
+        <fullName>DS_not_responding</fullName>
+        <description>DS not responding</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Firm_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/DS_not_responding</template>
+    </alerts>
+    <alerts>
+        <fullName>DS_not_responding_Escalated</fullName>
+        <description>DS not responding (Escalated)</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/DS_not_responding_Escalated</template>
+    </alerts>
+    <alerts>
+        <fullName>Defendant_Firm_Notification</fullName>
+        <description>Defendant Firm Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Defendant_Firm_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Defendant_Firm_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Defendant_Team_Added_to_Case</fullName>
+        <description>Defendant Team Added to Case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Defendant_Team_Added_to_Case</template>
+    </alerts>
+    <alerts>
+        <fullName>Doc_Prep_Closing_Defendant_Reminder</fullName>
+        <description>Doc Prep Closing - Defendant Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Doc_Prep_Closing_Defendant_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>Doc_Prep_closing_Claimant_Reminder</fullName>
+        <description>Doc Prep closing - Claimant Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Doc_Prep_closing_Claimant_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>Doc_Prep_started</fullName>
+        <description>Doc Prep started</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Doc_Prep_started</template>
+    </alerts>
+    <alerts>
+        <fullName>Doc_Prep_window_closing</fullName>
+        <description>Doc Prep window closing</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Doc_Prep_window_closing</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_New_Case_Notification</fullName>
+        <description>Facilitator New Case Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Facilitator_New_Case_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_assigned_to_case</fullName>
+        <description>Facilitator assigned to case</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Facilitator_assigned_to_case</template>
+    </alerts>
+    <alerts>
+        <fullName>Final_Offers_Started</fullName>
+        <description>Final Offers Started</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Final_Offers_started</template>
+    </alerts>
+    <alerts>
+        <fullName>Final_Offers_window_closing</fullName>
+        <description>Final Offers window closing</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Final_Offers_window_closing</template>
+    </alerts>
+    <alerts>
+        <fullName>Invite_Arbitrator</fullName>
+        <description>Invite Arbitrator</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Invite_Arbitrator</template>
+    </alerts>
+    <alerts>
+        <fullName>Negotiation_window_closing</fullName>
+        <description>Negotiation window closing</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Negotiation_window_closing</template>
+    </alerts>
+    <alerts>
+        <fullName>No_Arbitral_Award_Reminder</fullName>
+        <description>No Arbitral Award Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/No_Arbitral_Award_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>No_Arbitral_Award_Response_From_Arbitrator</fullName>
+        <description>No Arbitral Award Response From Arbitrator</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/No_Arbitral_Award_Response_From_Arbitrator</template>
+    </alerts>
+    <alerts>
+        <fullName>Submit_Final_Offers_for_Arbitration</fullName>
+        <description>Submit Final Offers for Arbitration</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/Submit_Final_Offers_for_Arbitration</template>
+    </alerts>
+    <alerts>
+        <fullName>X5_Days_to_End_of_Negotiation</fullName>
+        <description>5 Days to End of Negotiation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Case_Member_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>INAP_Templates/X5_Days_to_End_of_Negotiation</template>
+    </alerts>
+</Workflow>
